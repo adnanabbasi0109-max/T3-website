@@ -2,52 +2,41 @@
 
 import Link from "next/link";
 import type { CaseStudyDoc } from "../../lib/utils";
-import ParallaxImage from "../motion/ParallaxImage";
 
 export default function FeaturedWorkCard({ cs }: { cs: CaseStudyDoc }) {
   return (
-    <Link
-      href={`/work/${cs.slug}`}
-      className="group relative block overflow-hidden rounded-lg"
-    >
-      {cs.heroImage ? (
-        <ParallaxImage
-          src={cs.heroImage}
-          alt={cs.title}
-          aspect="aspect-[21/9]"
-          grayscale
-        />
-      ) : (
-        <div className="flex aspect-[21/9] items-center justify-center bg-paper-warm">
-          <span className="font-display text-[8rem] text-border/30">
-            {cs.title.charAt(0)}
-          </span>
-        </div>
-      )}
+    <Link href={`/work/${cs.slug}`} className="group block">
+      {/* Image */}
+      <div className="overflow-hidden rounded-sm bg-paper-warm">
+        {cs.heroImage ? (
+          <img
+            src={cs.heroImage}
+            alt={cs.title}
+            className="aspect-[2.2/1] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex aspect-[2.2/1] items-center justify-center">
+            <span className="font-display text-[6rem] text-border/20">
+              {cs.title.charAt(0)}
+            </span>
+          </div>
+        )}
+      </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent transition-opacity duration-500 group-hover:from-ink/70" />
-
-      {/* Content */}
-      <div className="absolute bottom-0 left-0 p-8 sm:p-10 lg:p-14">
-        <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-paper/60">
+      {/* Meta */}
+      <div className="mt-5">
+        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted">
           {cs.client || "Client"}
           {cs.year && ` · ${cs.year}`}
         </p>
-        <h3 className="mt-4 font-display text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.02em] text-paper transition-transform duration-500 group-hover:-translate-y-1">
+        <h3 className="mt-2 font-display text-[clamp(1.25rem,2.5vw,2rem)] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
           {cs.title}
         </h3>
         {cs.domains && cs.domains.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {cs.domains.slice(0, 3).map((d) => (
-              <span
-                key={d}
-                className="rounded-full border border-paper/20 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.1em] text-paper/50"
-              >
-                {d}
-              </span>
-            ))}
-          </div>
+          <p className="mt-2.5 text-[12px] text-muted-light">
+            {cs.domains.slice(0, 3).join(" · ")}
+          </p>
         )}
       </div>
     </Link>

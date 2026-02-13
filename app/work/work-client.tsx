@@ -5,7 +5,6 @@ import type { CaseStudyDoc } from "../../lib/utils";
 import WorkListItem from "../../components/work/WorkListItem";
 import Reveal from "../../components/motion/Reveal";
 import Container from "../../components/layout/Container";
-import FeaturedWorkCard from "../../components/work/FeaturedWorkCard";
 
 type SortKey = "default" | "year-desc" | "year-asc" | "title";
 
@@ -78,130 +77,119 @@ export default function WorkClient({
     setSortBy("default");
   }
 
-  // Split into featured (full-width) and regular items
-  const featuredItems = filtered.filter((cs) => cs.featured);
-  const regularItems = filtered.filter((cs) => !cs.featured);
-
-  const pillBase =
-    "rounded-full border px-4 py-2 text-[12px] font-medium transition-all duration-300";
-  const pillActive = "border-ink bg-ink text-paper";
-  const pillInactive = "border-border text-muted hover:border-ink/40 hover:text-ink";
+  const selectClass =
+    "appearance-none border border-border bg-transparent px-3 py-2 text-[12px] font-medium text-ink outline-none transition-all duration-300 focus:border-ink cursor-pointer";
 
   return (
     <Container>
-      {/* ── Filter bar — pill style ── */}
-      <div className="mt-14 flex flex-col gap-5 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
-        {/* Search */}
-        <div className="relative max-w-xs flex-1">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-lg border border-border bg-transparent px-4 py-2.5 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10"
-            aria-label="Search workstories"
-          />
+      {/* ── Filter bar ── */}
+      <div className="border-b border-border pb-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {/* Search */}
+          <div className="relative max-w-[260px] flex-1">
+            <input
+              type="text"
+              placeholder="Search workstories..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full border-b border-border bg-transparent pb-2 text-[13px] outline-none transition-colors duration-300 placeholder:text-muted-light focus:border-ink"
+              aria-label="Search workstories"
+            />
+          </div>
+
+          {/* Filters */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <select
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+              className={selectClass}
+              aria-label="Domain"
+            >
+              {allDomains.map((d) => (
+                <option key={d} value={d}>
+                  {d === "All" ? "Domain" : d}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+              className={selectClass}
+              aria-label="Industry"
+            >
+              {allIndustries.map((d) => (
+                <option key={d} value={d}>
+                  {d === "All" ? "Industry" : d}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as SortKey)}
+              className={selectClass}
+              aria-label="Sort"
+            >
+              <option value="default">Featured</option>
+              <option value="year-desc">Newest</option>
+              <option value="year-asc">Oldest</option>
+              <option value="title">A–Z</option>
+            </select>
+
+            <button
+              onClick={() => setFeaturedOnly((v) => !v)}
+              className={`${selectClass} ${
+                featuredOnly
+                  ? "border-ink bg-ink text-paper"
+                  : ""
+              }`}
+            >
+              Featured
+            </button>
+
+            {hasFilters && (
+              <button
+                onClick={clearAll}
+                className="ml-1 text-[11px] font-medium text-muted transition-colors hover:text-ink"
+              >
+                Clear
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* Pill filters */}
-        <div className="flex flex-wrap items-center gap-3">
-          <select
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-            className={`appearance-none ${pillBase} ${domain !== "All" ? pillActive : pillInactive} pr-8`}
-            aria-label="Domain"
-          >
-            {allDomains.map((d) => (
-              <option key={d} value={d}>
-                {d === "All" ? "All Domains" : d}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            className={`appearance-none ${pillBase} ${industry !== "All" ? pillActive : pillInactive} pr-8`}
-            aria-label="Industry"
-          >
-            {allIndustries.map((d) => (
-              <option key={d} value={d}>
-                {d === "All" ? "All Industries" : d}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortKey)}
-            className={`appearance-none ${pillBase} ${sortBy !== "default" ? pillActive : pillInactive} pr-8`}
-            aria-label="Sort"
-          >
-            <option value="default">Featured</option>
-            <option value="year-desc">Newest</option>
-            <option value="year-asc">Oldest</option>
-            <option value="title">A–Z</option>
-          </select>
-
-          <button
-            onClick={() => setFeaturedOnly((v) => !v)}
-            className={`${pillBase} ${featuredOnly ? pillActive : pillInactive}`}
-          >
-            Featured only
-          </button>
-        </div>
+        {hasFilters && (
+          <p className="mt-3 text-[12px] text-muted">
+            {filtered.length} result{filtered.length !== 1 && "s"}
+          </p>
+        )}
       </div>
 
-      {/* Filter hint */}
-      {hasFilters && (
-        <div className="mt-5 flex items-center justify-between text-[13px] text-muted">
-          <span>
-            {filtered.length} result{filtered.length !== 1 && "s"}
-          </span>
-          <button
-            onClick={clearAll}
-            className="font-medium text-gold transition-colors hover:text-gold-dark"
-          >
-            Clear
-          </button>
-        </div>
-      )}
-
-      {/* ── Mixed grid ── */}
-      <div className="mt-14 sm:mt-20">
-        {/* Featured items — full width */}
-        {featuredItems.map((cs, i) => (
-          <Reveal key={cs.slug} delay={Math.min(i * 0.08, 0.3)} className="mb-10">
-            <FeaturedWorkCard cs={cs} />
-          </Reveal>
-        ))}
-
-        {/* Regular items — responsive grid */}
-        {regularItems.length > 0 && (
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {regularItems.map((cs, i) => (
-              <Reveal key={cs.slug} delay={Math.min(i * 0.05, 0.4)} scale>
+      {/* ── Results ── */}
+      <div className="mt-10 sm:mt-14">
+        {filtered.length > 0 ? (
+          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((cs, i) => (
+              <Reveal key={cs.slug} delay={Math.min(i * 0.04, 0.3)}>
                 <WorkListItem cs={cs} />
               </Reveal>
             ))}
           </div>
+        ) : (
+          <div className="py-20 text-center">
+            <p className="text-[15px] text-muted">
+              No workstories match your filters.
+            </p>
+            <button
+              onClick={clearAll}
+              className="mt-3 text-[13px] font-medium text-gold transition-colors hover:text-gold-dark"
+            >
+              Clear all filters
+            </button>
+          </div>
         )}
       </div>
-
-      {/* Empty */}
-      {filtered.length === 0 && (
-        <div className="py-24 text-center">
-          <p className="text-[15px] text-muted">
-            No workstories match your filters.
-          </p>
-          <button
-            onClick={clearAll}
-            className="mt-4 text-[13px] font-medium text-gold transition-colors hover:text-gold-dark"
-          >
-            Clear all filters
-          </button>
-        </div>
-      )}
     </Container>
   );
 }

@@ -27,14 +27,14 @@ export default function CaseStudyStory({
           <Reveal>
             <Link
               href="/work"
-              className="mb-8 inline-flex items-center gap-2 text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink sm:mb-10"
+              className="link-underline mb-8 inline-flex items-center gap-2 text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink sm:mb-10"
             >
               &larr; All Work
             </Link>
 
             <div className="flex items-start justify-between gap-8">
               <div className="max-w-3xl">
-                <h1 className="font-display text-[clamp(2.25rem,6vw,5rem)] leading-[1.05] tracking-[-0.035em]">
+                <h1 className="font-display text-[clamp(2.25rem,6vw,5rem)] leading-[1.02] tracking-[-0.04em]">
                   {item.title}
                 </h1>
 
@@ -44,7 +44,7 @@ export default function CaseStudyStory({
                     {item.domains.map((d) => (
                       <span
                         key={d}
-                        className="rounded-full border border-border px-4 py-1.5 text-[11px] font-medium text-muted"
+                        className="rounded-full border border-border px-4 py-1.5 text-[11px] font-medium text-muted transition-colors duration-500 hover:border-border-strong"
                       >
                         {d}
                       </span>
@@ -53,12 +53,12 @@ export default function CaseStudyStory({
                 )}
               </div>
 
-              {/* Save button — rounded pill */}
+              {/* Save button — rounded pill with glow */}
               <button
                 onClick={() => (saved ? remove(item.slug) : add(item.slug))}
-                className={`mt-2 flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-[12px] font-medium transition-all duration-500 ${
+                className={`glow-ring mt-2 flex shrink-0 items-center gap-2 rounded-full border px-5 py-2.5 text-[12px] font-medium transition-all duration-500 ${
                   saved
-                    ? "border-ink bg-ink text-paper"
+                    ? "border-accent bg-accent text-white"
                     : "border-border text-muted hover:border-border-strong hover:text-ink"
                 }`}
                 aria-label={saved ? "Remove from shortlist" : "Save to shortlist"}
@@ -76,7 +76,7 @@ export default function CaseStudyStory({
       {/* ── Hero Image — wide cinematic ── */}
       {item.heroImage && (
         <section className="px-6 sm:px-10 lg:px-16">
-          <div className="mx-auto max-w-[1280px] overflow-hidden rounded-[1.375rem]">
+          <div className="mx-auto max-w-[1280px] overflow-hidden rounded-[1.375rem] shadow-card">
             <img
               src={item.heroImage}
               alt={item.title}
@@ -89,7 +89,8 @@ export default function CaseStudyStory({
       {/* ── Meta ── */}
       <Section spacing="sm">
         <Container>
-          <div className="flex flex-wrap gap-x-12 gap-y-4 border-b border-border pb-8">
+          <div className="flex flex-wrap gap-x-12 gap-y-4 pb-8">
+            <div className="divider-fade absolute left-0 right-0 bottom-0" />
             {item.client && (
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Client</p>
@@ -99,7 +100,7 @@ export default function CaseStudyStory({
             {item.year && (
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Year</p>
-                <p className="mt-1.5 text-[15px] font-medium">{item.year}</p>
+                <p className="mt-1.5 text-[15px] font-medium tabular-nums">{item.year}</p>
               </div>
             )}
             {item.industries && item.industries.length > 0 && (
@@ -115,6 +116,7 @@ export default function CaseStudyStory({
               </div>
             )}
           </div>
+          <div className="divider-fade" />
         </Container>
       </Section>
 
@@ -140,7 +142,7 @@ export default function CaseStudyStory({
                     <div className={`mt-10 grid gap-4 ${s.media.length > 1 ? "grid-cols-2" : ""}`}>
                       {s.media.map((url, mi) => (
                         <Reveal key={mi} delay={mi * 0.06}>
-                          <div className="overflow-hidden rounded-[1rem] bg-paper-warm">
+                          <div className="overflow-hidden rounded-[1rem] bg-paper-warm shadow-card">
                             <img
                               src={url}
                               alt={`${s.heading} ${mi + 1}`}
@@ -171,11 +173,11 @@ export default function CaseStudyStory({
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {item.gallery.map((url, i) => (
                 <Reveal key={i} delay={i * 0.04}>
-                  <div className="overflow-hidden rounded-[1rem] bg-paper-warm">
+                  <div className="overflow-hidden rounded-[1rem] bg-paper-warm shadow-card transition-shadow duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:shadow-card-hover">
                     <img
                       src={url}
                       alt={`Gallery ${i + 1}`}
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-[1.06]"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-[1.04]"
                       loading="lazy"
                     />
                   </div>
@@ -202,7 +204,7 @@ export default function CaseStudyStory({
               {item.outcomes.map((outcome, i) => (
                 <Reveal key={i} delay={i * 0.04}>
                   <div className={`flex gap-6 py-6 sm:py-8 ${i < item.outcomes!.length - 1 ? "border-b border-border" : ""}`}>
-                    <span className="shrink-0 text-[13px] font-bold text-accent">
+                    <span className="shrink-0 text-[13px] font-bold tabular-nums text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="text-[15px] leading-[1.85] text-ink/80 sm:text-[16px]">
@@ -221,6 +223,9 @@ export default function CaseStudyStory({
         <Section spacing="lg">
           <Container>
             <Reveal>
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                Related
+              </p>
               <h2 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.025em]">
                 More Work
               </h2>
@@ -246,7 +251,7 @@ export default function CaseStudyStory({
             <div className="mt-10">
               <Link
                 href="/contact"
-                className="btn-slide inline-flex h-13 items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
+                className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
               >
                 <span className="btn-text">Get in touch &rarr;</span>
               </Link>

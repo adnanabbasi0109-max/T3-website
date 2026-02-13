@@ -78,12 +78,13 @@ export default function WorkClient({
   }
 
   const pillClass =
-    "appearance-none rounded-full border border-border bg-transparent px-4 py-2 text-[12px] font-medium text-ink outline-none transition-all duration-500 focus:border-border-strong hover:border-border-strong cursor-pointer";
+    "appearance-none rounded-full border border-border bg-transparent px-4 py-2.5 text-[12px] font-medium text-ink outline-none transition-all duration-500 focus:border-border-strong hover:border-border-strong cursor-pointer";
 
   return (
     <Container>
       {/* ── Filter bar ── */}
-      <div className="border-b border-border pb-6">
+      <div className="pb-6">
+        <div className="divider-fade mb-6" />
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Search */}
           <div className="relative max-w-[280px] flex-1">
@@ -92,7 +93,7 @@ export default function WorkClient({
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong"
+              className="glow-ring w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong"
               aria-label="Search workstories"
             />
           </div>
@@ -139,9 +140,9 @@ export default function WorkClient({
 
             <button
               onClick={() => setFeaturedOnly((v) => !v)}
-              className={`rounded-full border px-4 py-2 text-[12px] font-medium transition-all duration-500 ${
+              className={`rounded-full border px-4 py-2.5 text-[12px] font-medium transition-all duration-500 ${
                 featuredOnly
-                  ? "border-ink bg-ink text-paper"
+                  ? "border-accent bg-accent text-white"
                   : "border-border bg-transparent text-ink hover:border-border-strong"
               }`}
             >
@@ -160,14 +161,14 @@ export default function WorkClient({
         </div>
 
         {hasFilters && (
-          <p className="mt-4 text-[12px] text-muted">
+          <p className="mt-4 text-[12px] tabular-nums text-muted">
             {filtered.length} result{filtered.length !== 1 && "s"}
           </p>
         )}
       </div>
 
       {/* ── Results — 2-col cinematic grid ── */}
-      <div className="mt-12 sm:mt-16">
+      <div className="mt-10 sm:mt-14">
         {filtered.length > 0 ? (
           <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
             {filtered.map((cs, i) => (

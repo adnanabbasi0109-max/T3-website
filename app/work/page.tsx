@@ -30,7 +30,10 @@ export default async function WorkPage() {
       <Section spacing="lg">
         <Container>
           <Reveal>
-            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-[-0.035em]">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              Portfolio
+            </p>
+            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
               Our Work
             </h1>
           </Reveal>

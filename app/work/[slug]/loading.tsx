@@ -19,14 +19,14 @@ export default function CaseStudyLoading() {
       {/* Hero image skeleton */}
       <section className="px-6 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-[1280px]">
-          <div className="aspect-[14/9] w-full animate-pulse rounded-[1.375rem] bg-paper-dim" />
+          <div className="aspect-[14/9] w-full animate-pulse rounded-[1.375rem] bg-paper-dim shadow-card" />
         </div>
       </section>
 
       {/* Meta skeleton */}
       <Section spacing="sm">
         <Container>
-          <div className="flex gap-12 border-b border-border pb-8">
+          <div className="flex gap-12 pb-8">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i}>
                 <div className="h-2.5 w-14 animate-pulse rounded-[0.375rem] bg-paper-dim" />
@@ -34,6 +34,7 @@ export default function CaseStudyLoading() {
               </div>
             ))}
           </div>
+          <div className="divider-fade" />
         </Container>
       </Section>
 

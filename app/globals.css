@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* ── Palette — warm neutrals inspired by Off+Brand ── */
-  --color-ink:         #1d1d1d;
-  --color-ink-light:   #252525;
-  --color-ink-muted:   #3a3a3a;
-  --color-paper:       #e5e4e0;
-  --color-paper-warm:  #f1f0ec;
-  --color-paper-dim:   #d8d7d3;
+  /* ── Palette — warm neutrals with richer depth ── */
+  --color-ink:         #1a1a1a;
+  --color-ink-light:   #232323;
+  --color-ink-muted:   #373737;
+  --color-paper:       #e8e7e3;
+  --color-paper-warm:  #f2f1ed;
+  --color-paper-dim:   #dbd9d5;
   --color-accent:      #ff642f;
   --color-accent-dark: #e5521d;
-  --color-muted:       #6f6f6f;
-  --color-muted-light: #9a9a96;
-  --color-border:      rgba(111,111,111,0.2);
-  --color-border-dark: rgba(218,218,218,0.2);
-  --color-border-strong: rgba(111,111,111,0.45);
+  --color-accent-soft: rgba(255,100,47,0.08);
+  --color-muted:       #6a6a66;
+  --color-muted-light: #97968f;
+  --color-border:      rgba(100,99,92,0.18);
+  --color-border-dark: rgba(218,218,218,0.18);
+  --color-border-strong: rgba(100,99,92,0.42);
 
-  /* Legacy aliases for compatibility */
+  /* Legacy aliases */
   --color-gold:        var(--color-accent);
   --color-gold-light:  #ff8a5e;
   --color-gold-dark:   var(--color-accent-dark);
@@ -34,10 +35,15 @@
   --radius-lg:   3.5rem;
   --radius-full: 9999px;
 
-  /* ── Easings ── */
+  /* ── Easings — Off+Brand signature ── */
   --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart:   cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+
+  /* ── Shadows ── */
+  --shadow-card: 0 2px 24px rgba(26,26,26,0.06);
+  --shadow-card-hover: 0 8px 40px rgba(26,26,26,0.10);
+  --shadow-nav: 0 1px 0 rgba(100,99,92,0.06);
 }
 
 /* ── Reset ── */
@@ -65,6 +71,20 @@ body {
   line-height: 1.65;
   font-weight: 400;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  overflow-x: hidden;
+}
+
+/* ── Grain overlay — subtle texture like Off+Brand ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
 }
 
 /* ── Selection ── */
@@ -80,14 +100,14 @@ body {
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(111,111,111,0.25);
-  border-radius: 3px;
+  background: rgba(100,99,92,0.22);
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(111,111,111,0.5);
+  background: rgba(100,99,92,0.45);
 }
 
 /* ── Typography rhythm ── */
@@ -95,7 +115,7 @@ h1, h2 {
   font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.025em;
-  line-height: 1.08;
+  line-height: 1.06;
   text-wrap: balance;
 }
 
@@ -137,7 +157,7 @@ img {
 /* ── Clip-path reveal ── */
 .clip-reveal {
   clip-path: inset(100% 0 0 0);
-  transition: clip-path 0.8s var(--ease-out-expo);
+  transition: clip-path 0.9s var(--ease-out-expo);
 }
 
 .clip-reveal.revealed,
@@ -172,6 +192,60 @@ img {
   transform: translateX(0.35em);
 }
 
+/* ── Underline-grow link hover — Off+Brand style ── */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.5s var(--ease-out-quart);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Glow ring — subtle accent halo on focus/hover ── */
+.glow-ring {
+  box-shadow: 0 0 0 0 rgba(255,100,47,0);
+  transition: box-shadow 0.6s var(--ease-out-quart);
+}
+.glow-ring:hover,
+.glow-ring:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255,100,47,0.12);
+}
+
+/* ── Perspective container — for 3D card tilts ── */
+.perspective-container {
+  perspective: 1200px;
+}
+
+/* ── Gradient text — accent gradient for special headings ── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #ff8a5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Divider with fade ── */
+.divider-fade {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border) 20%,
+    var(--color-border) 80%,
+    transparent
+  );
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -179,6 +253,10 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  body::before {
+    display: none;
   }
 }
 

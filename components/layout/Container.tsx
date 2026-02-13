@@ -12,7 +12,7 @@ const MAX_W: Record<string, string> = {
   xl: "max-w-[1440px]",
   wide: "max-w-[1280px]",
   default: "max-w-[1120px]",
-  narrow: "max-w-[720px]",
+  narrow: "max-w-[680px]",
 };
 
 export default function Container({

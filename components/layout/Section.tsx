@@ -15,8 +15,8 @@ const SPACING: Record<string, string> = {
   none: "",
   sm: "py-14 sm:py-20",
   md: "py-20 sm:py-28 lg:py-36",
-  lg: "py-24 sm:py-36 lg:py-44",
-  xl: "py-32 sm:py-44 lg:py-56",
+  lg: "py-24 sm:py-36 lg:py-48",
+  xl: "py-32 sm:py-48 lg:py-60",
 };
 
 export default function Section({

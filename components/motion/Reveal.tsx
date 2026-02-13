@@ -31,7 +31,7 @@ export default function Reveal({
   direction = "up",
   once = true,
   as = "div",
-  distance = 32,
+  distance = 36,
   stiffness = "normal",
   scale = false,
 }: Props) {
@@ -50,14 +50,23 @@ export default function Reveal({
             : direction === "right"
               ? distance
               : 0,
-        ...(scale ? { scale: 0.97 } : {}),
+        filter: "blur(4px)",
+        ...(scale ? { scale: 0.96 } : {}),
       };
+
+  const animate = {
+    opacity: 1,
+    y: 0,
+    x: 0,
+    filter: "blur(0px)",
+    ...(scale ? { scale: 1 } : {}),
+  };
 
   return (
     <Component
       initial={initial}
-      whileInView={{ opacity: 1, y: 0, x: 0, ...(scale ? { scale: 1 } : {}) }}
-      viewport={{ once, margin: "-80px" }}
+      whileInView={animate}
+      viewport={{ once, margin: "-60px" }}
       transition={{
         duration: reduced ? 0.15 : duration,
         delay,

@@ -24,18 +24,18 @@ async function getFeaturedStudies(): Promise<CaseStudyDoc[]> {
 const PROCESS = [
   {
     step: "01",
-    title: "Listen",
-    desc: "We start with the challenge, not the deliverable. Deep immersion into your market, audience, and ambition.",
+    title: "Deconstruct",
+    desc: "We start with the challenge, not the deliverable. A structured intervention at the intersection of data, creativity, and human behavior.",
   },
   {
     step: "02",
     title: "Build",
-    desc: "Strategy meets craft. We design solutions from first principles — no templates, no shortcuts.",
+    desc: "Methodology forged from first principles. Tailored solutions designed to move you from a competitive mindset to a category of one.",
   },
   {
     step: "03",
     title: "Prove",
-    desc: "Every engagement becomes a workstory. Documented outcomes that speak for themselves.",
+    desc: "Every engagement becomes a workstory. Documented outcomes for leaders navigating high-stakes inflection points.",
   },
 ];
 

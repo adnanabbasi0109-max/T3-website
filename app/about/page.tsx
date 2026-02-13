@@ -22,10 +22,11 @@ export default function AboutPage() {
               We defy conventional wisdom — and document the proof.
             </h1>
             <p className="mt-7 max-w-xl text-[15px] leading-[1.75] text-muted">
-              T3 Technologies was founded on a simple conviction: the most
-              powerful solutions emerge when you strip complexity down to its
-              essential truth. For over two decades, we&apos;ve turned that
-              conviction into outcomes for brands across India.
+              For more than two decades, T3 Technologies has been a leader in
+              creative innovation, assisting premium brands, organizations, and
+              individuals in achieving success. As a boutique creative agency, we
+              excel in precision — providing tailored solutions as distinctive as
+              the clients we partner with.
             </p>
           </Reveal>
         </Container>
@@ -62,12 +63,14 @@ export default function AboutPage() {
                   Humane Technology
                 </h2>
                 <p className="mt-6 text-[15px] leading-[1.8] text-muted">
-                  We believe technology is most powerful when it serves human
-                  goals — not when it replaces human judgement.
+                  We believe in a harmonious blend of tradition and innovation.
+                  Our philosophy centers on using technology not to take over,
+                  but to enhance the human experience.
                 </p>
                 <p className="mt-4 text-[15px] leading-[1.8] text-muted">
-                  Every solution we build is measured by its impact on people
-                  first. Metrics follow meaning.
+                  We create solutions that respect the past while embracing the
+                  future, putting technology to work for the betterment of
+                  humanity — ensuring progress is both thoughtful and purposeful.
                 </p>
               </div>
             </Reveal>
@@ -80,13 +83,14 @@ export default function AboutPage() {
                   Defy Convention
                 </h2>
                 <p className="mt-6 text-[15px] leading-[1.8] text-muted">
-                  Conventional wisdom is comfortable. It&apos;s also where
-                  mediocrity lives. We question assumptions and build from first
-                  principles.
+                  For the moments when the playbook is obsolete and the future is
+                  unwritten. Our engagement is a structured intervention designed
+                  to move you from a competitive mindset to a category of one.
                 </p>
                 <p className="mt-4 text-[15px] leading-[1.8] text-muted">
-                  This isn&apos;t contrarianism — it&apos;s a disciplined
-                  approach to finding the insight everyone else missed.
+                  This is not a consultancy. It is a catalyst process —
+                  methodology forged at the intersection of data, creativity, and
+                  human behavior.
                 </p>
               </div>
             </Reveal>

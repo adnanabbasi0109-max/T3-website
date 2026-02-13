@@ -22,8 +22,8 @@ export default function ServicesPage() {
               Services
             </h1>
             <p className="mt-5 max-w-lg text-[15px] leading-[1.75] text-muted">
-              Six disciplines. One doctrine: deconstruct complexity into powerful
-              simplicity.
+              Six disciplines. One doctrine: defy conventional wisdom,
+              deconstruct complex systems to create simple, powerful solutions.
             </p>
           </Reveal>
 
@@ -38,6 +38,9 @@ export default function ServicesPage() {
                     <h2 className="text-[22px] font-bold tracking-[-0.02em]">
                       {svc.title}
                     </h2>
+                    <p className="mt-2 text-[13px] font-medium uppercase tracking-[0.1em] text-gold">
+                      {svc.tagline}
+                    </p>
                     <p className="mt-4 text-[15px] leading-[1.8] text-muted">
                       {svc.desc}
                     </p>

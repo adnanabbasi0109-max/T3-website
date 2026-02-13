@@ -38,8 +38,8 @@ export default function ScrollTypeHero() {
             <span className="text-gold">{WORDS[0]}</span>
           </h1>
           <p className="mt-10 max-w-[440px] text-[15px] leading-[1.75] text-muted">
-            Strategy. Craft. Outcome. Twenty years of turning bold ideas into
-            documented results.
+            Defying conventional wisdom. Deconstructing complex systems to
+            create simple, powerful solutions — for over two decades.
           </p>
           <div className="mt-14 flex items-center gap-6">
             <Link
@@ -104,8 +104,8 @@ export default function ScrollTypeHero() {
             transition={{ duration: 1.2, delay: 0.7, ease }}
             className="mt-10 max-w-[440px] text-[15px] leading-[1.75] text-muted"
           >
-            Strategy. Craft. Outcome. Twenty years of turning bold ideas into
-            documented results.
+            Defying conventional wisdom. Deconstructing complex systems to
+            create simple, powerful solutions — for over two decades.
           </motion.p>
 
           <motion.div

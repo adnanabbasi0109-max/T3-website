@@ -37,32 +37,38 @@ export const CHALLENGE_CATEGORIES = [
 export const SERVICES = [
   {
     title: "Brand Building",
-    desc: "Identity systems, positioning, and brand architecture that create lasting market differentiation.",
+    tagline: "Crafting compelling brand identities that resonate.",
+    desc: "We create identities that stand out, delivering cohesive brand strategies that reflect your vision and values. From naming and messaging to visual identity and positioning — we handle it all.",
     icon: "layers",
   },
   {
     title: "Business Innovations",
-    desc: "Strategic consulting that turns complex market challenges into scalable, profitable solutions.",
+    tagline: "Navigating the toughest challenges with fresh solutions.",
+    desc: "We ignite transformation with forward-thinking solutions that help businesses thrive. From streamlining operations to identifying new revenue streams, innovation is the core of your growth.",
     icon: "lightbulb",
   },
   {
     title: "PR & Media Strategy",
-    desc: "Earned media campaigns, crisis management, and media relations that shape public narrative.",
+    tagline: "Shaping narratives that elevate your brand.",
+    desc: "Earned media campaigns, crisis management, and media relations that shape public narrative. We craft stories that resonate with your audience and amplify your market presence.",
     icon: "megaphone",
   },
   {
     title: "Social Media Management",
-    desc: "Community-driven strategies across platforms — content, engagement, and growth loops.",
+    tagline: "Engaging content, amplified reach.",
+    desc: "We blend creativity with data-driven insights to reach the right audience at the right time. Our 360-degree marketing solutions ensure your brand stays top-of-mind across all platforms.",
     icon: "share2",
   },
   {
     title: "Art & Design",
-    desc: "Visual systems, experiential design, and creative direction for campaigns that resonate.",
+    tagline: "Turning visions into reality with cutting-edge creativity.",
+    desc: "Our design philosophy blends creativity with purpose. Whether it's web design, store interiors, or digital media, every detail is crafted with precision to reflect your brand's essence.",
     icon: "palette",
   },
   {
     title: "AI & Tech Solutions",
-    desc: "Intelligent automation, data-driven marketing tools, and technology integrations.",
+    tagline: "Empowering businesses with the future of technology.",
+    desc: "We harness cutting-edge technology to optimize business operations and deliver seamless customer experiences. From AI-powered tools to process automation and system integration.",
     icon: "cpu",
   },
 ] as const;

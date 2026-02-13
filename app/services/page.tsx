@@ -56,7 +56,7 @@ export default function ServicesPage() {
   return (
     <main>
       {/* ── Hero — massive title, no gold label ── */}
-      <section className="pb-12 pt-20 sm:pt-28 lg:pt-36">
+      <section className="pb-16 pt-24 sm:pt-32 lg:pt-40">
         <Container>
           <Reveal>
             <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.92] tracking-[-0.02em]">
@@ -64,7 +64,7 @@ export default function ServicesPage() {
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-6 max-w-lg text-[15px] leading-[1.75] text-muted">
+            <p className="mt-8 max-w-lg text-[15px] leading-[1.75] text-muted">
               Six disciplines. One doctrine: defy conventional wisdom,
               deconstruct complex systems to create simple, powerful solutions.
             </p>
@@ -73,9 +73,9 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Bento Grid ── */}
-      <section className="pb-24 sm:pb-32">
+      <section className="pb-28 sm:pb-36">
         <Container>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((svc, i) => {
               const config = GRID_CONFIG[i] || GRID_CONFIG[0];
               const isDark = config.bg.includes("dark-section") || config.bg.includes("bg-ink");
@@ -99,14 +99,14 @@ export default function ServicesPage() {
                       {svc.title}
                     </h2>
                     <p
-                      className={`mt-2 text-[13px] font-medium uppercase tracking-[0.1em] ${
+                      className={`mt-3 text-[13px] font-medium uppercase tracking-[0.1em] ${
                         isDark ? "text-gold-light/60" : "text-gold"
                       }`}
                     >
                       {svc.tagline}
                     </p>
                     <p
-                      className={`mt-4 text-[14px] leading-[1.75] ${
+                      className={`mt-5 text-[14px] leading-[1.75] ${
                         isDark ? "text-paper/50" : "text-muted"
                       }`}
                     >
@@ -121,19 +121,19 @@ export default function ServicesPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="dark-section relative overflow-hidden py-24 sm:py-32">
+      <section className="dark-section relative overflow-hidden py-28 sm:py-40">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="select-none font-display text-[20vw] leading-none text-paper/[0.03]">
             T3
           </span>
         </div>
         <Container className="relative">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <Reveal>
               <h2 className="font-display text-[clamp(1.5rem,3.5vw,2.75rem)] tracking-[-0.02em] text-paper">
                 Not sure what you need?
               </h2>
-              <p className="mt-4 text-[15px] leading-[1.75] text-paper/50">
+              <p className="mt-5 text-[15px] leading-[1.75] text-paper/50">
                 Tell us your challenge. We&apos;ll map the right services.
               </p>
             </Reveal>

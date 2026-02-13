@@ -45,7 +45,7 @@ export default function Navbar() {
       }`}
       style={{ mixBlendMode: !scrolled && !mobileOpen ? "difference" : "normal" }}
     >
-      <div className="mx-auto flex h-[80px] max-w-[1120px] items-center justify-between px-5 sm:px-8 lg:px-16">
+      <div className="mx-auto flex h-[80px] max-w-[1120px] items-center justify-between px-6 sm:px-10 lg:px-16">
         {/* Logo */}
         <Link
           href="/"

@@ -65,7 +65,7 @@ export default function CaseStudyStory({
       {/* ── Dark Meta Strip ── */}
       <section className="dark-section">
         <Container>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 py-6">
+          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 py-8">
             {item.year && (
               <div className="flex items-center gap-3">
                 <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/40">
@@ -150,9 +150,9 @@ export default function CaseStudyStory({
 
       {/* ── Sections — Alternating Zigzag ── */}
       {sections.length > 0 && (
-        <section className="py-20 lg:py-28">
+        <section className="py-24 lg:py-36">
           <Container>
-            <div className="space-y-24 lg:space-y-32">
+            <div className="space-y-28 lg:space-y-40">
               {sections.map((s, i) => {
                 const isEven = i % 2 === 0;
                 const hasMedia = s.media && s.media.length > 0;
@@ -167,7 +167,7 @@ export default function CaseStudyStory({
                     </Reveal>
 
                     <div
-                      className={`mt-6 grid items-start gap-10 lg:gap-16 ${
+                      className={`mt-8 grid items-start gap-12 lg:gap-20 ${
                         hasMedia
                           ? isEven
                             ? "lg:grid-cols-[1fr_1fr]"
@@ -185,7 +185,7 @@ export default function CaseStudyStory({
                           stagger={0.03}
                         />
                         <Reveal delay={0.15}>
-                          <div className="mt-6 text-[15px] leading-[1.85] text-muted">
+                          <div className="mt-8 text-[15px] leading-[1.85] text-muted">
                             {s.body.split("\n").map((p, pi) => (
                               <p key={pi} className="mb-5 last:mb-0">
                                 {p}
@@ -198,7 +198,7 @@ export default function CaseStudyStory({
                       {/* Media */}
                       {hasMedia && (
                         <div
-                          className={`grid gap-4 ${
+                          className={`grid gap-6 ${
                             (s.media?.length ?? 0) > 1 ? "grid-cols-2" : ""
                           } ${!isEven ? "lg:order-1" : ""}`}
                         >
@@ -226,14 +226,14 @@ export default function CaseStudyStory({
 
       {/* ── Gallery — Masonry-like ── */}
       {item.gallery && item.gallery.length > 0 && (
-        <section className="border-t border-border py-20 lg:py-28">
+        <section className="border-t border-border py-24 lg:py-36">
           <Container>
             <Reveal>
               <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]">
                 Gallery
               </h2>
             </Reveal>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {item.gallery.map((url, i) => (
                 <Reveal key={i} delay={i * 0.06} scale>
                   <div
@@ -257,7 +257,7 @@ export default function CaseStudyStory({
 
       {/* ── Outcomes ── */}
       {item.outcomes && item.outcomes.length > 0 && (
-        <section className="dark-section py-24 lg:py-32">
+        <section className="dark-section py-28 lg:py-40">
           <Container>
             <Reveal>
               <h2 className="font-display text-[clamp(1.75rem,4vw,3rem)] tracking-[-0.02em] text-paper">
@@ -267,7 +267,7 @@ export default function CaseStudyStory({
             <div className="mt-16 space-y-0">
               {item.outcomes.map((outcome, i) => (
                 <Reveal key={i} delay={i * 0.06}>
-                  <div className="grid items-start gap-6 border-t border-paper/10 py-8 lg:grid-cols-[100px_1fr]">
+                  <div className="grid items-start gap-6 border-t border-paper/10 py-10 lg:grid-cols-[100px_1fr]">
                     <span className="font-display text-[clamp(2rem,4vw,3rem)] leading-none text-gold/30">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -284,14 +284,14 @@ export default function CaseStudyStory({
 
       {/* ── Related ── */}
       {related.length > 0 && (
-        <section className="py-24 lg:py-32">
+        <section className="py-28 lg:py-40">
           <Container>
             <TextReveal
               text="Related Workstories"
               as="h2"
               className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]"
             />
-            <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-16 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((cs, i) => (
                 <Reveal key={cs.slug} delay={i * 0.08} scale>
                   <CaseStudyCard cs={cs} size="compact" />
@@ -303,9 +303,9 @@ export default function CaseStudyStory({
       )}
 
       {/* ── CTA — Asymmetric ── */}
-      <section className="dark-section py-24 lg:py-32">
+      <section className="dark-section py-28 lg:py-40">
         <Container>
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <Reveal>
               <h2 className="font-display text-[clamp(1.75rem,5vw,3.5rem)] tracking-[-0.02em] text-paper">
                 Have a similar challenge?

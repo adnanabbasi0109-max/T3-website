@@ -27,22 +27,22 @@ export default function ScrollTypeHero() {
   if (reduced) {
     return (
       <section className="flex min-h-[90vh] items-center bg-gradient-to-r from-paper to-paper-warm">
-        <div className="mx-auto w-full max-w-[1120px] px-5 sm:px-8 lg:px-16">
-          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-muted">
+        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-16">
+          <p className="text-[12px] font-medium uppercase tracking-[0.35em] text-muted">
             T3 Technologies
           </p>
-          <h1 className="mt-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.92] tracking-[-0.02em]">
+          <h1 className="mt-10 font-display text-[clamp(3rem,10vw,9rem)] leading-[1] tracking-[-0.02em]">
             We build what
             <br />
             matters in
             <br />
             <span className="text-gold">{WORDS[0]}</span>
           </h1>
-          <p className="mt-10 max-w-[440px] text-[15px] font-light leading-[1.75] tracking-[0.02em] text-muted/70">
+          <p className="mt-12 max-w-[440px] text-[15px] font-light leading-[1.85] tracking-[0.02em] text-muted/70">
             Defying conventional wisdom. Deconstructing complex systems to
             create simple, powerful solutions — for over two decades.
           </p>
-          <div className="mt-14 flex items-center gap-6">
+          <div className="mt-16 flex items-center gap-8">
             <Link
               href="/work"
               className="inline-flex h-[52px] items-center bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/85"
@@ -71,12 +71,12 @@ export default function ScrollTypeHero() {
       style={{ height: `${WORDS.length * 300 + 800}px` }}
     >
       <div className="sticky top-0 flex h-screen items-center overflow-hidden bg-gradient-to-r from-paper to-paper-warm">
-        <div className="mx-auto w-full max-w-[1120px] px-5 sm:px-8 lg:px-16">
+        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-16">
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.2, ease }}
-            className="text-[11px] font-medium uppercase tracking-[0.35em] text-muted"
+            className="text-[12px] font-medium uppercase tracking-[0.35em] text-muted"
           >
             T3 Technologies
           </motion.p>
@@ -85,7 +85,7 @@ export default function ScrollTypeHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.4, ease }}
-            className="mt-8 font-display text-[clamp(3rem,10vw,9rem)] leading-[0.92] tracking-[-0.02em]"
+            className="mt-10 font-display text-[clamp(3rem,10vw,9rem)] leading-[1] tracking-[-0.02em]"
           >
             We build what
             <br />
@@ -109,7 +109,7 @@ export default function ScrollTypeHero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.7, ease }}
-            className="mt-10 max-w-[440px] text-[15px] font-light leading-[1.75] tracking-[0.02em] text-muted/70"
+            className="mt-12 max-w-[440px] text-[15px] font-light leading-[1.85] tracking-[0.02em] text-muted/70"
           >
             Defying conventional wisdom. Deconstructing complex systems to
             create simple, powerful solutions — for over two decades.
@@ -119,7 +119,7 @@ export default function ScrollTypeHero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.95, ease }}
-            className="mt-14 flex items-center gap-6"
+            className="mt-16 flex items-center gap-8"
           >
             <Link
               href="/work"

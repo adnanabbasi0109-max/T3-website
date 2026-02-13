@@ -23,14 +23,14 @@ export default async function WorkPage() {
   const items = await getAllCaseStudies();
 
   return (
-    <main className="pb-28 sm:pb-36">
+    <main className="pb-32 sm:pb-40">
       {/* ── Dark hero ── */}
-      <section className="dark-section flex min-h-[50vh] items-end pb-12 sm:pb-16">
+      <section className="dark-section flex min-h-[55vh] items-end pb-16 sm:pb-20 lg:pb-24">
         <Container>
-          <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[0.92] tracking-[-0.02em] text-paper">
+          <h1 className="font-display text-[clamp(3rem,10vw,8rem)] leading-[1] tracking-[-0.02em] text-paper">
             Workstories
           </h1>
-          <p className="mt-4 max-w-lg text-[15px] leading-[1.75] text-paper/50">
+          <p className="mt-6 max-w-lg text-[15px] leading-[1.85] text-paper/50">
             Every project is a story — from brief to outcome.
           </p>
         </Container>

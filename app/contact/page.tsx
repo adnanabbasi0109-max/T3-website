@@ -10,7 +10,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen lg:grid lg:grid-cols-2">
       {/* ── Dark left panel ── */}
-      <div className="dark-section relative flex flex-col justify-center overflow-hidden px-8 py-20 sm:px-12 lg:min-h-screen lg:px-16">
+      <div className="dark-section relative flex flex-col justify-center overflow-hidden px-8 py-24 sm:px-14 lg:min-h-screen lg:px-20">
         {/* Decorative watermark */}
         <div className="absolute bottom-0 left-0 select-none">
           <span className="font-display text-[15vw] leading-none text-paper/[0.04]">
@@ -25,14 +25,14 @@ export default function ContactPage() {
             </h1>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="mt-6 max-w-sm text-[15px] leading-[1.75] text-paper/50">
+            <p className="mt-8 max-w-sm text-[15px] leading-[1.75] text-paper/50">
               Tell us about your challenge. We&apos;ll respond with honesty
               — whether we&apos;re the right fit or not.
             </p>
           </Reveal>
 
           <Reveal delay={0.25}>
-            <div className="mt-16 space-y-10">
+            <div className="mt-20 space-y-12">
               <div>
                 <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/30">
                   Email
@@ -58,7 +58,7 @@ export default function ContactPage() {
       </div>
 
       {/* ── Light right panel — form ── */}
-      <div className="flex items-center justify-center bg-paper px-8 py-20 sm:px-12 lg:px-16">
+      <div className="flex items-center justify-center bg-paper px-8 py-24 sm:px-14 lg:px-20">
         <div className="w-full max-w-md">
           <Reveal delay={0.2}>
             <ContactForm />

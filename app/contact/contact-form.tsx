@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-transparent px-4 py-3.5 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
+  "w-full rounded-lg border border-border bg-transparent px-5 py-4 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -85,11 +85,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-7">
       <div>
         <label
           htmlFor="name"
-          className="mb-2 block text-[13px] font-medium text-ink/80"
+          className="mb-2.5 block text-[13px] font-medium text-ink/80"
         >
           Name <span className="text-accent">*</span>
         </label>
@@ -107,7 +107,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="mb-2 block text-[13px] font-medium text-ink/80"
+          className="mb-2.5 block text-[13px] font-medium text-ink/80"
         >
           Email <span className="text-accent">*</span>
         </label>
@@ -125,7 +125,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="company"
-          className="mb-2 block text-[13px] font-medium text-ink/80"
+          className="mb-2.5 block text-[13px] font-medium text-ink/80"
         >
           Company
         </label>
@@ -142,7 +142,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-2 block text-[13px] font-medium text-ink/80"
+          className="mb-2.5 block text-[13px] font-medium text-ink/80"
         >
           Message <span className="text-accent">*</span>
         </label>
@@ -164,7 +164,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink py-4 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/90 disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink py-4.5 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/90 disabled:opacity-50"
       >
         {status === "loading" ? (
           <>

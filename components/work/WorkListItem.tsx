@@ -25,7 +25,7 @@ export default function WorkListItem({ cs }: { cs: CaseStudyDoc }) {
       </div>
 
       {/* Meta */}
-      <div className="mt-4">
+      <div className="mt-6">
         <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.15em] text-muted">
           <span>{cs.client || "Client"}</span>
           {cs.year && (
@@ -36,13 +36,13 @@ export default function WorkListItem({ cs }: { cs: CaseStudyDoc }) {
           )}
         </div>
 
-        <h3 className="mt-2 font-display text-[clamp(1.1rem,2vw,1.4rem)] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
+        <h3 className="mt-3 font-display text-[clamp(1.1rem,2vw,1.4rem)] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
           {cs.title}
         </h3>
 
         {/* Tags */}
         {cs.domains && cs.domains.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+          <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
             {cs.domains.slice(0, 2).map((d) => (
               <span
                 key={d}

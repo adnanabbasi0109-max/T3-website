@@ -49,7 +49,7 @@ export default function CaseStudyCard({ cs, size = "default" }: Props) {
       </div>
 
       {/* Meta */}
-      <div className="mt-5">
+      <div className="mt-6">
         <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.15em] text-muted">
           <span>{cs.client || "Client"}</span>
           {cs.year && (
@@ -60,7 +60,7 @@ export default function CaseStudyCard({ cs, size = "default" }: Props) {
           )}
         </div>
         <h3
-          className={`mt-2.5 font-display tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold ${
+          className={`mt-3 font-display tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold ${
             size === "compact"
               ? "text-[16px]"
               : size === "large"

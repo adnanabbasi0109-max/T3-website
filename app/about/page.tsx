@@ -24,7 +24,7 @@ export default function AboutPage() {
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-8 max-w-xl text-[15px] font-light leading-[1.75] tracking-[0.02em] text-paper/50">
+            <p className="mt-10 max-w-xl text-[15px] font-light leading-[1.75] tracking-[0.02em] text-paper/50">
               For more than two decades, T3 Technologies has been a leader in
               creative innovation, assisting premium brands, organizations, and
               individuals in achieving success.
@@ -34,7 +34,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Marquee divider ── */}
-      <div className="border-y border-border py-4">
+      <div className="border-y border-border py-6">
         <Marquee
           text="Delhi NCR · Jaipur · Bhopal · Since 2004 · T3 Technologies"
           className="text-[13px] font-medium uppercase tracking-[0.2em] text-muted/30"
@@ -43,9 +43,9 @@ export default function AboutPage() {
       </div>
 
       {/* ── Stats — Asymmetric ── */}
-      <section className="py-24 sm:py-32">
+      <section className="py-28 sm:py-36">
         <Container>
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-14 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.1} stiffness="snappy">
                 <div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                   >
                     <CountUp value={s.value} />
                   </p>
-                  <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.15em] text-muted">
+                  <p className="mt-3 text-[12px] font-medium uppercase tracking-[0.15em] text-muted">
                     {s.label}
                   </p>
                 </div>
@@ -69,7 +69,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Philosophy — Dark pull-quote ── */}
-      <section className="dark-section py-24 sm:py-32">
+      <section className="dark-section py-28 sm:py-40">
         <Container>
           <Reveal>
             <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold-light/60">
@@ -77,14 +77,14 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <blockquote className="mt-8 max-w-3xl font-display text-[clamp(1.5rem,3.5vw,2.5rem)] italic leading-[1.3] tracking-[-0.02em] text-paper">
+            <blockquote className="mt-10 max-w-3xl font-display text-[clamp(1.5rem,3.5vw,2.5rem)] italic leading-[1.3] tracking-[-0.02em] text-paper">
               &ldquo;We believe in a harmonious blend of tradition and
               innovation. Technology should enhance the human experience, not
               replace it.&rdquo;
             </blockquote>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-10 max-w-xl text-[15px] leading-[1.8] text-paper/50">
+            <p className="mt-12 max-w-xl text-[15px] leading-[1.8] text-paper/50">
               We create solutions that respect the past while embracing the
               future, putting technology to work for the betterment of
               humanity — ensuring progress is both thoughtful and purposeful.
@@ -94,9 +94,9 @@ export default function AboutPage() {
       </section>
 
       {/* ── Doctrine — Asymmetric 2:3 grid ── */}
-      <section className="py-24 sm:py-32">
+      <section className="py-28 sm:py-36">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[2fr_3fr] lg:gap-20">
+          <div className="grid gap-14 lg:grid-cols-[2fr_3fr] lg:gap-24">
             <SlideIn direction="left">
               <div>
                 <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
@@ -110,7 +110,7 @@ export default function AboutPage() {
               </div>
             </SlideIn>
             <SlideIn direction="right" delay={0.1}>
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <p className="text-[15px] leading-[1.8] text-muted">
                   For the moments when the playbook is obsolete and the future is
                   unwritten. Our engagement is a structured intervention designed
@@ -128,21 +128,21 @@ export default function AboutPage() {
       </section>
 
       {/* ── Presence — SlideIn stack ── */}
-      <section className="border-t border-border py-24 sm:py-32">
+      <section className="border-t border-border py-28 sm:py-36">
         <Container>
           <TextReveal
             text="Our Presence"
             as="h2"
             className="font-display text-[clamp(1.75rem,4vw,3rem)] tracking-[-0.02em]"
           />
-          <div className="mt-14 space-y-12 lg:mt-20">
+          <div className="mt-16 space-y-14 lg:mt-24">
             {[
               { city: "Delhi NCR", desc: "Strategy, execution, and client engagement from the national capital region." },
               { city: "Jaipur", desc: "Strategy, execution, and client engagement from Jaipur." },
               { city: "Bhopal", desc: "Strategy, execution, and client engagement from Bhopal." },
             ].map((loc, i) => (
               <SlideIn key={loc.city} direction={i % 2 === 0 ? "left" : "right"} delay={i * 0.08}>
-                <div className="grid items-start gap-4 border-t border-border pt-8 lg:grid-cols-[300px_1fr]">
+                <div className="grid items-start gap-6 border-t border-border pt-10 lg:grid-cols-[300px_1fr]">
                   <h3 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.02em]">
                     {loc.city}
                   </h3>
@@ -157,14 +157,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA — Dark ── */}
-      <section className="dark-section relative overflow-hidden py-24 sm:py-32">
+      <section className="dark-section relative overflow-hidden py-28 sm:py-40">
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="select-none font-display text-[20vw] leading-none text-paper/[0.03]">
             T3
           </span>
         </div>
         <Container className="relative">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <Reveal>
               <h2 className="font-display text-[clamp(1.75rem,4.5vw,3.5rem)] tracking-[-0.02em] text-paper">
                 Let&apos;s build something worth documenting.

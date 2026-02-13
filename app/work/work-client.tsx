@@ -90,7 +90,7 @@ export default function WorkClient({
   return (
     <Container>
       {/* ── Filter bar — pill style ── */}
-      <div className="mt-10 flex flex-col gap-5 sm:mt-14 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-14 flex flex-col gap-5 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
         {/* Search */}
         <div className="relative max-w-xs flex-1">
           <input
@@ -104,7 +104,7 @@ export default function WorkClient({
         </div>
 
         {/* Pill filters */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3">
           <select
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
@@ -168,17 +168,17 @@ export default function WorkClient({
       )}
 
       {/* ── Mixed grid ── */}
-      <div className="mt-10 sm:mt-14">
+      <div className="mt-14 sm:mt-20">
         {/* Featured items — full width */}
         {featuredItems.map((cs, i) => (
-          <Reveal key={cs.slug} delay={Math.min(i * 0.08, 0.3)} className="mb-8">
+          <Reveal key={cs.slug} delay={Math.min(i * 0.08, 0.3)} className="mb-10">
             <FeaturedWorkCard cs={cs} />
           </Reveal>
         ))}
 
         {/* Regular items — responsive grid */}
         {regularItems.length > 0 && (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {regularItems.map((cs, i) => (
               <Reveal key={cs.slug} delay={Math.min(i * 0.05, 0.4)} scale>
                 <WorkListItem cs={cs} />

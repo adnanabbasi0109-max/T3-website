@@ -5,20 +5,20 @@ export default function Footer() {
   return (
     <footer className="dark-section mt-auto">
       {/* ── Large CTA ── */}
-      <div className="mx-auto max-w-[1120px] px-5 pt-28 sm:px-8 sm:pt-36 lg:px-16">
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1] tracking-[-0.02em] text-paper">
+      <div className="mx-auto max-w-[1120px] px-6 pt-32 sm:px-10 sm:pt-40 lg:px-16">
+        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] tracking-[-0.02em] text-paper">
           Let&apos;s build something
         </h2>
         <a
           href="mailto:hello@t-3.in"
-          className="mt-6 inline-block text-[clamp(1rem,2.5vw,1.75rem)] font-light text-paper/60 transition-colors duration-300 hover:text-gold"
+          className="mt-8 inline-block text-[clamp(1rem,2.5vw,1.75rem)] font-light text-paper/60 transition-colors duration-300 hover:text-gold"
         >
           hello@t-3.in
         </a>
       </div>
 
       {/* ── Marquee divider ── */}
-      <div className="mt-20 border-y border-border-dark py-5 sm:mt-28">
+      <div className="mt-24 border-y border-border-dark py-7 sm:mt-32">
         <Marquee
           text="Strategy \u00b7 Craft \u00b7 Outcome \u00b7 T3 Technologies \u00b7 Defy Convention"
           className="text-[13px] font-medium uppercase tracking-[0.2em] text-paper/20"
@@ -27,8 +27,8 @@ export default function Footer() {
       </div>
 
       {/* ── Link columns ── */}
-      <div className="mx-auto max-w-[1120px] px-5 sm:px-8 lg:px-16">
-        <div className="grid gap-14 py-16 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
+      <div className="mx-auto max-w-[1120px] px-6 sm:px-10 lg:px-16">
+        <div className="grid gap-14 py-20 sm:grid-cols-2 sm:py-24 lg:grid-cols-[2fr_1fr_1fr]">
           {/* Brand */}
           <div>
             <span className="font-display text-[24px] tracking-[-0.02em] text-paper">

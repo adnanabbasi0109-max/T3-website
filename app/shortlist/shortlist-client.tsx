@@ -7,7 +7,7 @@ import type { CaseStudyDoc } from "../../lib/utils";
 import Container from "../../components/layout/Container";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-transparent px-4 py-3.5 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
+  "w-full rounded-lg border border-border bg-transparent px-5 py-4 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
 
 export default function ShortlistClient() {
   const { slugs, remove, clear, count } = useShortlist();
@@ -121,11 +121,11 @@ export default function ShortlistClient() {
   return (
     <Container>
       {/* ── Shortlisted items as cards ── */}
-      <div className="mt-14 space-y-3">
+      <div className="mt-14 space-y-4">
         {items.map((cs) => (
           <div
             key={cs.slug}
-            className="flex items-center gap-4 rounded-lg bg-paper-warm p-4 transition-colors duration-200"
+            className="flex items-center gap-5 rounded-lg bg-paper-warm p-5 transition-colors duration-200"
           >
             {/* Thumbnail */}
             {cs.heroImage ? (
@@ -153,7 +153,7 @@ export default function ShortlistClient() {
               >
                 {cs.title}
               </Link>
-              <p className="mt-0.5 text-[12px] text-muted">
+              <p className="mt-1.5 text-[12px] text-muted">
                 {cs.client || "Client"} &middot; {cs.year || ""}
               </p>
             </div>
@@ -182,11 +182,11 @@ export default function ShortlistClient() {
       </div>
 
       {/* ── Lead form ── */}
-      <div className="mt-20 lg:mt-28">
+      <div className="mt-24 lg:mt-32">
         <h2 className="font-display text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em]">
           Send Your Brief
         </h2>
-        <p className="mt-3 text-[15px] leading-[1.75] text-muted">
+        <p className="mt-4 text-[15px] leading-[1.75] text-muted">
           We&apos;ll review your selected workstories and prepare a tailored
           response.
         </p>
@@ -217,7 +217,7 @@ export default function ShortlistClient() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-10 max-w-lg space-y-6">
+          <form onSubmit={handleSubmit} className="mt-12 max-w-lg space-y-7">
             <div>
               <label
                 htmlFor="lead-name"

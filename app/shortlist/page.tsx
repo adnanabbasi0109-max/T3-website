@@ -12,10 +12,7 @@ export default function ShortlistPage() {
     <main className="pb-28 pt-20 sm:pb-36 sm:pt-28 lg:pt-36">
       <Container>
         <Reveal>
-          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
-            Your Selection
-          </p>
-          <h1 className="mt-5 text-[clamp(2rem,5vw,4rem)] font-extrabold tracking-[-0.03em]">
+          <h1 className="font-display text-[clamp(2rem,6vw,4rem)] tracking-[-0.02em]">
             Shortlist
           </h1>
           <p className="mt-5 max-w-lg text-[15px] leading-[1.75] text-muted">

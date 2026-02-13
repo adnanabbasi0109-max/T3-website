@@ -1,6 +1,5 @@
 import ContactForm from "./contact-form";
 import Reveal from "../../components/motion/Reveal";
-import Container from "../../components/layout/Container";
 
 export const metadata = {
   title: "Contact",
@@ -9,52 +8,63 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main>
-      <section className="pb-28 pt-20 sm:pb-36 sm:pt-28 lg:pt-36">
-        <Container>
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-            <Reveal>
-              <div>
-                <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
-                  Get in Touch
-                </p>
-                <h1 className="mt-5 text-[clamp(2rem,5vw,4rem)] font-extrabold tracking-[-0.03em]">
-                  Start a Conversation
-                </h1>
-                <p className="mt-6 text-[15px] leading-[1.75] text-muted">
-                  Tell us about your challenge. We&apos;ll respond with honesty
-                  — whether we&apos;re the right fit or not.
-                </p>
+    <main className="min-h-screen lg:grid lg:grid-cols-2">
+      {/* ── Dark left panel ── */}
+      <div className="dark-section relative flex flex-col justify-center overflow-hidden px-8 py-20 sm:px-12 lg:min-h-screen lg:px-16">
+        {/* Decorative watermark */}
+        <div className="absolute bottom-0 left-0 select-none">
+          <span className="font-display text-[15vw] leading-none text-paper/[0.04]">
+            T3
+          </span>
+        </div>
 
-                <div className="mt-16 space-y-10">
-                  <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60">
-                      Email
-                    </p>
-                    <p className="mt-2 text-[15px] font-semibold">
-                      hello@t-3.in
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60">
-                      Offices
-                    </p>
-                    <p className="mt-2 text-[15px] font-semibold">
-                      Delhi NCR &middot; Jaipur &middot; Bhopal
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
+        <div className="relative">
+          <Reveal>
+            <h1 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
+              Let&apos;s talk.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <p className="mt-6 max-w-sm text-[15px] leading-[1.75] text-paper/50">
+              Tell us about your challenge. We&apos;ll respond with honesty
+              — whether we&apos;re the right fit or not.
+            </p>
+          </Reveal>
 
-            <Reveal delay={0.15}>
+          <Reveal delay={0.25}>
+            <div className="mt-16 space-y-10">
               <div>
-                <ContactForm />
+                <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/30">
+                  Email
+                </p>
+                <a
+                  href="mailto:hello@t-3.in"
+                  className="mt-2 block text-[clamp(1rem,2vw,1.5rem)] font-light text-paper/70 transition-colors duration-300 hover:text-gold"
+                >
+                  hello@t-3.in
+                </a>
               </div>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/30">
+                  Offices
+                </p>
+                <p className="mt-2 text-[15px] font-semibold text-paper/70">
+                  Delhi NCR &middot; Jaipur &middot; Bhopal
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* ── Light right panel — form ── */}
+      <div className="flex items-center justify-center bg-paper px-8 py-20 sm:px-12 lg:px-16">
+        <div className="w-full max-w-md">
+          <Reveal delay={0.2}>
+            <ContactForm />
+          </Reveal>
+        </div>
+      </div>
     </main>
   );
 }

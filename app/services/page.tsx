@@ -1,73 +1,65 @@
 import Link from "next/link";
 import { SERVICES } from "../../lib/utils";
-import Reveal from "../../components/ui/reveal";
+import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
 
 export const metadata = {
   title: "Services",
-  description:
-    "Brand Building, Business Innovations, PR, Social Media, Art & Design, AI & Tech.",
+  description: "Brand Building, Business Innovations, PR, Social Media, Art & Design, AI & Tech.",
 };
 
 export default function ServicesPage() {
   return (
     <main>
-      <section className="py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="pb-32 pt-28 lg:pt-36">
+        <Container>
           <Reveal>
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
               What We Do
             </p>
-            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
               Services
             </h1>
-            <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-muted">
-              Six disciplines. One doctrine: deconstruct complexity into
-              powerful simplicity. Every service is delivered with proof —
-              measurable outcomes, not promises.
+            <p className="mt-5 text-[15px] leading-[1.7] text-muted">
+              Six disciplines. One doctrine: deconstruct complexity into powerful simplicity.
             </p>
           </Reveal>
 
-          <div className="mt-20 space-y-20">
+          <div className="mt-24 space-y-24">
             {SERVICES.map((svc, i) => (
-              <Reveal key={svc.title} delay={i * 0.08}>
-                <div className="grid items-start gap-8 sm:grid-cols-[100px_1fr]">
-                  <div className="font-editorial text-5xl font-bold text-border dark:text-border-dark">
+              <Reveal key={svc.title} delay={i * 0.06}>
+                <div className="grid items-start gap-6 sm:grid-cols-[80px_1fr]">
+                  <span className="text-[clamp(2.5rem,4vw,3.5rem)] font-bold tracking-tight text-border">
                     {String(i + 1).padStart(2, "0")}
-                  </div>
+                  </span>
                   <div>
-                    <h2 className="text-2xl font-bold tracking-tight">
-                      {svc.title}
-                    </h2>
-                    <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted">
-                      {svc.desc}
-                    </p>
+                    <h2 className="text-[22px] font-bold tracking-tight">{svc.title}</h2>
+                    <p className="mt-3 text-[14px] leading-[1.75] text-muted">{svc.desc}</p>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* CTA */}
-      <section className="border-t border-border py-28 dark:border-border-dark">
-        <div className="mx-auto max-w-7xl px-6 text-center lg:px-10">
+      <section className="border-t border-border py-32">
+        <Container className="text-center">
           <Reveal>
-            <h2 className="font-editorial text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-bold tracking-tight">
               Not sure what you need?
             </h2>
-            <p className="mt-5 text-[16px] text-muted">
-              Tell us your challenge. We&apos;ll map the right combination of
-              services.
+            <p className="mx-auto mt-4 text-[15px] text-muted">
+              Tell us your challenge. We&apos;ll map the right services.
             </p>
             <Link
               href="/contact"
-              className="mt-10 inline-flex items-center gap-2 rounded-full bg-surface-dark px-8 py-4 text-[13px] font-semibold text-white transition hover:shadow-lg hover:shadow-black/10 dark:bg-white dark:text-black"
+              className="mt-10 inline-flex h-12 items-center gap-2 rounded-full bg-surface-dark px-8 text-[13px] font-medium text-white transition hover:opacity-90"
             >
               Start a Conversation &rarr;
             </Link>
           </Reveal>
-        </div>
+        </Container>
       </section>
     </main>
   );

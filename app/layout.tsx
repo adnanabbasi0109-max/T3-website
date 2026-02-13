@@ -35,22 +35,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Premium font stack — Inter + Playfair Display */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-surface text-surface-dark antialiased dark:bg-surface-dark dark:text-neutral-100">
+      <body className="flex min-h-screen flex-col bg-surface text-surface-dark antialiased">
         <ShortlistProvider>
           <Navbar />
-          <div className="pt-[72px]">{children}</div>
+          <div className="flex-1 pt-20">{children}</div>
           <Footer />
         </ShortlistProvider>
       </body>

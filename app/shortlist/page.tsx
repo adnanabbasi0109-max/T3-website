@@ -1,5 +1,6 @@
 import ShortlistClient from "./shortlist-client";
-import Reveal from "../../components/ui/reveal";
+import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
 
 export const metadata = {
   title: "Your Shortlist",
@@ -8,21 +9,21 @@ export const metadata = {
 
 export default function ShortlistPage() {
   return (
-    <main className="py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <main className="pb-32 pt-28 lg:pt-36">
+      <Container>
         <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
             Your Selection
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+          <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
             Shortlist
           </h1>
-          <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
+          <p className="mt-5 text-[15px] leading-[1.7] text-muted">
             Review the workstories you&apos;ve saved, then send us your brief.
             We&apos;ll respond within 24 hours.
           </p>
         </Reveal>
-      </div>
+      </Container>
 
       <ShortlistClient />
     </main>

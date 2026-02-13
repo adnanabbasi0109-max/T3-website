@@ -3,7 +3,8 @@ import { CaseStudy } from "../../models/CaseStudy";
 import { serialize } from "../../lib/utils";
 import type { CaseStudyDoc } from "../../lib/utils";
 import WorkClient from "./work-client";
-import Reveal from "../../components/ui/reveal";
+import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
 
 export const metadata = {
   title: "Workstories",
@@ -23,21 +24,20 @@ export default async function WorkPage() {
   const items = await getAllCaseStudies();
 
   return (
-    <main>
-      <div className="mx-auto max-w-7xl px-6 pb-6 pt-20 lg:px-10">
+    <main className="pb-32">
+      <Container className="pt-28 lg:pt-36">
         <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
             Portfolio
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
             Workstories
           </h1>
-          <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
-            Every project is a story — from brief to outcome. Filter, search,
-            and explore.
+          <p className="mt-4 text-[15px] leading-[1.7] text-muted">
+            Every project is a story — from brief to outcome.
           </p>
         </Reveal>
-      </div>
+      </Container>
 
       <WorkClient initialItems={items} />
     </main>

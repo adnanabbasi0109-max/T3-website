@@ -1,5 +1,6 @@
 import ContactForm from "./contact-form";
-import Reveal from "../../components/ui/reveal";
+import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
 
 export const metadata = {
   title: "Contact",
@@ -9,36 +10,36 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <main>
-      <section className="py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="pb-32 pt-28 lg:pt-36">
+        <Container>
           <div className="grid gap-20 lg:grid-cols-2">
             <Reveal>
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+                <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
                   Get in Touch
                 </p>
-                <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
+                <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
                   Start a Conversation
                 </h1>
-                <p className="mt-5 text-[16px] leading-relaxed text-muted">
+                <p className="mt-6 text-[15px] leading-[1.7] text-muted">
                   Tell us about your challenge. We&apos;ll respond with honesty
                   — whether we&apos;re the right fit or not.
                 </p>
 
-                <div className="mt-14 space-y-8">
+                <div className="mt-16 space-y-10">
                   <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400">
                       Email
                     </p>
-                    <p className="mt-2 text-[15px] font-medium">
+                    <p className="mt-2 text-[15px] font-semibold">
                       hello@t-3.in
                     </p>
                   </div>
                   <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400">
                       Offices
                     </p>
-                    <p className="mt-2 text-[15px] font-medium">
+                    <p className="mt-2 text-[15px] font-semibold">
                       Delhi NCR &middot; Jaipur &middot; Bhopal
                     </p>
                   </div>
@@ -52,7 +53,7 @@ export default function ContactPage() {
               </div>
             </Reveal>
           </div>
-        </div>
+        </Container>
       </section>
     </main>
   );

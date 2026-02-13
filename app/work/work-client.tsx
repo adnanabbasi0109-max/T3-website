@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import type { CaseStudyDoc } from "../../lib/utils";
-import CaseStudyCard from "../../components/ui/case-study-card";
+import WorkListItem from "../../components/work/WorkListItem";
+import Reveal from "../../components/motion/Reveal";
 
 type SortKey = "default" | "year-desc" | "year-asc" | "title";
 
@@ -15,7 +15,6 @@ export default function WorkClient({
   const [query, setQuery] = useState("");
   const [domain, setDomain] = useState("All");
   const [industry, setIndustry] = useState("All");
-  const [location, setLocation] = useState("All");
   const [featuredOnly, setFeaturedOnly] = useState(false);
   const [sortBy, setSortBy] = useState<SortKey>("default");
 
@@ -27,17 +26,7 @@ export default function WorkClient({
 
   const allIndustries = useMemo(() => {
     const s = new Set<string>();
-    initialItems.forEach((i) =>
-      (i.industries || []).forEach((d) => s.add(d))
-    );
-    return ["All", ...Array.from(s).sort()];
-  }, [initialItems]);
-
-  const allLocations = useMemo(() => {
-    const s = new Set<string>();
-    initialItems.forEach((i) =>
-      (i.locations || []).forEach((d) => s.add(d))
-    );
+    initialItems.forEach((i) => (i.industries || []).forEach((d) => s.add(d)));
     return ["All", ...Array.from(s).sort()];
   }, [initialItems]);
 
@@ -49,14 +38,11 @@ export default function WorkClient({
       .filter(
         (i) => industry === "All" || (i.industries || []).includes(industry)
       )
-      .filter(
-        (i) => location === "All" || (i.locations || []).includes(location)
-      )
       .filter((i) => !featuredOnly || i.featured)
       .filter((i) => {
         if (!q) return true;
         const hay =
-          `${i.title} ${i.client || ""} ${(i.domains || []).join(" ")} ${(i.industries || []).join(" ")} ${(i.locations || []).join(" ")}`.toLowerCase();
+          `${i.title} ${i.client || ""} ${(i.domains || []).join(" ")} ${(i.industries || []).join(" ")}`.toLowerCase();
         return hay.includes(q);
       });
 
@@ -75,163 +61,95 @@ export default function WorkClient({
     }
 
     return list;
-  }, [initialItems, query, domain, industry, location, featuredOnly, sortBy]);
+  }, [initialItems, query, domain, industry, featuredOnly, sortBy]);
 
   const hasFilters =
-    domain !== "All" ||
-    industry !== "All" ||
-    location !== "All" ||
-    featuredOnly ||
-    query.trim();
+    domain !== "All" || industry !== "All" || featuredOnly || query.trim();
 
   function clearAll() {
     setQuery("");
     setDomain("All");
     setIndustry("All");
-    setLocation("All");
     setFeaturedOnly(false);
     setSortBy("default");
   }
 
   const selectClass =
-    "rounded-lg border border-border bg-white px-3 py-2 text-[13px] outline-none transition focus:border-gold dark:border-border-dark dark:bg-neutral-900 dark:text-white";
+    "appearance-none rounded-none border-b border-border bg-transparent pb-2 pr-6 text-[13px] outline-none transition-colors focus:border-surface-dark";
 
   return (
-    <div className="mx-auto max-w-7xl px-6 pb-28 lg:px-10">
-      {/* ── Filter bar ── */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-border bg-white/60 p-5 backdrop-blur-sm dark:border-border-dark dark:bg-neutral-900/60 sm:flex-row sm:items-center sm:justify-between">
+    <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+      {/* ── Filter bar — minimal, flat ── */}
+      <div className="mt-16 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         {/* Search */}
-        <div className="relative flex-1">
-          <svg
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-            />
-          </svg>
+        <div className="relative max-w-xs flex-1">
           <input
             type="text"
-            placeholder="Search workstories..."
+            placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-lg border border-border bg-surface py-2.5 pl-10 pr-4 text-[13px] outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-border-dark dark:bg-neutral-800 dark:text-white"
+            className="w-full border-b border-border bg-transparent pb-2 text-[14px] outline-none transition-colors placeholder:text-neutral-400 focus:border-surface-dark"
             aria-label="Search workstories"
           />
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap items-center gap-2">
-          <select
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-            className={selectClass}
-            aria-label="Filter by domain"
-          >
+        {/* Selects */}
+        <div className="flex flex-wrap items-end gap-5">
+          <select value={domain} onChange={(e) => setDomain(e.target.value)} className={selectClass} aria-label="Domain">
             {allDomains.map((d) => (
-              <option key={d} value={d}>
-                {d === "All" ? "All Domains" : d}
-              </option>
+              <option key={d} value={d}>{d === "All" ? "All Domains" : d}</option>
             ))}
           </select>
 
-          <select
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            className={selectClass}
-            aria-label="Filter by industry"
-          >
+          <select value={industry} onChange={(e) => setIndustry(e.target.value)} className={selectClass} aria-label="Industry">
             {allIndustries.map((d) => (
-              <option key={d} value={d}>
-                {d === "All" ? "All Industries" : d}
-              </option>
+              <option key={d} value={d}>{d === "All" ? "All Industries" : d}</option>
             ))}
           </select>
 
-          <select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className={selectClass}
-            aria-label="Filter by location"
-          >
-            {allLocations.map((d) => (
-              <option key={d} value={d}>
-                {d === "All" ? "All Locations" : d}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortKey)}
-            className={selectClass}
-            aria-label="Sort order"
-          >
-            <option value="default">Sort: Featured</option>
-            <option value="year-desc">Year: Newest</option>
-            <option value="year-asc">Year: Oldest</option>
-            <option value="title">Title: A-Z</option>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} className={selectClass} aria-label="Sort">
+            <option value="default">Featured</option>
+            <option value="year-desc">Newest</option>
+            <option value="year-asc">Oldest</option>
+            <option value="title">A-Z</option>
           </select>
 
           <button
             onClick={() => setFeaturedOnly((v) => !v)}
-            className={`rounded-lg border px-3 py-2 text-[13px] font-medium transition ${
+            className={`border-b pb-2 text-[13px] transition-colors ${
               featuredOnly
-                ? "border-gold bg-gold-muted text-gold"
-                : "border-border bg-white text-muted hover:border-gold hover:text-gold dark:border-border-dark dark:bg-neutral-900 dark:text-neutral-400"
+                ? "border-gold text-gold"
+                : "border-transparent text-muted hover:text-surface-dark"
             }`}
           >
-            Featured
+            Featured only
           </button>
         </div>
       </div>
 
-      {/* Active filter hint */}
+      {/* Filter hint */}
       {hasFilters && (
-        <div className="mt-4 flex items-center justify-between text-[13px] text-muted">
-          <span>
-            {filtered.length} result{filtered.length !== 1 && "s"}
-          </span>
-          <button
-            onClick={clearAll}
-            className="font-medium text-gold transition hover:underline"
-          >
-            Clear filters
-          </button>
+        <div className="mt-6 flex items-center justify-between text-[13px] text-muted">
+          <span>{filtered.length} result{filtered.length !== 1 && "s"}</span>
+          <button onClick={clearAll} className="text-gold transition hover:underline">Clear</button>
         </div>
       )}
 
-      {/* Grid */}
-      <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((cs) => (
-            <motion.div
-              key={cs.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.3 }}
-            >
-              <CaseStudyCard cs={cs} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+      {/* ── Editorial list ── */}
+      <div className="mt-10">
+        <div className="h-px bg-border" />
+        {filtered.map((cs, i) => (
+          <Reveal key={cs.slug} delay={i * 0.04}>
+            <WorkListItem cs={cs} />
+          </Reveal>
+        ))}
       </div>
 
       {/* Empty */}
       {filtered.length === 0 && (
-        <div className="mt-16 rounded-2xl border border-border bg-white p-16 text-center dark:border-border-dark dark:bg-neutral-900">
+        <div className="py-24 text-center">
           <p className="text-muted">No workstories match your filters.</p>
-          <button
-            onClick={clearAll}
-            className="mt-4 text-[13px] font-medium text-gold transition hover:underline"
-          >
+          <button onClick={clearAll} className="mt-3 text-[13px] text-gold transition hover:underline">
             Clear all filters
           </button>
         </div>

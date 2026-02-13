@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CaseStudyDoc } from "../../lib/utils";
-import WorkListItem from "../../components/work/WorkListItem";
+import CaseStudyCard from "../../components/ui/case-study-card";
 import Reveal from "../../components/motion/Reveal";
 import Container from "../../components/layout/Container";
 
@@ -77,32 +77,32 @@ export default function WorkClient({
     setSortBy("default");
   }
 
-  const selectClass =
-    "appearance-none border border-border bg-transparent px-3 py-2 text-[12px] font-medium text-ink outline-none transition-all duration-300 focus:border-ink cursor-pointer";
+  const pillClass =
+    "appearance-none rounded-full border border-border bg-transparent px-4 py-2 text-[12px] font-medium text-ink outline-none transition-all duration-500 focus:border-border-strong hover:border-border-strong cursor-pointer";
 
   return (
     <Container>
       {/* ── Filter bar ── */}
-      <div className="border-b border-border pb-5">
+      <div className="border-b border-border pb-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Search */}
-          <div className="relative max-w-[260px] flex-1">
+          <div className="relative max-w-[280px] flex-1">
             <input
               type="text"
-              placeholder="Search workstories..."
+              placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full border-b border-border bg-transparent pb-2 text-[13px] outline-none transition-colors duration-300 placeholder:text-muted-light focus:border-ink"
+              className="w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong"
               aria-label="Search workstories"
             />
           </div>
 
-          {/* Filters */}
-          <div className="flex flex-wrap items-center gap-2.5">
+          {/* Filters — pill-shaped */}
+          <div className="flex flex-wrap items-center gap-2">
             <select
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
-              className={selectClass}
+              className={pillClass}
               aria-label="Domain"
             >
               {allDomains.map((d) => (
@@ -115,7 +115,7 @@ export default function WorkClient({
             <select
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
-              className={selectClass}
+              className={pillClass}
               aria-label="Industry"
             >
               {allIndustries.map((d) => (
@@ -128,7 +128,7 @@ export default function WorkClient({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortKey)}
-              className={selectClass}
+              className={pillClass}
               aria-label="Sort"
             >
               <option value="default">Featured</option>
@@ -139,10 +139,10 @@ export default function WorkClient({
 
             <button
               onClick={() => setFeaturedOnly((v) => !v)}
-              className={`${selectClass} ${
+              className={`rounded-full border px-4 py-2 text-[12px] font-medium transition-all duration-500 ${
                 featuredOnly
                   ? "border-ink bg-ink text-paper"
-                  : ""
+                  : "border-border bg-transparent text-ink hover:border-border-strong"
               }`}
             >
               Featured
@@ -151,7 +151,7 @@ export default function WorkClient({
             {hasFilters && (
               <button
                 onClick={clearAll}
-                className="ml-1 text-[11px] font-medium text-muted transition-colors hover:text-ink"
+                className="ml-1 text-[11px] font-medium text-muted transition-colors duration-500 hover:text-accent"
               >
                 Clear
               </button>
@@ -160,30 +160,30 @@ export default function WorkClient({
         </div>
 
         {hasFilters && (
-          <p className="mt-3 text-[12px] text-muted">
+          <p className="mt-4 text-[12px] text-muted">
             {filtered.length} result{filtered.length !== 1 && "s"}
           </p>
         )}
       </div>
 
-      {/* ── Results ── */}
-      <div className="mt-10 sm:mt-14">
+      {/* ── Results — 2-col cinematic grid ── */}
+      <div className="mt-12 sm:mt-16">
         {filtered.length > 0 ? (
-          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
             {filtered.map((cs, i) => (
               <Reveal key={cs.slug} delay={Math.min(i * 0.04, 0.3)}>
-                <WorkListItem cs={cs} />
+                <CaseStudyCard cs={cs} />
               </Reveal>
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center">
-            <p className="text-[15px] text-muted">
+          <div className="py-24 text-center">
+            <p className="text-[16px] text-muted">
               No workstories match your filters.
             </p>
             <button
               onClick={clearAll}
-              className="mt-3 text-[13px] font-medium text-gold transition-colors hover:text-gold-dark"
+              className="mt-4 rounded-full border border-border px-6 py-2.5 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
             >
               Clear all filters
             </button>

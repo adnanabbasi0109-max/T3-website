@@ -2,9 +2,19 @@
 
 import { useState } from "react";
 
+const inputClass =
+  "w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-[14px] outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-border-dark dark:bg-neutral-800";
+
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -40,12 +50,12 @@ export default function ContactForm() {
         <p className="text-lg font-semibold text-green-800 dark:text-green-200">
           Message sent!
         </p>
-        <p className="mt-2 text-sm text-green-600 dark:text-green-400">
+        <p className="mt-2 text-[14px] text-green-600 dark:text-green-400">
           We&apos;ll get back to you within 24 hours.
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-4 text-sm text-gold transition hover:underline"
+          className="mt-4 text-[13px] font-medium text-gold transition hover:underline"
         >
           Send another message
         </button>
@@ -56,7 +66,10 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="name" className="mb-1 block text-sm font-medium">
+        <label
+          htmlFor="name"
+          className="mb-1.5 block text-[13px] font-medium"
+        >
           Name <span className="text-red-400">*</span>
         </label>
         <input
@@ -65,13 +78,16 @@ export default function ContactForm() {
           required
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full rounded-xl border border-neutral-200 px-4 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-neutral-700 dark:bg-neutral-800"
+          className={inputClass}
           placeholder="Your name"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="mb-1 block text-sm font-medium">
+        <label
+          htmlFor="email"
+          className="mb-1.5 block text-[13px] font-medium"
+        >
           Email <span className="text-red-400">*</span>
         </label>
         <input
@@ -80,13 +96,16 @@ export default function ContactForm() {
           required
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full rounded-xl border border-neutral-200 px-4 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-neutral-700 dark:bg-neutral-800"
+          className={inputClass}
           placeholder="you@company.com"
         />
       </div>
 
       <div>
-        <label htmlFor="company" className="mb-1 block text-sm font-medium">
+        <label
+          htmlFor="company"
+          className="mb-1.5 block text-[13px] font-medium"
+        >
           Company
         </label>
         <input
@@ -94,13 +113,16 @@ export default function ContactForm() {
           type="text"
           value={form.company}
           onChange={(e) => setForm({ ...form, company: e.target.value })}
-          className="w-full rounded-xl border border-neutral-200 px-4 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-neutral-700 dark:bg-neutral-800"
+          className={inputClass}
           placeholder="Company name"
         />
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-1 block text-sm font-medium">
+        <label
+          htmlFor="message"
+          className="mb-1.5 block text-[13px] font-medium"
+        >
           Message <span className="text-red-400">*</span>
         </label>
         <textarea
@@ -109,13 +131,13 @@ export default function ContactForm() {
           rows={4}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="w-full rounded-xl border border-neutral-200 px-4 py-2.5 text-sm outline-none transition focus:border-gold focus:ring-1 focus:ring-gold dark:border-neutral-700 dark:bg-neutral-800"
+          className={inputClass}
           placeholder="Tell us about your challenge..."
         />
       </div>
 
       {status === "error" && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950 dark:text-red-400">
+        <p className="rounded-lg bg-red-50 px-3 py-2 text-[13px] text-red-600 dark:bg-red-950 dark:text-red-400">
           {errorMsg}
         </p>
       )}
@@ -123,7 +145,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full rounded-xl bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+        className="w-full rounded-xl bg-surface-dark px-6 py-3 text-[13px] font-semibold text-white transition hover:shadow-lg hover:shadow-black/10 disabled:opacity-50 dark:bg-white dark:text-black"
       >
         {status === "loading" ? "Sending..." : "Send Message"}
       </button>

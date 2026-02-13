@@ -1,65 +1,72 @@
 import Link from "next/link";
 import { SERVICES } from "../../lib/utils";
+import Reveal from "../../components/ui/reveal";
 
 export const metadata = {
   title: "Services",
-  description: "Brand Building, Business Innovations, PR, Social Media, Art & Design, AI & Tech.",
+  description:
+    "Brand Building, Business Innovations, PR, Social Media, Art & Design, AI & Tech.",
 };
 
 export default function ServicesPage() {
   return (
     <main>
-      <section className="py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
-            What We Do
-          </p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">
-            Services
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-neutral-500 dark:text-neutral-400">
-            Six disciplines. One doctrine: deconstruct complexity into powerful
-            simplicity. Every service is delivered with proof — measurable
-            outcomes, not promises.
-          </p>
+      <section className="py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal>
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+              What We Do
+            </p>
+            <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              Services
+            </h1>
+            <p className="mt-5 max-w-2xl text-[16px] leading-relaxed text-muted">
+              Six disciplines. One doctrine: deconstruct complexity into
+              powerful simplicity. Every service is delivered with proof —
+              measurable outcomes, not promises.
+            </p>
+          </Reveal>
 
-          <div className="mt-16 space-y-16">
+          <div className="mt-20 space-y-20">
             {SERVICES.map((svc, i) => (
-              <div
-                key={svc.title}
-                className="grid items-start gap-8 sm:grid-cols-[120px_1fr]"
-              >
-                <div className="text-5xl font-bold text-neutral-100 dark:text-neutral-800">
-                  {String(i + 1).padStart(2, "0")}
+              <Reveal key={svc.title} delay={i * 0.08}>
+                <div className="grid items-start gap-8 sm:grid-cols-[100px_1fr]">
+                  <div className="font-editorial text-5xl font-bold text-border dark:text-border-dark">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold tracking-tight">
+                      {svc.title}
+                    </h2>
+                    <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted">
+                      {svc.desc}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold">{svc.title}</h2>
-                  <p className="mt-3 max-w-xl text-neutral-500 dark:text-neutral-400 leading-relaxed">
-                    {svc.desc}
-                  </p>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="border-t border-neutral-100 py-24 dark:border-neutral-800">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tight">
-            Not sure what you need?
-          </h2>
-          <p className="mt-4 text-neutral-500 dark:text-neutral-400">
-            Tell us your challenge. We&apos;ll map the right combination of
-            services.
-          </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200"
-          >
-            Start a Conversation &rarr;
-          </Link>
+      <section className="border-t border-border py-28 dark:border-border-dark">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-10">
+          <Reveal>
+            <h2 className="font-editorial text-3xl font-bold tracking-tight sm:text-4xl">
+              Not sure what you need?
+            </h2>
+            <p className="mt-5 text-[16px] text-muted">
+              Tell us your challenge. We&apos;ll map the right combination of
+              services.
+            </p>
+            <Link
+              href="/contact"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-surface-dark px-8 py-4 text-[13px] font-semibold text-white transition hover:shadow-lg hover:shadow-black/10 dark:bg-white dark:text-black"
+            >
+              Start a Conversation &rarr;
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

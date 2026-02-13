@@ -1,71 +1,81 @@
 import Link from "next/link";
 
+const footerLinks = {
+  work: [
+    { href: "/work", label: "Workstories" },
+    { href: "/shortlist", label: "Your Shortlist" },
+  ],
+  company: [
+    { href: "/services", label: "Services" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ],
+};
+
 export default function Footer() {
   return (
-    <footer className="border-t border-neutral-100 bg-neutral-950 py-20 text-neutral-400 dark:border-neutral-800">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <span className="text-xl font-bold text-white">
+    <footer className="border-t border-border bg-surface-dark text-neutral-400 dark:border-border-dark">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* Top section */}
+        <div className="grid gap-12 py-20 sm:grid-cols-2 lg:grid-cols-12">
+          {/* Brand — spans wider */}
+          <div className="lg:col-span-5">
+            <span className="text-2xl font-bold tracking-tight text-white">
               T<span className="text-gold">3</span>
             </span>
-            <p className="mt-3 text-sm leading-relaxed">
-              Defying conventional wisdom since 2004. Strategy, craft, outcome.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-neutral-500">
+              Defying conventional wisdom since 2004. Strategy, craft, outcome
+              — documented from brief to result.
             </p>
-            <p className="mt-4 text-xs text-neutral-600">
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-600">
               Delhi NCR &middot; Jaipur &middot; Bhopal
             </p>
           </div>
 
-          {/* Work */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-neutral-500">
+          {/* Work links */}
+          <div className="lg:col-span-2 lg:col-start-8">
+            <p className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-600">
               Work
             </p>
-            <div className="flex flex-col gap-2 text-sm">
-              <Link href="/work" className="transition hover:text-white">
-                Workstories
-              </Link>
-              <Link href="/shortlist" className="transition hover:text-white">
-                Your Shortlist
-              </Link>
-            </div>
+            <nav className="flex flex-col gap-3">
+              {footerLinks.work.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm text-neutral-500 transition-colors hover:text-white"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
           </div>
 
-          {/* Company */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-neutral-500">
+          {/* Company links */}
+          <div className="lg:col-span-2">
+            <p className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-600">
               Company
             </p>
-            <div className="flex flex-col gap-2 text-sm">
-              <Link href="/about" className="transition hover:text-white">
-                About
-              </Link>
-              <Link href="/services" className="transition hover:text-white">
-                Services
-              </Link>
-              <Link href="/contact" className="transition hover:text-white">
-                Contact
-              </Link>
-            </div>
-          </div>
-
-          {/* Philosophy */}
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-neutral-500">
-              Philosophy
-            </p>
-            <p className="text-sm leading-relaxed">
-              Humane Technology &mdash; balancing tradition with innovation to
-              create solutions that serve people first.
-            </p>
+            <nav className="flex flex-col gap-3">
+              {footerLinks.company.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm text-neutral-500 transition-colors hover:text-white"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-neutral-800 pt-8 text-xs text-neutral-600 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} T3 Technologies. All rights reserved.</p>
-          <p>
+        {/* Bottom bar */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-neutral-800/60 py-8 sm:flex-row">
+          <p className="text-[11px] text-neutral-600">
+            &copy; {new Date().getFullYear()} T3 Technologies. All rights
+            reserved.
+          </p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-neutral-700">
             Built with conviction, not convention.
           </p>
         </div>

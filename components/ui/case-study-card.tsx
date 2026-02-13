@@ -8,7 +8,7 @@ export default function CaseStudyCard({ cs }: { cs: CaseStudyDoc }) {
     <Link href={`/work/${cs.slug}`} className="group block">
       {/* Image */}
       {cs.heroImage ? (
-        <div className="aspect-[3/2] overflow-hidden rounded-lg bg-neutral-100">
+        <div className="aspect-[3/2] overflow-hidden rounded-md bg-neutral-100">
           <img
             src={cs.heroImage}
             alt={cs.title}
@@ -17,24 +17,25 @@ export default function CaseStudyCard({ cs }: { cs: CaseStudyDoc }) {
           />
         </div>
       ) : (
-        <div className="flex aspect-[3/2] items-center justify-center rounded-lg bg-neutral-50">
-          <span className="text-5xl font-bold text-neutral-200">
+        <div className="flex aspect-[3/2] items-center justify-center rounded-md bg-neutral-100">
+          <span className="text-6xl font-extrabold text-neutral-200/70">
             {cs.title.charAt(0)}
           </span>
         </div>
       )}
 
+      {/* Meta */}
       <div className="mt-5">
-        <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.15em] text-neutral-400">
+        <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.15em] text-muted">
           <span>{cs.client || "Client"}</span>
           {cs.year && (
             <>
-              <span className="h-px w-3 bg-neutral-300" />
+              <span className="h-px w-3 bg-border" />
               <span>{cs.year}</span>
             </>
           )}
         </div>
-        <h3 className="mt-2 text-[18px] font-semibold leading-snug tracking-tight transition-colors duration-200 group-hover:text-gold">
+        <h3 className="mt-2.5 text-[19px] font-bold leading-[1.25] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
           {cs.title}
         </h3>
       </div>

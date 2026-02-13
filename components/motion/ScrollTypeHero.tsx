@@ -10,6 +10,7 @@ import { useRef } from "react";
 import Link from "next/link";
 
 const WORDS = ["Brand", "Innovation", "PR", "AI", "Design", "Strategy"];
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function ScrollTypeHero() {
   const reduced = useReducedMotion();
@@ -20,36 +21,38 @@ export default function ScrollTypeHero() {
     offset: ["start start", "end start"],
   });
 
+  // Map 0–85% of scroll to word cycling, leave 15% for exit
   const wordIndex = useTransform(scrollYProgress, [0, 0.85], [0, WORDS.length - 1]);
 
   if (reduced) {
     return (
-      <section className="flex min-h-[80vh] items-center">
-        <div className="mx-auto w-full max-w-[1200px] px-6 lg:px-10">
-          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-400">
+      <section className="flex min-h-[85vh] items-center">
+        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-8 lg:px-12">
+          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-muted">
             T3 Technologies
           </p>
-          <h1 className="mt-8 text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.03em]">
+          <h1 className="mt-10 text-[clamp(2.5rem,8vw,7rem)] font-extrabold leading-[0.92] tracking-[-0.04em]">
             We build what
             <br />
-            matters in <span className="text-gold">{WORDS[0]}</span>
+            matters in{" "}
+            <span className="text-gold">{WORDS[0]}</span>
           </h1>
-          <p className="mt-10 max-w-[420px] text-[15px] leading-[1.7] text-neutral-500">
+          <p className="mt-10 max-w-[440px] text-[15px] leading-[1.75] text-muted">
             Strategy. Craft. Outcome. Twenty years of turning bold ideas into
             documented results.
           </p>
           <div className="mt-14 flex items-center gap-6">
             <Link
               href="/work"
-              className="inline-flex h-12 items-center rounded-full bg-surface-dark px-8 text-[13px] font-medium text-white transition-all hover:opacity-90"
+              className="inline-flex h-[50px] items-center rounded-full bg-surface-dark px-9 text-[13px] font-medium text-white transition-all duration-300 hover:bg-surface-dark/85"
             >
               View Work
             </Link>
             <Link
               href="/contact"
-              className="text-[13px] font-medium text-neutral-500 transition hover:text-surface-dark"
+              className="text-[13px] font-medium text-muted transition-colors duration-300 hover:text-surface-dark"
             >
-              Get in touch &rarr;
+              Get in touch&nbsp;&rarr;
             </Link>
           </div>
         </div>
@@ -61,15 +64,15 @@ export default function ScrollTypeHero() {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${WORDS.length * 280 + 600}px` }}
+      style={{ height: `${WORDS.length * 260 + 700}px` }}
     >
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="mx-auto w-full max-w-[1200px] px-6 lg:px-10">
+        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-8 lg:px-12">
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-[11px] font-medium uppercase tracking-[0.35em] text-neutral-400"
+            transition={{ duration: 1.2, delay: 0.2, ease }}
+            className="text-[11px] font-medium uppercase tracking-[0.35em] text-muted"
           >
             T3 Technologies
           </motion.p>
@@ -77,46 +80,51 @@ export default function ScrollTypeHero() {
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.03em]"
+            transition={{ duration: 1.2, delay: 0.4, ease }}
+            className="mt-10 text-[clamp(2.5rem,8vw,7rem)] font-extrabold leading-[0.92] tracking-[-0.04em]"
           >
             We build what
             <br />
             matters in{" "}
-            <span className="relative inline-block min-w-[2.5ch] text-gold">
+            <span className="relative inline-block min-w-[2ch] text-gold">
               {WORDS.map((word, i) => (
-                <WordItem key={word} word={word} index={i} wordIndex={wordIndex} />
+                <WordItem
+                  key={word}
+                  word={word}
+                  index={i}
+                  wordIndex={wordIndex}
+                />
               ))}
             </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 max-w-[420px] text-[15px] leading-[1.7] text-neutral-500"
+            transition={{ duration: 1.2, delay: 0.7, ease }}
+            className="mt-10 max-w-[440px] text-[15px] leading-[1.75] text-muted"
           >
             Strategy. Craft. Outcome. Twenty years of turning bold ideas into
             documented results.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.2, delay: 0.95, ease }}
             className="mt-14 flex items-center gap-6"
           >
             <Link
               href="/work"
-              className="inline-flex h-12 items-center rounded-full bg-surface-dark px-8 text-[13px] font-medium text-white transition-all hover:opacity-90"
+              className="inline-flex h-[50px] items-center rounded-full bg-surface-dark px-9 text-[13px] font-medium text-white transition-all duration-300 hover:bg-surface-dark/85"
             >
               View Work
             </Link>
             <Link
               href="/contact"
-              className="text-[13px] font-medium text-neutral-500 transition hover:text-surface-dark"
+              className="text-[13px] font-medium text-muted transition-colors duration-300 hover:text-surface-dark"
             >
-              Get in touch &rarr;
+              Get in touch&nbsp;&rarr;
             </Link>
           </motion.div>
         </div>
@@ -141,15 +149,12 @@ function WordItem({
 
   const y = useTransform(wordIndex, (v: number) => {
     const diff = v - index;
-    if (Math.abs(diff) > 1) return diff > 0 ? -24 : 24;
-    return diff * -24;
+    if (Math.abs(diff) > 1) return diff > 0 ? -28 : 28;
+    return diff * -28;
   });
 
   return (
-    <motion.span
-      style={{ opacity, y }}
-      className="absolute left-0 top-0"
-    >
+    <motion.span style={{ opacity, y }} className="absolute left-0 top-0">
       {word}
     </motion.span>
   );

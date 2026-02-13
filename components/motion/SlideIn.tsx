@@ -30,12 +30,12 @@ export default function SlideIn({
       initial={
         reduced
           ? { opacity: 0 }
-          : { opacity: 0, x: direction === "left" ? -60 : 60 }
+          : { opacity: 0, x: direction === "left" ? -32 : 32 }
       }
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once, margin: "-80px" }}
       transition={{
-        duration: reduced ? 0.15 : 0.8,
+        duration: reduced ? 0.15 : 0.7,
         delay,
         ease,
       }}

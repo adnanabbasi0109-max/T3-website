@@ -12,9 +12,9 @@ type Props = {
   as?: "div" | "section" | "li" | "article" | "aside";
   /** Distance in px for the initial offset */
   distance?: number;
-  /** Motion feel: soft (slow ease), normal (default), snappy (fast sharp) */
+  /** Motion feel */
   stiffness?: "soft" | "normal" | "snappy";
-  /** Add a slight scale-up effect */
+  /** Slight scale-up */
   scale?: boolean;
 };
 
@@ -25,9 +25,9 @@ const EASE_MAP: Record<string, [number, number, number, number]> = {
 };
 
 const DURATION_MAP: Record<string, number> = {
-  soft: 1.1,
-  normal: 0.9,
-  snappy: 0.5,
+  soft: 0.9,
+  normal: 0.75,
+  snappy: 0.45,
 };
 
 export default function Reveal({
@@ -37,7 +37,7 @@ export default function Reveal({
   direction = "up",
   once = true,
   as = "div",
-  distance = 40,
+  distance = 24,
   stiffness = "normal",
   scale = false,
 }: Props) {
@@ -58,14 +58,14 @@ export default function Reveal({
             : direction === "right"
               ? distance
               : 0,
-        ...(scale ? { scale: 0.97 } : {}),
+        ...(scale ? { scale: 0.98 } : {}),
       };
 
   return (
     <Component
       initial={initial}
       whileInView={{ opacity: 1, y: 0, x: 0, ...(scale ? { scale: 1 } : {}) }}
-      viewport={{ once, margin: "-80px" }}
+      viewport={{ once, margin: "-60px" }}
       transition={{
         duration: reduced ? 0.15 : duration,
         delay,

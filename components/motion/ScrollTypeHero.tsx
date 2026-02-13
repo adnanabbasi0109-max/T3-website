@@ -5,7 +5,6 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
-  AnimatePresence,
 } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
@@ -24,39 +23,33 @@ export default function ScrollTypeHero() {
 
   const wordIndex = useTransform(scrollYProgress, [0, 0.85], [0, WORDS.length - 1]);
 
+  /* ── Reduced-motion fallback ── */
   if (reduced) {
     return (
-      <section className="flex min-h-[90vh] items-center bg-gradient-to-r from-paper to-paper-warm">
-        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-16">
-          <p className="text-[12px] font-medium uppercase tracking-[0.35em] text-muted">
-            T3 Technologies
-          </p>
-          <h1 className="mt-10 font-display text-[clamp(3rem,10vw,9rem)] leading-[1] tracking-[-0.02em]">
+      <section className="flex min-h-[85vh] items-end pb-20 sm:pb-28">
+        <div className="mx-auto w-full max-w-[1080px] px-6 sm:px-8 lg:px-12">
+          <h1 className="font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[1.02] tracking-[-0.03em]">
             We build what
             <br />
-            matters in
-            <br />
+            matters in{" "}
             <span className="text-gold">{WORDS[0]}</span>
           </h1>
-          <p className="mt-12 max-w-[440px] text-[15px] font-light leading-[1.85] tracking-[0.02em] text-muted/70">
-            Defying conventional wisdom. Deconstructing complex systems to
-            create simple, powerful solutions — for over two decades.
+          <p className="mt-8 max-w-[480px] text-[15px] leading-[1.75] text-muted sm:text-base">
+            Proof-led creative strategy for brands that refuse to blend in.
+            Over two decades of defying conventional wisdom.
           </p>
-          <div className="mt-16 flex items-center gap-8">
+          <div className="mt-10 flex items-center gap-6">
             <Link
               href="/work"
-              className="inline-flex h-[52px] items-center bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/85"
+              className="inline-flex h-11 items-center bg-ink px-6 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light"
             >
               View Work
             </Link>
             <Link
               href="/contact"
-              className="group flex items-center gap-2 text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
+              className="text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
             >
-              Get in touch
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                &rarr;
-              </span>
+              Get in touch &rarr;
             </Link>
           </div>
         </div>
@@ -68,95 +61,56 @@ export default function ScrollTypeHero() {
     <div
       ref={containerRef}
       className="relative"
-      style={{ height: `${WORDS.length * 300 + 800}px` }}
+      style={{ height: `${WORDS.length * 250 + 700}px` }}
     >
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden bg-gradient-to-r from-paper to-paper-warm">
-        <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-16">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.2, ease }}
-            className="text-[12px] font-medium uppercase tracking-[0.35em] text-muted"
-          >
-            T3 Technologies
-          </motion.p>
-
+      <div className="sticky top-0 flex h-screen items-end overflow-hidden pb-16 sm:pb-24 lg:pb-28">
+        <div className="mx-auto w-full max-w-[1080px] px-6 sm:px-8 lg:px-12">
           <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.4, ease }}
-            className="mt-10 font-display text-[clamp(3rem,10vw,9rem)] leading-[1] tracking-[-0.02em]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease }}
+            className="font-display text-[clamp(2.75rem,7vw,6.5rem)] leading-[1.02] tracking-[-0.03em]"
           >
             We build what
             <br />
-            matters in
-            <br />
-            <span className="relative inline-block min-w-[3ch] overflow-hidden text-gold">
-              <AnimatePresence mode="wait">
-                {WORDS.map((word, i) => (
-                  <WordItem
-                    key={word}
-                    word={word}
-                    index={i}
-                    wordIndex={wordIndex}
-                  />
-                ))}
-              </AnimatePresence>
+            matters in{" "}
+            <span className="relative inline-block min-w-[3ch] text-gold">
+              {WORDS.map((word, i) => (
+                <WordItem key={word} word={word} index={i} wordIndex={wordIndex} />
+              ))}
             </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.7, ease }}
-            className="mt-12 max-w-[440px] text-[15px] font-light leading-[1.85] tracking-[0.02em] text-muted/70"
+            transition={{ duration: 0.8, delay: 0.4, ease }}
+            className="mt-8 max-w-[480px] text-[15px] leading-[1.75] text-muted sm:text-base"
           >
-            Defying conventional wisdom. Deconstructing complex systems to
-            create simple, powerful solutions — for over two decades.
+            Proof-led creative strategy for brands that refuse to blend in.
+            Over two decades of defying conventional wisdom.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.95, ease }}
-            className="mt-16 flex items-center gap-8"
+            transition={{ duration: 0.8, delay: 0.6, ease }}
+            className="mt-10 flex items-center gap-6"
           >
             <Link
               href="/work"
-              className="inline-flex h-[52px] items-center bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/85"
+              className="inline-flex h-11 items-center bg-ink px-6 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light"
             >
               View Work
             </Link>
             <Link
               href="/contact"
-              className="group flex items-center gap-2 text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
+              className="text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
             >
-              Get in touch
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
-                &rarr;
-              </span>
+              Get in touch &rarr;
             </Link>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-        >
-          <motion.div
-            className="h-12 w-px bg-ink/20"
-            animate={{ scaleY: [0, 1, 0] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{ transformOrigin: "top" }}
-          />
-        </motion.div>
       </div>
     </div>
   );
@@ -176,17 +130,15 @@ function WordItem({
     return dist < 0.5 ? 1 : 0;
   });
 
-  const clipPath = useTransform(wordIndex, (v: number) => {
+  const y = useTransform(wordIndex, (v: number) => {
     const diff = v - index;
-    if (Math.abs(diff) > 0.5) {
-      return diff > 0 ? "inset(0 0 100% 0)" : "inset(100% 0 0 0)";
-    }
-    return "inset(0 0 0 0)";
+    if (Math.abs(diff) > 0.5) return diff > 0 ? -12 : 12;
+    return 0;
   });
 
   return (
     <motion.span
-      style={{ opacity, clipPath }}
+      style={{ opacity, y }}
       className="absolute left-0 top-0"
     >
       {word}

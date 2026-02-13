@@ -12,7 +12,8 @@ type Props = {
   as?: "div" | "section" | "article" | "li";
 };
 
-const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
+/* Off+Brand style buttery easing */
+const ease: [number, number, number, number] = [0.165, 0.84, 0.44, 1];
 
 export default function SlideIn({
   children,
@@ -30,12 +31,12 @@ export default function SlideIn({
       initial={
         reduced
           ? { opacity: 0 }
-          : { opacity: 0, x: direction === "left" ? -32 : 32 }
+          : { opacity: 0, x: direction === "left" ? -40 : 40 }
       }
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once, margin: "-80px" }}
       transition={{
-        duration: reduced ? 0.15 : 0.7,
+        duration: reduced ? 0.15 : 0.9,
         delay,
         ease,
       }}

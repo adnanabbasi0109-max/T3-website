@@ -1,55 +1,59 @@
 import Container from "../../../components/layout/Container";
+import Section from "../../../components/layout/Section";
 
 export default function CaseStudyLoading() {
   return (
     <>
       {/* Header skeleton */}
-      <section className="pb-8 pt-8 sm:pb-12 sm:pt-12">
+      <Section spacing="md">
         <Container>
-          <div className="mb-6 h-4 w-28 animate-pulse rounded bg-paper-dim" />
-          <div className="h-3 w-16 animate-pulse rounded bg-paper-dim" />
-          <div className="mt-3 h-10 w-3/4 animate-pulse rounded bg-paper-dim sm:h-14" />
+          <div className="mb-8 h-4 w-20 animate-pulse rounded-[0.625rem] bg-paper-dim" />
+          <div className="h-12 w-3/4 animate-pulse rounded-[0.875rem] bg-paper-dim sm:h-16" />
+          <div className="mt-6 flex gap-2">
+            <div className="h-7 w-24 animate-pulse rounded-full bg-paper-dim" />
+            <div className="h-7 w-20 animate-pulse rounded-full bg-paper-dim" />
+          </div>
         </Container>
-      </section>
+      </Section>
 
       {/* Hero image skeleton */}
-      <section className="px-6 sm:px-8 lg:px-12">
+      <section className="px-6 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-[1280px]">
-          <div className="aspect-[2/1] w-full animate-pulse rounded-sm bg-paper-dim sm:aspect-[2.5/1]" />
+          <div className="aspect-[14/9] w-full animate-pulse rounded-[1.375rem] bg-paper-dim" />
         </div>
       </section>
 
       {/* Meta skeleton */}
-      <section className="py-12 sm:py-16">
+      <Section spacing="sm">
         <Container>
-          <div className="flex gap-10 border-b border-border pb-6">
+          <div className="flex gap-12 border-b border-border pb-8">
             {Array.from({ length: 3 }).map((_, i) => (
               <div key={i}>
-                <div className="h-2.5 w-12 animate-pulse rounded bg-paper-dim" />
-                <div className="mt-2 h-4 w-20 animate-pulse rounded bg-paper-dim" />
+                <div className="h-2.5 w-14 animate-pulse rounded-[0.375rem] bg-paper-dim" />
+                <div className="mt-2.5 h-4 w-24 animate-pulse rounded-[0.375rem] bg-paper-dim" />
               </div>
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
 
       {/* Content skeleton */}
-      <section className="py-12">
+      <Section spacing="md">
         <Container size="narrow">
-          <div className="space-y-16">
+          <div className="space-y-20">
             {Array.from({ length: 2 }).map((_, i) => (
               <div key={i}>
-                <div className="h-7 w-48 animate-pulse rounded bg-paper-dim" />
-                <div className="mt-5 space-y-3">
-                  <div className="h-4 w-full animate-pulse rounded bg-paper-dim" />
-                  <div className="h-4 w-full animate-pulse rounded bg-paper-dim" />
-                  <div className="h-4 w-3/4 animate-pulse rounded bg-paper-dim" />
+                <div className="h-8 w-48 animate-pulse rounded-[0.625rem] bg-paper-dim" />
+                <div className="mt-6 space-y-3">
+                  <div className="h-4 w-full animate-pulse rounded-[0.375rem] bg-paper-dim" />
+                  <div className="h-4 w-full animate-pulse rounded-[0.375rem] bg-paper-dim" />
+                  <div className="h-4 w-3/4 animate-pulse rounded-[0.375rem] bg-paper-dim" />
                 </div>
               </div>
             ))}
           </div>
         </Container>
-      </section>
+      </Section>
     </>
   );
 }

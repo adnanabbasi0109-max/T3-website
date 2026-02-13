@@ -6,25 +6,25 @@ export default function NotFound() {
   return (
     <Section spacing="xl">
       <Container className="text-center">
-        <p className="font-display text-[clamp(5rem,15vw,12rem)] leading-[1] tracking-[-0.04em] text-border">
+        <p className="font-display text-[clamp(6rem,18vw,14rem)] leading-[0.85] tracking-[-0.05em] text-border">
           404
         </p>
-        <h1 className="mt-6 font-display text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.02em]">
+        <h1 className="mt-8 font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.025em]">
           Page not found
         </h1>
-        <p className="mx-auto mt-4 max-w-sm text-[15px] leading-[1.75] text-muted">
+        <p className="mx-auto mt-5 max-w-sm text-[15px] leading-[1.85] text-muted">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/"
-            className="inline-flex h-11 items-center bg-ink px-8 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light"
+            className="btn-slide inline-flex h-13 items-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-600 hover:bg-ink-light"
           >
-            Go Home
+            <span className="btn-text">Go Home</span>
           </Link>
           <Link
             href="/work"
-            className="inline-flex h-11 items-center border border-border px-8 text-[13px] font-medium text-ink transition-colors duration-300 hover:border-ink/30"
+            className="inline-flex h-13 items-center rounded-full border border-border px-10 text-[14px] font-medium transition-all duration-600 hover:border-border-strong"
           >
             View Work
           </Link>

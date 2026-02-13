@@ -18,7 +18,10 @@ export default function ServicesPage() {
       <Section spacing="lg">
         <Container>
           <Reveal>
-            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-[-0.035em]">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              What We Do
+            </p>
+            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
               Services
             </h1>
           </Reveal>
@@ -43,7 +46,7 @@ export default function ServicesPage() {
                   }`}
                 >
                   <div className="hidden lg:block">
-                    <span className="text-[13px] font-bold text-accent">
+                    <span className="text-[13px] font-bold tabular-nums text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -51,7 +54,7 @@ export default function ServicesPage() {
                     <h2 className="text-[22px] font-semibold tracking-[-0.02em] sm:text-[26px] transition-colors duration-500 group-hover:text-accent">
                       {svc.title}
                     </h2>
-                    <p className="mt-2 text-[13px] font-medium text-accent">
+                    <p className="mt-2 text-[13px] font-medium text-accent/70">
                       {svc.tagline}
                     </p>
                   </div>
@@ -66,12 +69,14 @@ export default function ServicesPage() {
       </Section>
 
       {/* ── Marquee ── */}
-      <Section spacing="none" className="border-y border-border py-6 sm:py-8">
+      <Section spacing="none" className="py-7 sm:py-9">
+        <div className="divider-fade mb-7 sm:mb-9" />
         <Marquee
           text="Brand Identity / Digital Experiences / PR Strategy / UX Design / Business Innovation / AI Solutions / Art Direction / Social Media"
           speed={50}
-          className="text-[clamp(1rem,2vw,1.35rem)] font-medium tracking-[-0.01em] text-ink/30"
+          className="text-[clamp(1rem,2vw,1.35rem)] font-medium tracking-[-0.01em] text-ink/25"
         />
+        <div className="divider-fade mt-7 sm:mt-9" />
       </Section>
 
       {/* ── CTA ── */}
@@ -87,7 +92,7 @@ export default function ServicesPage() {
             <div className="mt-12">
               <Link
                 href="/contact"
-                className="btn-slide inline-flex h-14 items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
+                className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
               >
                 <span className="btn-text">Start a Conversation &rarr;</span>
               </Link>

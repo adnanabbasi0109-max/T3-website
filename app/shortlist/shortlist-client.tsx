@@ -7,7 +7,7 @@ import type { CaseStudyDoc } from "../../lib/utils";
 import Container from "../../components/layout/Container";
 
 const inputClass =
-  "w-full rounded-[0.875rem] border border-border bg-paper-warm px-5 py-4 text-[14px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong focus:bg-paper";
+  "glow-ring w-full rounded-[0.875rem] border border-border bg-paper-warm px-5 py-4 text-[14px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong focus:bg-paper";
 
 export default function ShortlistClient() {
   const { slugs, remove, clear, count } = useShortlist();
@@ -82,7 +82,7 @@ export default function ShortlistClient() {
     return (
       <Container className="py-12">
         <div className="flex items-center justify-center">
-          <div className="h-5 w-5 animate-spin rounded-full border-[1.5px] border-border border-t-ink" />
+          <div className="h-5 w-5 animate-spin rounded-full border-[1.5px] border-border border-t-accent" />
         </div>
       </Container>
     );
@@ -91,13 +91,13 @@ export default function ShortlistClient() {
   if (count === 0) {
     return (
       <Container className="py-16">
-        <div className="rounded-[1.375rem] bg-paper-warm px-8 py-16 text-center sm:px-12">
+        <div className="rounded-[1.375rem] bg-paper-warm px-8 py-16 text-center shadow-card sm:px-12">
           <p className="text-[16px] text-muted">
             Your shortlist is empty.
           </p>
           <Link
             href="/work"
-            className="mt-5 inline-flex h-12 items-center rounded-full border border-border px-8 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
+            className="mt-5 inline-flex h-[52px] items-center rounded-full border border-border px-8 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
           >
             Start exploring &rarr;
           </Link>
@@ -117,7 +117,7 @@ export default function ShortlistClient() {
           >
             {/* Thumbnail */}
             {cs.heroImage ? (
-              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-[0.625rem] bg-paper-warm sm:h-16 sm:w-16">
+              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-[0.625rem] bg-paper-warm shadow-card sm:h-16 sm:w-16">
                 <img
                   src={cs.heroImage}
                   alt=""
@@ -137,7 +137,7 @@ export default function ShortlistClient() {
             <div className="min-w-0 flex-1">
               <Link
                 href={`/work/${cs.slug}`}
-                className="block truncate text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-500 hover:text-accent sm:text-[16px]"
+                className="link-underline block truncate text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-500 hover:text-accent sm:text-[16px]"
               >
                 {cs.title}
               </Link>
@@ -149,7 +149,7 @@ export default function ShortlistClient() {
             {/* Remove */}
             <button
               onClick={() => remove(cs.slug)}
-              className="shrink-0 rounded-full border border-border p-2 text-muted-light transition-all duration-500 hover:border-accent/30 hover:text-accent"
+              className="glow-ring shrink-0 rounded-full border border-border p-2 text-muted-light transition-all duration-500 hover:border-accent/30 hover:text-accent"
               aria-label={`Remove ${cs.title}`}
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -170,7 +170,8 @@ export default function ShortlistClient() {
       </div>
 
       {/* ── Lead form ── */}
-      <div className="mt-20 border-t border-border pt-16 sm:mt-24 sm:pt-20">
+      <div className="mt-20 pt-16 sm:mt-24 sm:pt-20">
+        <div className="divider-fade mb-16 sm:mb-20" />
         <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.025em]">
           Send Your Brief
         </h2>
@@ -179,7 +180,7 @@ export default function ShortlistClient() {
         </p>
 
         {status === "success" ? (
-          <div className="mt-12 rounded-[1.375rem] bg-paper-warm px-8 py-14 text-center sm:px-12">
+          <div className="mt-12 rounded-[1.375rem] bg-paper-warm px-8 py-14 text-center shadow-card sm:px-12">
             <p className="font-display text-[24px] tracking-[-0.02em]">
               Brief submitted.
             </p>
@@ -240,7 +241,7 @@ export default function ShortlistClient() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="btn-slide inline-flex h-13 items-center justify-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-500 hover:bg-ink-light disabled:opacity-40"
+              className="btn-slide inline-flex h-[52px] items-center justify-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-500 hover:bg-ink-light hover:shadow-card disabled:opacity-40"
             >
               <span className="btn-text">
                 {status === "loading" ? "Sending..." : "Submit Brief"}

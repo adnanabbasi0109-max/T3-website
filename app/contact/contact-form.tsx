@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full rounded-[0.875rem] border border-border bg-paper-warm px-5 py-4 text-[14px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong focus:bg-paper";
+  "glow-ring w-full rounded-[0.875rem] border border-border bg-paper-warm px-5 py-4 text-[14px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong focus:bg-paper";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -46,7 +46,7 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-[1.375rem] bg-paper-warm px-8 py-14 text-center sm:px-12">
+      <div className="rounded-[1.375rem] bg-paper-warm px-8 py-14 text-center shadow-card sm:px-12">
         <p className="font-display text-[24px] tracking-[-0.02em] sm:text-[28px]">
           Message sent.
         </p>
@@ -143,7 +143,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="btn-slide inline-flex h-13 items-center justify-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-500 hover:bg-ink-light disabled:opacity-40"
+        className="btn-slide inline-flex h-[52px] items-center justify-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-500 hover:bg-ink-light hover:shadow-card disabled:opacity-40"
       >
         <span className="btn-text">
           {status === "loading" ? "Sending..." : "Send Message"}

@@ -14,7 +14,10 @@ export default function ShortlistPage() {
       <Section spacing="lg">
         <Container>
           <Reveal>
-            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-[-0.035em]">
+            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              Saved Projects
+            </p>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.04em]">
               Your Shortlist
             </h1>
             <p className="mt-5 max-w-md text-[15px] leading-[1.85] text-muted sm:text-[16px]">

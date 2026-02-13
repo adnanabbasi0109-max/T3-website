@@ -16,7 +16,10 @@ export default function ContactPage() {
           {/* Left — info */}
           <div>
             <Reveal>
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-[-0.035em]">
+              <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                Get in Touch
+              </p>
+              <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.04em]">
                 Let&apos;s talk.
               </h1>
             </Reveal>
@@ -35,7 +38,7 @@ export default function ContactPage() {
                   </p>
                   <a
                     href="mailto:hello@t-3.in"
-                    className="mt-2 block text-[18px] font-medium transition-colors duration-500 hover:text-accent sm:text-[20px]"
+                    className="link-underline mt-2 block text-[18px] font-medium transition-colors duration-500 hover:text-accent sm:text-[20px]"
                   >
                     hello@t-3.in
                   </a>

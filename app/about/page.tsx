@@ -23,7 +23,10 @@ export default function AboutPage() {
       <Section spacing="lg">
         <Container>
           <Reveal>
-            <h1 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-[-0.035em]">
+            <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+              About T3
+            </p>
+            <h1 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
               We defy conventional wisdom — and document the proof.
             </h1>
           </Reveal>
@@ -44,7 +47,7 @@ export default function AboutPage() {
             {STATS.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.06}>
                 <div className="text-center sm:text-left">
-                  <p className="font-display text-[clamp(2.25rem,5vw,3.75rem)] tracking-[-0.03em]">
+                  <p className="font-display text-[clamp(2.25rem,5vw,4rem)] tracking-[-0.03em]">
                     <CountUp value={s.value} />
                   </p>
                   <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.14em] text-muted">
@@ -72,7 +75,7 @@ export default function AboutPage() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="space-y-6">
+              <div className="space-y-6 lg:pt-4">
                 <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
                   We believe in a harmonious blend of tradition and innovation.
                   Technology should enhance the human experience, not replace it.
@@ -88,8 +91,9 @@ export default function AboutPage() {
       </Section>
 
       {/* ── Doctrine ── */}
-      <Section spacing="lg" className="border-t border-border">
+      <Section spacing="lg">
         <Container>
+          <div className="divider-fade mb-24 sm:mb-36" />
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-24">
             <Reveal>
               <div>
@@ -102,7 +106,7 @@ export default function AboutPage() {
               </div>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="space-y-6">
+              <div className="space-y-6 lg:pt-4">
                 <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
                   For the moments when the playbook is obsolete and the future is
                   unwritten. Our engagement is a structured intervention designed
@@ -120,8 +124,9 @@ export default function AboutPage() {
       </Section>
 
       {/* ── Locations ── */}
-      <Section spacing="lg" className="border-t border-border">
+      <Section spacing="lg">
         <Container>
+          <div className="divider-fade mb-24 sm:mb-36" />
           <Reveal>
             <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
               Offices
@@ -157,13 +162,13 @@ export default function AboutPage() {
             <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/work"
-                className="inline-flex h-13 items-center rounded-full border border-paper/20 px-8 text-[14px] font-medium text-paper transition-all duration-600 hover:border-paper/40"
+                className="inline-flex h-[52px] items-center rounded-full border border-paper/20 px-9 text-[14px] font-medium text-paper transition-all duration-600 hover:border-paper/40"
               >
                 See Our Work
               </Link>
               <Link
                 href="/contact"
-                className="btn-slide inline-flex h-13 items-center rounded-full bg-paper px-8 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
+                className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-9 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
               >
                 <span className="btn-text">Start a Conversation &rarr;</span>
               </Link>

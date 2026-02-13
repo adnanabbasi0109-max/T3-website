@@ -5,6 +5,7 @@ import type { CaseStudyDoc } from "../../lib/utils";
 import WorkListItem from "../../components/work/WorkListItem";
 import Reveal from "../../components/motion/Reveal";
 import Container from "../../components/layout/Container";
+import FeaturedWorkCard from "../../components/work/FeaturedWorkCard";
 
 type SortKey = "default" | "year-desc" | "year-asc" | "title";
 
@@ -77,13 +78,19 @@ export default function WorkClient({
     setSortBy("default");
   }
 
-  const selectClass =
-    "appearance-none rounded-none border-b border-border bg-transparent pb-2 pr-6 text-[13px] outline-none transition-colors duration-300 focus:border-surface-dark";
+  // Split into featured (full-width) and regular items
+  const featuredItems = filtered.filter((cs) => cs.featured);
+  const regularItems = filtered.filter((cs) => !cs.featured);
+
+  const pillBase =
+    "rounded-full border px-4 py-2 text-[12px] font-medium transition-all duration-300";
+  const pillActive = "border-ink bg-ink text-paper";
+  const pillInactive = "border-border text-muted hover:border-ink/40 hover:text-ink";
 
   return (
     <Container>
-      {/* ── Filter bar ── */}
-      <div className="mt-14 flex flex-col gap-5 sm:mt-20 sm:flex-row sm:items-end sm:justify-between">
+      {/* ── Filter bar — pill style ── */}
+      <div className="mt-10 flex flex-col gap-5 sm:mt-14 sm:flex-row sm:items-center sm:justify-between">
         {/* Search */}
         <div className="relative max-w-xs flex-1">
           <input
@@ -91,17 +98,17 @@ export default function WorkClient({
             placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full border-b border-border bg-transparent pb-2 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/50 focus:border-surface-dark"
+            className="w-full rounded-lg border border-border bg-transparent px-4 py-2.5 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10"
             aria-label="Search workstories"
           />
         </div>
 
-        {/* Selects */}
-        <div className="flex flex-wrap items-end gap-5">
+        {/* Pill filters */}
+        <div className="flex flex-wrap items-center gap-2">
           <select
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
-            className={selectClass}
+            className={`appearance-none ${pillBase} ${domain !== "All" ? pillActive : pillInactive} pr-8`}
             aria-label="Domain"
           >
             {allDomains.map((d) => (
@@ -114,7 +121,7 @@ export default function WorkClient({
           <select
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
-            className={selectClass}
+            className={`appearance-none ${pillBase} ${industry !== "All" ? pillActive : pillInactive} pr-8`}
             aria-label="Industry"
           >
             {allIndustries.map((d) => (
@@ -127,7 +134,7 @@ export default function WorkClient({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortKey)}
-            className={selectClass}
+            className={`appearance-none ${pillBase} ${sortBy !== "default" ? pillActive : pillInactive} pr-8`}
             aria-label="Sort"
           >
             <option value="default">Featured</option>
@@ -138,11 +145,7 @@ export default function WorkClient({
 
           <button
             onClick={() => setFeaturedOnly((v) => !v)}
-            className={`border-b pb-2 text-[13px] font-medium transition-colors duration-300 ${
-              featuredOnly
-                ? "border-gold text-gold"
-                : "border-transparent text-muted hover:text-surface-dark"
-            }`}
+            className={`${pillBase} ${featuredOnly ? pillActive : pillInactive}`}
           >
             Featured only
           </button>
@@ -151,7 +154,7 @@ export default function WorkClient({
 
       {/* Filter hint */}
       {hasFilters && (
-        <div className="mt-6 flex items-center justify-between text-[13px] text-muted">
+        <div className="mt-5 flex items-center justify-between text-[13px] text-muted">
           <span>
             {filtered.length} result{filtered.length !== 1 && "s"}
           </span>
@@ -164,14 +167,25 @@ export default function WorkClient({
         </div>
       )}
 
-      {/* ── List ── */}
+      {/* ── Mixed grid ── */}
       <div className="mt-10 sm:mt-14">
-        <div className="h-px bg-border" />
-        {filtered.map((cs, i) => (
-          <Reveal key={cs.slug} delay={Math.min(i * 0.04, 0.4)} as="div">
-            <WorkListItem cs={cs} />
+        {/* Featured items — full width */}
+        {featuredItems.map((cs, i) => (
+          <Reveal key={cs.slug} delay={Math.min(i * 0.08, 0.3)} className="mb-8">
+            <FeaturedWorkCard cs={cs} />
           </Reveal>
         ))}
+
+        {/* Regular items — responsive grid */}
+        {regularItems.length > 0 && (
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {regularItems.map((cs, i) => (
+              <Reveal key={cs.slug} delay={Math.min(i * 0.05, 0.4)} scale>
+                <WorkListItem cs={cs} />
+              </Reveal>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Empty */}

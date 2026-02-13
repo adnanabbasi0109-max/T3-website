@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import type { CaseStudyDoc } from "../../lib/utils";
 
 type Props = {
@@ -15,33 +14,21 @@ const ASPECT: Record<string, string> = {
   compact: "aspect-[1/1]",
 };
 
-const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
 export default function CaseStudyCard({ cs, size = "default" }: Props) {
-  const reduced = useReducedMotion();
-
   return (
     <Link href={`/work/${cs.slug}`} className="group block">
-      {/* Image with clip-path reveal */}
-      <div className={`overflow-hidden rounded-lg bg-paper-warm ${ASPECT[size]}`}>
+      {/* Image */}
+      <div className={`overflow-hidden rounded-sm bg-paper-warm ${ASPECT[size]}`}>
         {cs.heroImage ? (
-          <motion.div
-            className="h-full w-full"
-            initial={reduced ? {} : { clipPath: "inset(100% 0 0 0)" }}
-            whileInView={{ clipPath: "inset(0 0 0 0)" }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, ease }}
-          >
-            <img
-              src={cs.heroImage}
-              alt={cs.title}
-              className="h-full w-full object-cover transition-all duration-700 ease-out grayscale group-hover:scale-[1.04] group-hover:grayscale-0"
-              loading="lazy"
-            />
-          </motion.div>
+          <img
+            src={cs.heroImage}
+            alt={cs.title}
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            loading="lazy"
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-[4rem] text-border/40">
+            <span className="font-display text-[3rem] text-border/30">
               {cs.title.charAt(0)}
             </span>
           </div>
@@ -49,23 +36,18 @@ export default function CaseStudyCard({ cs, size = "default" }: Props) {
       </div>
 
       {/* Meta */}
-      <div className="mt-6">
-        <div className="flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.15em] text-muted">
-          <span>{cs.client || "Client"}</span>
-          {cs.year && (
-            <>
-              <span className="h-px w-3 bg-border" />
-              <span>{cs.year}</span>
-            </>
-          )}
-        </div>
+      <div className="mt-4">
+        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted">
+          {cs.client || "Client"}
+          {cs.year && ` · ${cs.year}`}
+        </p>
         <h3
-          className={`mt-3 font-display tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold ${
+          className={`mt-1.5 font-display tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold ${
             size === "compact"
-              ? "text-[16px]"
+              ? "text-[15px]"
               : size === "large"
-                ? "text-[clamp(1.1rem,2vw,1.5rem)]"
-                : "text-[19px]"
+                ? "text-[clamp(1rem,1.8vw,1.35rem)]"
+                : "text-[17px]"
           }`}
         >
           {cs.title}

@@ -24,16 +24,16 @@ export default async function WorkPage() {
   const items = await getAllCaseStudies();
 
   return (
-    <main className="pb-32">
-      <Container className="pt-28 lg:pt-36">
+    <main className="pb-28 sm:pb-36">
+      <Container className="pt-20 sm:pt-28 lg:pt-36">
         <Reveal>
           <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
             Portfolio
           </p>
-          <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
+          <h1 className="mt-5 text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold tracking-[-0.03em]">
             Workstories
           </h1>
-          <p className="mt-4 text-[15px] leading-[1.7] text-muted">
+          <p className="mt-5 max-w-lg text-[15px] leading-[1.75] text-muted">
             Every project is a story — from brief to outcome.
           </p>
         </Reveal>

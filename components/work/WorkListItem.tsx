@@ -16,26 +16,32 @@ export default function WorkListItem({ cs }: { cs: CaseStudyDoc }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <article className="relative grid items-start gap-4 py-10 sm:grid-cols-[1fr_auto] sm:gap-8 lg:grid-cols-[1fr_280px]">
+      <article className="relative grid items-start gap-4 py-9 sm:grid-cols-[1fr_auto] sm:gap-8 lg:grid-cols-[1fr_260px] lg:py-12">
         {/* Left: title + meta */}
         <div className="min-w-0">
-          <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-neutral-400">
+          <div className="flex items-center gap-4 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
             <span>{cs.client || "Client"}</span>
-            <span className="h-px w-4 bg-neutral-300" />
+            <span className="h-px w-4 bg-border" />
             <span>{cs.year || ""}</span>
+            {cs.featured && (
+              <>
+                <span className="h-px w-4 bg-border" />
+                <span className="text-gold">Featured</span>
+              </>
+            )}
           </div>
 
-          <h3 className="mt-3 text-[clamp(1.25rem,3vw,2rem)] font-bold leading-[1.15] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
+          <h3 className="mt-3 text-[clamp(1.2rem,2.5vw,1.75rem)] font-bold leading-[1.2] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
             {cs.title}
           </h3>
 
           {/* Tags */}
           {cs.domains && cs.domains.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {cs.domains.slice(0, 2).map((d) => (
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+              {cs.domains.slice(0, 3).map((d) => (
                 <span
                   key={d}
-                  className="text-[11px] font-medium uppercase tracking-[0.1em] text-neutral-400"
+                  className="text-[11px] font-medium uppercase tracking-[0.1em] text-muted/70"
                 >
                   {d}
                 </span>
@@ -43,32 +49,38 @@ export default function WorkListItem({ cs }: { cs: CaseStudyDoc }) {
             </div>
           )}
 
-          {/* Hover-reveal: outcomes preview */}
+          {/* Hover-reveal: outcomes */}
           <AnimatePresence>
-            {hovered && !reduced && cs.outcomes && cs.outcomes.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden"
-              >
-                <div className="mt-4 flex flex-col gap-1">
-                  {cs.outcomes.slice(0, 2).map((o, i) => (
-                    <p key={i} className="text-[13px] leading-relaxed text-neutral-500">
-                      &mdash; {o}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            )}
+            {hovered &&
+              !reduced &&
+              cs.outcomes &&
+              cs.outcomes.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-4 flex flex-col gap-1.5">
+                    {cs.outcomes.slice(0, 2).map((o, i) => (
+                      <p
+                        key={i}
+                        className="text-[13px] leading-relaxed text-muted"
+                      >
+                        &mdash;&ensp;{o}
+                      </p>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
           </AnimatePresence>
         </div>
 
-        {/* Right: image thumbnail on hover (desktop) */}
-        <div className="hidden overflow-hidden rounded-lg lg:block">
+        {/* Right: image thumbnail (desktop) */}
+        <div className="hidden overflow-hidden rounded-md lg:block">
           {cs.heroImage ? (
-            <div className="relative aspect-[4/3] w-[280px] overflow-hidden rounded-lg bg-neutral-100">
+            <div className="relative aspect-[4/3] w-[260px] overflow-hidden rounded-md bg-neutral-100">
               <img
                 src={cs.heroImage}
                 alt=""
@@ -77,24 +89,17 @@ export default function WorkListItem({ cs }: { cs: CaseStudyDoc }) {
               />
             </div>
           ) : (
-            <div className="flex aspect-[4/3] w-[280px] items-center justify-center rounded-lg bg-neutral-50">
-              <span className="text-4xl font-bold text-neutral-200">
+            <div className="flex aspect-[4/3] w-[260px] items-center justify-center rounded-md bg-neutral-100">
+              <span className="text-4xl font-extrabold text-neutral-200/70">
                 {cs.title.charAt(0)}
               </span>
             </div>
           )}
         </div>
-
-        {/* Featured dot */}
-        {cs.featured && (
-          <div className="absolute right-0 top-10 hidden sm:block lg:hidden">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold" />
-          </div>
-        )}
       </article>
 
       {/* Hairline divider */}
-      <div className="h-px bg-neutral-200/70 transition-colors duration-300 group-hover:bg-gold/30" />
+      <div className="h-px bg-border transition-colors duration-500 group-hover:bg-gold/25" />
     </Link>
   );
 }

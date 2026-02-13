@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type { CaseStudyDoc } from "../../lib/utils";
 import WorkListItem from "../../components/work/WorkListItem";
 import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
 
 type SortKey = "default" | "year-desc" | "year-asc" | "title";
 
@@ -26,7 +27,9 @@ export default function WorkClient({
 
   const allIndustries = useMemo(() => {
     const s = new Set<string>();
-    initialItems.forEach((i) => (i.industries || []).forEach((d) => s.add(d)));
+    initialItems.forEach((i) =>
+      (i.industries || []).forEach((d) => s.add(d))
+    );
     return ["All", ...Array.from(s).sort()];
   }, [initialItems]);
 
@@ -75,12 +78,12 @@ export default function WorkClient({
   }
 
   const selectClass =
-    "appearance-none rounded-none border-b border-border bg-transparent pb-2 pr-6 text-[13px] outline-none transition-colors focus:border-surface-dark";
+    "appearance-none rounded-none border-b border-border bg-transparent pb-2 pr-6 text-[13px] outline-none transition-colors duration-300 focus:border-surface-dark";
 
   return (
-    <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
-      {/* ── Filter bar — minimal, flat ── */}
-      <div className="mt-16 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+    <Container>
+      {/* ── Filter bar ── */}
+      <div className="mt-14 flex flex-col gap-5 sm:mt-20 sm:flex-row sm:items-end sm:justify-between">
         {/* Search */}
         <div className="relative max-w-xs flex-1">
           <input
@@ -88,35 +91,54 @@ export default function WorkClient({
             placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full border-b border-border bg-transparent pb-2 text-[14px] outline-none transition-colors placeholder:text-neutral-400 focus:border-surface-dark"
+            className="w-full border-b border-border bg-transparent pb-2 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/50 focus:border-surface-dark"
             aria-label="Search workstories"
           />
         </div>
 
         {/* Selects */}
         <div className="flex flex-wrap items-end gap-5">
-          <select value={domain} onChange={(e) => setDomain(e.target.value)} className={selectClass} aria-label="Domain">
+          <select
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+            className={selectClass}
+            aria-label="Domain"
+          >
             {allDomains.map((d) => (
-              <option key={d} value={d}>{d === "All" ? "All Domains" : d}</option>
+              <option key={d} value={d}>
+                {d === "All" ? "All Domains" : d}
+              </option>
             ))}
           </select>
 
-          <select value={industry} onChange={(e) => setIndustry(e.target.value)} className={selectClass} aria-label="Industry">
+          <select
+            value={industry}
+            onChange={(e) => setIndustry(e.target.value)}
+            className={selectClass}
+            aria-label="Industry"
+          >
             {allIndustries.map((d) => (
-              <option key={d} value={d}>{d === "All" ? "All Industries" : d}</option>
+              <option key={d} value={d}>
+                {d === "All" ? "All Industries" : d}
+              </option>
             ))}
           </select>
 
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value as SortKey)} className={selectClass} aria-label="Sort">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortKey)}
+            className={selectClass}
+            aria-label="Sort"
+          >
             <option value="default">Featured</option>
             <option value="year-desc">Newest</option>
             <option value="year-asc">Oldest</option>
-            <option value="title">A-Z</option>
+            <option value="title">A–Z</option>
           </select>
 
           <button
             onClick={() => setFeaturedOnly((v) => !v)}
-            className={`border-b pb-2 text-[13px] transition-colors ${
+            className={`border-b pb-2 text-[13px] font-medium transition-colors duration-300 ${
               featuredOnly
                 ? "border-gold text-gold"
                 : "border-transparent text-muted hover:text-surface-dark"
@@ -130,16 +152,23 @@ export default function WorkClient({
       {/* Filter hint */}
       {hasFilters && (
         <div className="mt-6 flex items-center justify-between text-[13px] text-muted">
-          <span>{filtered.length} result{filtered.length !== 1 && "s"}</span>
-          <button onClick={clearAll} className="text-gold transition hover:underline">Clear</button>
+          <span>
+            {filtered.length} result{filtered.length !== 1 && "s"}
+          </span>
+          <button
+            onClick={clearAll}
+            className="font-medium text-gold transition-colors hover:text-gold-dark"
+          >
+            Clear
+          </button>
         </div>
       )}
 
-      {/* ── Editorial list ── */}
-      <div className="mt-10">
+      {/* ── List ── */}
+      <div className="mt-10 sm:mt-14">
         <div className="h-px bg-border" />
         {filtered.map((cs, i) => (
-          <Reveal key={cs.slug} delay={i * 0.04}>
+          <Reveal key={cs.slug} delay={Math.min(i * 0.04, 0.4)} as="div">
             <WorkListItem cs={cs} />
           </Reveal>
         ))}
@@ -148,12 +177,17 @@ export default function WorkClient({
       {/* Empty */}
       {filtered.length === 0 && (
         <div className="py-24 text-center">
-          <p className="text-muted">No workstories match your filters.</p>
-          <button onClick={clearAll} className="mt-3 text-[13px] text-gold transition hover:underline">
+          <p className="text-[15px] text-muted">
+            No workstories match your filters.
+          </p>
+          <button
+            onClick={clearAll}
+            className="mt-4 text-[13px] font-medium text-gold transition-colors hover:text-gold-dark"
+          >
             Clear all filters
           </button>
         </div>
       )}
-    </div>
+    </Container>
   );
 }

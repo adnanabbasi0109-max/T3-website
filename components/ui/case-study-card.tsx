@@ -23,25 +23,27 @@ const RADIUS: Record<string, string> = {
 export default function CaseStudyCard({ cs, size = "default" }: Props) {
   return (
     <Link href={`/work/${cs.slug}`} className="group block">
-      {/* Image — Off+Brand 14:9 cinematic + generous radius + scale hover */}
-      <div className={`overflow-hidden bg-paper-warm ${ASPECT[size]} ${RADIUS[size]}`}>
+      {/* Image — 14:9 cinematic + generous radius + scale + shadow hover */}
+      <div
+        className={`overflow-hidden bg-paper-warm shadow-card transition-shadow duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:shadow-card-hover ${ASPECT[size]} ${RADIUS[size]}`}
+      >
         {cs.heroImage ? (
           <img
             src={cs.heroImage}
             alt={cs.title}
-            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-[1.08]"
+            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-[1.06]"
             loading="lazy"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-ink-light">
-            <span className="font-display text-[4rem] text-paper/20">
+            <span className="font-display text-[4rem] text-paper/15">
               {cs.title.charAt(0)}
             </span>
           </div>
         )}
       </div>
 
-      {/* Meta — project name + category symbols */}
+      {/* Meta */}
       <div className="mt-5 flex items-start justify-between gap-4">
         <div>
           <h3
@@ -54,9 +56,9 @@ export default function CaseStudyCard({ cs, size = "default" }: Props) {
             {cs.title}
           </h3>
           {cs.domains && cs.domains.length > 0 && (
-            <div className="mt-2 flex flex-wrap items-center gap-2">
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
               {cs.domains.slice(0, 2).map((d) => (
-                <span key={d} className="text-[11px] text-muted">
+                <span key={d} className="text-[11px] text-muted-light">
                   {d}
                 </span>
               ))}
@@ -64,7 +66,7 @@ export default function CaseStudyCard({ cs, size = "default" }: Props) {
           )}
         </div>
         {cs.year && (
-          <span className="shrink-0 pt-0.5 text-[11px] font-medium text-muted-light">
+          <span className="shrink-0 pt-0.5 text-[11px] font-medium tabular-nums text-muted-light">
             {cs.year}
           </span>
         )}

@@ -35,16 +35,19 @@ export default async function Home() {
       {/* ── Value Proposition ── */}
       <Section spacing="lg">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-24">
             <Reveal>
-              <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.025em]">
+              <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                Who We Are
+              </p>
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,3.25rem)] tracking-[-0.03em]">
                 Every brand has a story.
                 <br />
                 We make it unforgettable.
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="space-y-5">
+              <div className="space-y-5 lg:pt-8">
                 <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
                   T3 Technologies blends creative innovation with strategic
                   precision. For more than two decades, we&apos;ve helped brands,
@@ -62,13 +65,13 @@ export default async function Home() {
       </Section>
 
       {/* ── Stats ── */}
-      <Section spacing="md" alt>
+      <Section spacing="md" alt className="rounded-[2rem] sm:rounded-[3rem] mx-4 sm:mx-6 lg:mx-10">
         <Container>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {STATS.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.08}>
                 <div className="text-center sm:text-left">
-                  <p className="font-display text-[clamp(2.25rem,5vw,3.75rem)] tracking-[-0.03em] text-ink">
+                  <p className="font-display text-[clamp(2.25rem,5vw,4rem)] tracking-[-0.03em] text-ink">
                     <CountUp value={s.value} />
                   </p>
                   <p className="mt-2 text-[12px] font-medium uppercase tracking-[0.14em] text-muted">
@@ -87,12 +90,17 @@ export default async function Home() {
           <Container>
             <Reveal>
               <div className="flex items-end justify-between gap-6">
-                <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.025em]">
-                  Selected Work
-                </h2>
+                <div>
+                  <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    Portfolio
+                  </p>
+                  <h2 className="font-display text-[clamp(1.75rem,3.5vw,3.25rem)] tracking-[-0.03em]">
+                    Selected Work
+                  </h2>
+                </div>
                 <Link
                   href="/work"
-                  className="hidden shrink-0 text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink sm:block"
+                  className="link-underline hidden shrink-0 text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink sm:block"
                 >
                   View all &rarr;
                 </Link>
@@ -111,7 +119,7 @@ export default async function Home() {
             <Reveal className="mt-12 text-center sm:hidden">
               <Link
                 href="/work"
-                className="text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink"
+                className="link-underline text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink"
               >
                 View all workstories &rarr;
               </Link>
@@ -121,12 +129,14 @@ export default async function Home() {
       )}
 
       {/* ── Services Marquee ── */}
-      <Section spacing="none" className="border-y border-border py-6 sm:py-8">
+      <Section spacing="none" className="py-7 sm:py-9">
+        <div className="divider-fade mb-7 sm:mb-9" />
         <Marquee
           text="Brand Identity / Digital Experiences / PR Strategy / UX Design / Business Innovation / AI Solutions / Art Direction / Social Media"
           speed={50}
-          className="text-[clamp(1rem,2vw,1.35rem)] font-medium tracking-[-0.01em] text-ink/30"
+          className="text-[clamp(1rem,2vw,1.35rem)] font-medium tracking-[-0.01em] text-ink/25"
         />
+        <div className="divider-fade mt-7 sm:mt-9" />
       </Section>
 
       {/* ── CTA ── */}
@@ -136,13 +146,19 @@ export default async function Home() {
             <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
               Where Different Is the Standard
             </p>
-            <h2 className="mx-auto max-w-2xl font-display text-[clamp(2rem,5vw,3.75rem)] tracking-[-0.03em] text-paper">
+            <h2 className="mx-auto max-w-2xl font-display text-[clamp(2rem,5vw,4rem)] tracking-[-0.035em] text-paper">
               How about we do a thing or two?
             </h2>
-            <div className="mt-12">
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/work"
+                className="inline-flex h-[52px] items-center rounded-full border border-paper/20 px-9 text-[14px] font-medium text-paper transition-all duration-600 hover:border-paper/40"
+              >
+                See Our Work
+              </Link>
               <Link
                 href="/contact"
-                className="btn-slide inline-flex h-14 items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
+                className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-9 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
               >
                 <span className="btn-text">Get in touch &rarr;</span>
               </Link>

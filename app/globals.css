@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-gold: #b8952a;
+  --color-gold-light: #d4af37;
+  --color-gold-muted: #b8952a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  color: #0a0a0a;
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: #000;
+}
+
+/* Smooth scrolling for chapter navigation */
+html {
+  scroll-behavior: smooth;
+}

@@ -38,25 +38,24 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-700 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-paper/80 shadow-[0_1px_0_var(--color-border)] backdrop-blur-2xl"
+          ? "bg-paper/90 shadow-[0_1px_0_var(--color-border)] backdrop-blur-xl"
           : "bg-transparent"
       }`}
-      style={{ mixBlendMode: !scrolled && !mobileOpen ? "difference" : "normal" }}
     >
-      <div className="mx-auto flex h-[80px] max-w-[1120px] items-center justify-between px-6 sm:px-10 lg:px-16">
+      <div className="mx-auto flex h-16 max-w-[1080px] items-center justify-between px-6 sm:h-[72px] sm:px-8 lg:px-12">
         {/* Logo */}
         <Link
           href="/"
-          className="relative z-50 font-display text-[28px] tracking-[-0.02em]"
+          className="relative z-50 font-display text-[22px] tracking-[-0.02em]"
           aria-label="T3 Technologies Home"
         >
-          T<span className="bg-gradient-to-br from-gold to-gold-dark bg-clip-text text-transparent">3</span>
+          T<span className="text-gold">3</span>
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => {
             const active =
               pathname === l.href || pathname.startsWith(l.href + "/");
@@ -64,31 +63,25 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="group relative text-[13px] font-medium tracking-[0.01em] transition-colors duration-300"
+                className={`text-[13px] font-medium tracking-[0.01em] transition-colors duration-300 ${
+                  active ? "text-ink" : "text-muted hover:text-ink"
+                }`}
               >
                 {l.label}
-                {/* Animated underline on hover */}
-                <span
-                  className={`absolute -bottom-1 left-0 h-[1.5px] bg-current transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-left ${
-                    active
-                      ? "w-full scale-x-100"
-                      : "w-full scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-                {/* Active gold dot */}
-                {active && (
-                  <span className="absolute -bottom-3 left-1/2 h-[4px] w-[4px] -translate-x-1/2 rounded-full bg-gold" />
-                )}
               </Link>
             );
           })}
+
+          {/* Shortlist — minimal */}
           <Link
             href="/shortlist"
-            className="ml-4 flex items-center gap-2 rounded-full border border-current/15 px-5 py-[7px] text-[12px] font-medium tracking-[0.02em] transition-all duration-300 hover:bg-ink hover:text-paper"
+            className="ml-2 flex items-center gap-1.5 text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
           >
-            Shortlist
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+            </svg>
             {count > 0 && (
-              <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-white">
+              <span className="flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-ink px-1 text-[9px] font-bold text-paper">
                 {count}
               </span>
             )}
@@ -107,51 +100,49 @@ export default function Navbar() {
               className={`block h-[1.5px] w-[18px] transition-all duration-400 ${
                 mobileOpen
                   ? "translate-y-[6.5px] rotate-45 bg-paper"
-                  : "bg-current"
+                  : "bg-ink"
               }`}
             />
             <span
               className={`block h-[1.5px] w-[18px] transition-all duration-400 ${
-                mobileOpen ? "opacity-0 bg-paper" : "bg-current"
+                mobileOpen ? "opacity-0 bg-paper" : "bg-ink"
               }`}
             />
             <span
               className={`block h-[1.5px] w-[18px] transition-all duration-400 ${
                 mobileOpen
                   ? "-translate-y-[6.5px] -rotate-45 bg-paper"
-                  : "bg-current"
+                  : "bg-ink"
               }`}
             />
           </div>
         </button>
       </div>
 
-      {/* Mobile overlay — dark full-screen */}
+      {/* Mobile overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="dark-section fixed inset-0 z-40 flex flex-col justify-center px-8 md:hidden"
+            transition={{ duration: 0.35 }}
+            className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-6 pb-16 pt-24 md:hidden"
           >
-            <nav className="flex flex-col gap-5">
+            <nav className="flex flex-col gap-1">
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}
-                  initial={{ opacity: 0, y: 30, clipPath: "inset(100% 0 0 0)" }}
-                  animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0 0)" }}
-                  transition={{
-                    delay: 0.08 + i * 0.06,
-                    duration: 0.6,
-                    ease,
-                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 + i * 0.05, duration: 0.5, ease }}
                 >
                   <Link
                     href={l.href}
-                    className={`block font-display text-[3.5rem] leading-[1.1] tracking-[-0.02em] transition-colors ${
-                      pathname.startsWith(l.href) ? "text-gold" : "text-paper"
+                    className={`block py-2 font-display text-[2.5rem] leading-[1.15] tracking-[-0.02em] transition-colors ${
+                      pathname.startsWith(l.href)
+                        ? "text-gold"
+                        : "text-paper/80 hover:text-paper"
                     }`}
                   >
                     {l.label}
@@ -159,23 +150,26 @@ export default function Navbar() {
                 </motion.div>
               ))}
             </nav>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.4 }}
-              className="mt-14"
+              transition={{ delay: 0.35, duration: 0.3 }}
+              className="mt-12 flex items-center gap-4"
             >
               <Link
                 href="/shortlist"
-                className="inline-flex items-center gap-2 rounded-full border border-paper/20 px-6 py-3 text-[13px] font-medium text-paper"
+                className="text-[13px] font-medium text-paper/50 transition-colors hover:text-paper"
               >
-                Shortlist
-                {count > 0 && (
-                  <span className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-gold px-1 text-[10px] font-bold text-white">
-                    {count}
-                  </span>
-                )}
+                Shortlist{count > 0 && ` (${count})`}
               </Link>
+              <span className="text-paper/20">·</span>
+              <a
+                href="mailto:hello@t-3.in"
+                className="text-[13px] font-medium text-paper/50 transition-colors hover:text-paper"
+              >
+                hello@t-3.in
+              </a>
             </motion.div>
           </motion.div>
         )}

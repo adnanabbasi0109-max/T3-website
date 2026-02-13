@@ -1,104 +1,81 @@
 import Link from "next/link";
-import Marquee from "../motion/Marquee";
 
 export default function Footer() {
   return (
-    <footer className="dark-section mt-auto">
-      {/* ── Large CTA ── */}
-      <div className="mx-auto max-w-[1120px] px-6 pt-32 sm:px-10 sm:pt-40 lg:px-16">
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] tracking-[-0.02em] text-paper">
-          Let&apos;s build something
-        </h2>
-        <a
-          href="mailto:hello@t-3.in"
-          className="mt-8 inline-block text-[clamp(1rem,2.5vw,1.75rem)] font-light text-paper/60 transition-colors duration-300 hover:text-gold"
-        >
-          hello@t-3.in
-        </a>
-      </div>
-
-      {/* ── Marquee divider ── */}
-      <div className="mt-24 border-y border-border-dark py-7 sm:mt-32">
-        <Marquee
-          text="Strategy \u00b7 Craft \u00b7 Outcome \u00b7 T3 Technologies \u00b7 Defy Convention"
-          className="text-[13px] font-medium uppercase tracking-[0.2em] text-paper/20"
-          speed={50}
-        />
-      </div>
-
-      {/* ── Link columns ── */}
-      <div className="mx-auto max-w-[1120px] px-6 sm:px-10 lg:px-16">
-        <div className="grid gap-14 py-20 sm:grid-cols-2 sm:py-24 lg:grid-cols-[2fr_1fr_1fr]">
+    <footer className="mt-auto border-t border-border">
+      <div className="mx-auto max-w-[1080px] px-6 sm:px-8 lg:px-12">
+        {/* ── Main grid ── */}
+        <div className="grid gap-12 py-16 sm:grid-cols-2 sm:py-20 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
-            <span className="font-display text-[24px] tracking-[-0.02em] text-paper">
+            <Link href="/" className="font-display text-[20px] tracking-[-0.02em]">
               T<span className="text-gold">3</span>
-            </span>
-            <p className="mt-6 max-w-[280px] text-[14px] leading-[1.75] text-paper/40">
+            </Link>
+            <p className="mt-4 max-w-[260px] text-[13px] leading-[1.7] text-muted">
               Strategy, craft, outcome. Defying conventional wisdom since 2004.
-            </p>
-            <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.2em] text-paper/25">
-              Delhi NCR &middot; Jaipur &middot; Bhopal
             </p>
           </div>
 
           {/* Work */}
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-paper/30">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
               Work
             </p>
-            <nav className="mt-5 flex flex-col gap-3">
-              <Link
-                href="/work"
-                className="text-[14px] text-paper/50 transition-all duration-300 hover:translate-x-1 hover:text-paper"
-              >
+            <nav className="mt-4 flex flex-col gap-2.5">
+              <Link href="/work" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 Workstories
               </Link>
-              <Link
-                href="/shortlist"
-                className="text-[14px] text-paper/50 transition-all duration-300 hover:translate-x-1 hover:text-paper"
-              >
-                Your Shortlist
+              <Link href="/shortlist" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
+                Shortlist
               </Link>
             </nav>
           </div>
 
           {/* Company */}
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-paper/30">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
               Company
             </p>
-            <nav className="mt-5 flex flex-col gap-3">
-              <Link
-                href="/services"
-                className="text-[14px] text-paper/50 transition-all duration-300 hover:translate-x-1 hover:text-paper"
-              >
+            <nav className="mt-4 flex flex-col gap-2.5">
+              <Link href="/services" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 Services
               </Link>
-              <Link
-                href="/about"
-                className="text-[14px] text-paper/50 transition-all duration-300 hover:translate-x-1 hover:text-paper"
-              >
+              <Link href="/about" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 About
               </Link>
-              <Link
-                href="/contact"
-                className="text-[14px] text-paper/50 transition-all duration-300 hover:translate-x-1 hover:text-paper"
-              >
+              <Link href="/contact" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 Contact
               </Link>
             </nav>
           </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
+              Get in Touch
+            </p>
+            <div className="mt-4 flex flex-col gap-2.5">
+              <a
+                href="mailto:hello@t-3.in"
+                className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink"
+              >
+                hello@t-3.in
+              </a>
+              <p className="text-[13px] text-ink/40">
+                Delhi NCR · Jaipur · Bhopal
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* ── Bottom bar ── */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-border-dark py-8 sm:flex-row">
-          <p className="text-[12px] text-paper/25">
+        <div className="flex items-center justify-between border-t border-border py-6">
+          <p className="text-[11px] text-muted-light">
             &copy; {new Date().getFullYear()} T3 Technologies
           </p>
-          <span className="font-display text-[14px] tracking-[-0.02em] text-paper/25">
-            T<span className="text-gold/40">3</span>
-          </span>
+          <p className="text-[11px] text-muted-light">
+            Since 2004
+          </p>
         </div>
       </div>
     </footer>

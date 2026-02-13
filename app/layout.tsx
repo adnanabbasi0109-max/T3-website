@@ -42,14 +42,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
         <ShortlistProvider>
           <Navbar />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 pt-16 sm:pt-[72px]">{children}</div>
           <Footer />
         </ShortlistProvider>
       </body>

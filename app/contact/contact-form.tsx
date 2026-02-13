@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full border-b border-border bg-transparent pb-3 pt-1 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted-light focus:border-ink";
+  "w-full rounded-[0.875rem] border border-border bg-paper-warm px-5 py-4 text-[14px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong focus:bg-paper";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -46,16 +46,16 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="py-10">
-        <p className="font-display text-[22px] tracking-[-0.02em]">
+      <div className="rounded-[1.375rem] bg-paper-warm px-8 py-14 text-center sm:px-12">
+        <p className="font-display text-[24px] tracking-[-0.02em] sm:text-[28px]">
           Message sent.
         </p>
-        <p className="mt-3 text-[14px] leading-[1.7] text-muted">
+        <p className="mx-auto mt-4 max-w-xs text-[14px] leading-[1.8] text-muted">
           We&apos;ll get back to you within 24 hours.
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-6 text-[13px] font-medium text-gold transition-colors duration-300 hover:text-gold-dark"
+          className="mt-8 rounded-full border border-border px-6 py-2.5 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
         >
           Send another message
         </button>
@@ -64,11 +64,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label
           htmlFor="name"
-          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Name <span className="text-accent">*</span>
         </label>
@@ -86,7 +86,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Email <span className="text-accent">*</span>
         </label>
@@ -104,7 +104,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="company"
-          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Company
         </label>
@@ -121,7 +121,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
+          className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Message <span className="text-accent">*</span>
         </label>
@@ -143,9 +143,11 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex h-11 items-center justify-center gap-2 bg-ink px-8 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light disabled:opacity-40"
+        className="btn-slide inline-flex h-13 items-center justify-center rounded-full bg-ink px-10 text-[14px] font-medium text-paper transition-all duration-500 hover:bg-ink-light disabled:opacity-40"
       >
-        {status === "loading" ? "Sending..." : "Send Message"}
+        <span className="btn-text">
+          {status === "loading" ? "Sending..." : "Send Message"}
+        </span>
       </button>
     </form>
   );

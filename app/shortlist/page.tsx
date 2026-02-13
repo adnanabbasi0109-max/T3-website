@@ -11,16 +11,13 @@ export const metadata = {
 export default function ShortlistPage() {
   return (
     <>
-      <Section spacing="md">
+      <Section spacing="lg">
         <Container>
           <Reveal>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
-              Saved
-            </p>
-            <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] tracking-[-0.025em]">
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-[-0.035em]">
               Your Shortlist
             </h1>
-            <p className="mt-4 max-w-md text-[15px] leading-[1.75] text-muted">
+            <p className="mt-5 max-w-md text-[15px] leading-[1.85] text-muted sm:text-[16px]">
               Review the workstories you&apos;ve saved, then send us your brief.
             </p>
           </Reveal>
@@ -29,7 +26,7 @@ export default function ShortlistPage() {
 
       <ShortlistClient />
 
-      <div className="pb-20 sm:pb-28" />
+      <div className="pb-20 sm:pb-32" />
     </>
   );
 }

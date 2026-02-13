@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SERVICES } from "../../lib/utils";
 import Reveal from "../../components/motion/Reveal";
+import Marquee from "../../components/motion/Marquee";
 import Container from "../../components/layout/Container";
 import Section from "../../components/layout/Section";
 
@@ -14,18 +15,15 @@ export default function ServicesPage() {
   return (
     <>
       {/* ── Header ── */}
-      <Section spacing="md">
+      <Section spacing="lg">
         <Container>
           <Reveal>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
-              What We Do
-            </p>
-            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-[-0.03em]">
+            <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-[-0.035em]">
               Services
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-4 max-w-lg text-[15px] leading-[1.75] text-muted sm:text-base">
+            <p className="mt-6 max-w-lg text-[15px] leading-[1.85] text-muted sm:text-[16px]">
               Six disciplines. One doctrine: defy conventional wisdom,
               deconstruct complex systems to create simple, powerful solutions.
             </p>
@@ -33,31 +31,31 @@ export default function ServicesPage() {
         </Container>
       </Section>
 
-      {/* ── Services List ── */}
-      <Section spacing="lg" className="border-t border-border">
+      {/* ── Services List — expandable rows ── */}
+      <Section spacing="md">
         <Container>
           <div>
             {SERVICES.map((svc, i) => (
               <Reveal key={svc.title} delay={i * 0.04}>
                 <div
-                  className={`grid gap-4 py-8 sm:gap-8 sm:py-10 lg:grid-cols-[200px_1fr_1.5fr] lg:gap-12 ${
+                  className={`group grid gap-6 py-10 sm:gap-10 sm:py-14 lg:grid-cols-[3rem_1fr_1.5fr] lg:gap-16 ${
                     i < SERVICES.length - 1 ? "border-b border-border" : ""
                   }`}
                 >
-                  <div>
-                    <span className="text-[11px] font-semibold text-muted-light">
+                  <div className="hidden lg:block">
+                    <span className="text-[13px] font-bold text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <div>
-                    <h2 className="font-display text-[clamp(1.15rem,2vw,1.5rem)] tracking-[-0.015em]">
+                    <h2 className="text-[22px] font-semibold tracking-[-0.02em] sm:text-[26px] transition-colors duration-500 group-hover:text-accent">
                       {svc.title}
                     </h2>
-                    <p className="mt-1.5 text-[12px] font-medium text-gold">
+                    <p className="mt-2 text-[13px] font-medium text-accent">
                       {svc.tagline}
                     </p>
                   </div>
-                  <p className="text-[14px] leading-[1.75] text-muted sm:text-[15px]">
+                  <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
                     {svc.desc}
                   </p>
                 </div>
@@ -67,22 +65,31 @@ export default function ServicesPage() {
         </Container>
       </Section>
 
+      {/* ── Marquee ── */}
+      <Section spacing="none" className="border-y border-border py-6 sm:py-8">
+        <Marquee
+          text="Brand Identity / Digital Experiences / PR Strategy / UX Design / Business Innovation / AI Solutions / Art Direction / Social Media"
+          speed={50}
+          className="text-[clamp(1rem,2vw,1.35rem)] font-medium tracking-[-0.01em] text-ink/30"
+        />
+      </Section>
+
       {/* ── CTA ── */}
-      <Section spacing="xl" dark>
+      <Section spacing="xl" dark className="rounded-t-[2rem] sm:rounded-t-[3rem]">
         <Container className="text-center">
           <Reveal>
-            <h2 className="mx-auto max-w-md font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em] text-paper">
+            <h2 className="mx-auto max-w-xl font-display text-[clamp(2rem,4.5vw,3.25rem)] tracking-[-0.025em] text-paper">
               Not sure what you need?
             </h2>
-            <p className="mx-auto mt-4 max-w-sm text-[15px] leading-[1.75] text-paper/50">
+            <p className="mx-auto mt-5 max-w-sm text-[15px] leading-[1.85] text-paper/40">
               Tell us your challenge. We&apos;ll map the right services.
             </p>
-            <div className="mt-8">
+            <div className="mt-12">
               <Link
                 href="/contact"
-                className="inline-flex h-11 items-center gap-2 bg-paper px-8 text-[13px] font-medium text-ink transition-colors duration-300 hover:bg-paper-warm"
+                className="btn-slide inline-flex h-14 items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-600 hover:bg-paper-warm"
               >
-                Start a Conversation &rarr;
+                <span className="btn-text">Start a Conversation &rarr;</span>
               </Link>
             </div>
           </Reveal>

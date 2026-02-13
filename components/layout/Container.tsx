@@ -4,8 +4,16 @@ type Props = {
   children: ReactNode;
   className?: string;
   as?: "div" | "section" | "header" | "footer" | "main" | "article";
-  /** "wide" for edge-to-edge heroes, "narrow" for prose, default for content */
-  size?: "default" | "wide" | "narrow";
+  /** "full" for edge-to-edge, "xl" for 1600px, "wide" for 1400px, "default" for content, "narrow" for prose */
+  size?: "default" | "wide" | "narrow" | "full" | "xl";
+};
+
+const MAX_W: Record<string, string> = {
+  full: "",
+  xl: "max-w-[1600px]",
+  wide: "max-w-[1400px]",
+  default: "max-w-[1120px]",
+  narrow: "max-w-[720px]",
 };
 
 export default function Container({
@@ -14,15 +22,10 @@ export default function Container({
   as: Tag = "div",
   size = "default",
 }: Props) {
-  const maxW =
-    size === "wide"
-      ? "max-w-[1400px]"
-      : size === "narrow"
-        ? "max-w-[720px]"
-        : "max-w-[1120px]";
-
   return (
-    <Tag className={`mx-auto w-full ${maxW} px-6 sm:px-8 lg:px-12 ${className}`}>
+    <Tag
+      className={`mx-auto w-full ${MAX_W[size]} px-5 sm:px-8 lg:px-16 ${className}`}
+    >
       {children}
     </Tag>
   );

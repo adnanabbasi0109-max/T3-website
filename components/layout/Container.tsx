@@ -10,10 +10,10 @@ type Props = {
 
 const MAX_W: Record<string, string> = {
   full: "",
-  xl: "max-w-[1600px]",
-  wide: "max-w-[1400px]",
-  default: "max-w-[1120px]",
-  narrow: "max-w-[720px]",
+  xl: "max-w-[1440px]",
+  wide: "max-w-[1280px]",
+  default: "max-w-[1080px]",
+  narrow: "max-w-[680px]",
 };
 
 export default function Container({
@@ -24,7 +24,7 @@ export default function Container({
 }: Props) {
   return (
     <Tag
-      className={`mx-auto w-full ${MAX_W[size]} px-6 sm:px-10 lg:px-16 ${className}`}
+      className={`mx-auto w-full ${MAX_W[size]} px-6 sm:px-8 lg:px-12 ${className}`}
     >
       {children}
     </Tag>

@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import type { CaseStudyDoc } from "../../../lib/utils";
 import { useShortlist } from "../../../components/ui/shortlist-provider";
 import CaseStudyCard from "../../../components/ui/case-study-card";
 import Reveal from "../../../components/motion/Reveal";
-import TextReveal from "../../../components/motion/TextReveal";
-import ParallaxImage from "../../../components/motion/ParallaxImage";
 import Container from "../../../components/layout/Container";
-
-const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
+import Section from "../../../components/layout/Section";
 
 export default function CaseStudyStory({
   item,
@@ -24,227 +20,152 @@ export default function CaseStudyStory({
   const sections = item.sections || [];
 
   return (
-    <main>
-      {/* ── Full-bleed Hero Image ── */}
-      <section className="relative w-full">
-        {item.heroImage ? (
-          <div className="h-[70vh] min-h-[500px] w-full overflow-hidden">
-            <ParallaxImage
+    <>
+      {/* ── Hero ── */}
+      <section className="pb-8 pt-8 sm:pb-12 sm:pt-12">
+        <Container>
+          <Reveal>
+            <Link
+              href="/work"
+              className="mb-6 inline-flex items-center gap-1.5 text-[12px] font-medium text-muted transition-colors hover:text-ink sm:mb-8"
+            >
+              &larr; All Workstories
+            </Link>
+
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                  {item.client || "Case Study"}
+                </p>
+                <h1 className="mt-3 font-display text-[clamp(2rem,5vw,4rem)] leading-[1.08] tracking-[-0.025em]">
+                  {item.title}
+                </h1>
+              </div>
+
+              {/* Save button */}
+              <button
+                onClick={() => (saved ? remove(item.slug) : add(item.slug))}
+                className={`mt-2 flex shrink-0 items-center gap-1.5 border px-4 py-2 text-[12px] font-medium transition-all duration-300 ${
+                  saved
+                    ? "border-ink bg-ink text-paper"
+                    : "border-border text-muted hover:border-ink/30 hover:text-ink"
+                }`}
+                aria-label={saved ? "Remove from shortlist" : "Save to shortlist"}
+              >
+                <svg className="h-3.5 w-3.5" fill={saved ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                </svg>
+                {saved ? "Saved" : "Save"}
+              </button>
+            </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* ── Hero Image ── */}
+      {item.heroImage && (
+        <section className="px-6 sm:px-8 lg:px-12">
+          <div className="mx-auto max-w-[1280px] overflow-hidden rounded-sm">
+            <img
               src={item.heroImage}
               alt={item.title}
-              aspect="aspect-auto"
-              speed={0.2}
-              className="h-full w-full [&>img]:h-full [&>img]:w-full"
+              className="aspect-[2/1] w-full object-cover sm:aspect-[2.5/1]"
             />
           </div>
-        ) : (
-          <div className="flex h-[70vh] min-h-[500px] w-full items-center justify-center bg-paper-warm">
-            <span className="select-none font-display text-[30vw] leading-none text-border/20">
-              {item.title.charAt(0)}
-            </span>
-          </div>
-        )}
-      </section>
-
-      {/* ── Overlapping Title Block ── */}
-      <section className="relative -mt-20 lg:-mt-28">
-        <Container>
-          <div className="rounded-lg bg-paper p-8 shadow-[0_-20px_60px_rgba(0,0,0,0.08)] lg:p-12">
-            <Reveal>
-              <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-muted">
-                {item.client || "Case Study"}
-              </p>
-              <h1 className="mt-4 font-display text-[clamp(2rem,5vw,4.5rem)] tracking-[-0.02em]">
-                {item.title}
-              </h1>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Dark Meta Strip ── */}
-      <section className="dark-section">
-        <Container>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-4 py-8">
-            {item.year && (
-              <div className="flex items-center gap-3">
-                <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/40">
-                  Year
-                </span>
-                <p className="text-[15px] font-semibold text-paper">
-                  {item.year}
-                </p>
-              </div>
-            )}
-            {item.locations && item.locations.length > 0 && (
-              <>
-                <div className="hidden h-4 w-px bg-border-dark sm:block" />
-                <div className="flex items-center gap-3">
-                  <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/40">
-                    Location
-                  </span>
-                  <p className="text-[15px] font-semibold text-paper">
-                    {item.locations.join(", ")}
-                  </p>
-                </div>
-              </>
-            )}
-            {item.domains && item.domains.length > 0 && (
-              <>
-                <div className="hidden h-4 w-px bg-border-dark sm:block" />
-                <div className="flex items-center gap-3">
-                  <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/40">
-                    Domain
-                  </span>
-                  <p className="text-[15px] font-semibold text-paper">
-                    {item.domains.join(", ")}
-                  </p>
-                </div>
-              </>
-            )}
-            {item.industries && item.industries.length > 0 && (
-              <>
-                <div className="hidden h-4 w-px bg-border-dark sm:block" />
-                <div className="flex items-center gap-3">
-                  <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/40">
-                    Industry
-                  </span>
-                  <p className="text-[15px] font-semibold text-paper">
-                    {item.industries.join(", ")}
-                  </p>
-                </div>
-              </>
-            )}
-
-            {/* Save button — pushed to the right */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              onClick={() => (saved ? remove(item.slug) : add(item.slug))}
-              className={`ml-auto flex shrink-0 items-center gap-2 rounded-full border px-5 py-2 text-[13px] font-medium transition-all duration-300 ${
-                saved
-                  ? "border-gold bg-gold text-white"
-                  : "border-paper/20 text-paper/60 hover:border-paper/40 hover:text-paper"
-              }`}
-              aria-label={saved ? "Remove from shortlist" : "Save to shortlist"}
-            >
-              <svg
-                className="h-4 w-4"
-                fill={saved ? "currentColor" : "none"}
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                />
-              </svg>
-              {saved ? "Saved" : "Save"}
-            </motion.button>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── Sections — Alternating Zigzag ── */}
-      {sections.length > 0 && (
-        <section className="py-24 lg:py-36">
-          <Container>
-            <div className="space-y-28 lg:space-y-40">
-              {sections.map((s, i) => {
-                const isEven = i % 2 === 0;
-                const hasMedia = s.media && s.media.length > 0;
-
-                return (
-                  <article key={i} className="scroll-mt-28">
-                    {/* Decorative number */}
-                    <Reveal delay={i * 0.05}>
-                      <span className="font-display text-[clamp(3rem,6vw,6rem)] leading-none text-border/15">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </Reveal>
-
-                    <div
-                      className={`mt-8 grid items-start gap-12 lg:gap-20 ${
-                        hasMedia
-                          ? isEven
-                            ? "lg:grid-cols-[1fr_1fr]"
-                            : "lg:grid-cols-[1fr_1fr]"
-                          : ""
-                      }`}
-                    >
-                      {/* Text */}
-                      <div className={hasMedia && !isEven ? "lg:order-2" : ""}>
-                        <TextReveal
-                          text={s.heading}
-                          as="h2"
-                          className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]"
-                          mode="word"
-                          stagger={0.03}
-                        />
-                        <Reveal delay={0.15}>
-                          <div className="mt-8 text-[15px] leading-[1.85] text-muted">
-                            {s.body.split("\n").map((p, pi) => (
-                              <p key={pi} className="mb-5 last:mb-0">
-                                {p}
-                              </p>
-                            ))}
-                          </div>
-                        </Reveal>
-                      </div>
-
-                      {/* Media */}
-                      {hasMedia && (
-                        <div
-                          className={`grid gap-6 ${
-                            (s.media?.length ?? 0) > 1 ? "grid-cols-2" : ""
-                          } ${!isEven ? "lg:order-1" : ""}`}
-                        >
-                          {s.media!.map((url, mi) => (
-                            <Reveal key={mi} delay={mi * 0.08} scale>
-                              <ParallaxImage
-                                src={url}
-                                alt={`${s.heading} ${mi + 1}`}
-                                aspect="aspect-video"
-                                className="rounded-lg"
-                                grayscale
-                              />
-                            </Reveal>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </Container>
         </section>
       )}
 
-      {/* ── Gallery — Masonry-like ── */}
+      {/* ── Meta ── */}
+      <Section spacing="sm">
+        <Container>
+          <div className="flex flex-wrap gap-x-10 gap-y-3 border-b border-border pb-6">
+            {item.year && (
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Year</p>
+                <p className="mt-1 text-[14px] font-medium">{item.year}</p>
+              </div>
+            )}
+            {item.domains && item.domains.length > 0 && (
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Domain</p>
+                <p className="mt-1 text-[14px] font-medium">{item.domains.join(", ")}</p>
+              </div>
+            )}
+            {item.industries && item.industries.length > 0 && (
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Industry</p>
+                <p className="mt-1 text-[14px] font-medium">{item.industries.join(", ")}</p>
+              </div>
+            )}
+            {item.locations && item.locations.length > 0 && (
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-light">Location</p>
+                <p className="mt-1 text-[14px] font-medium">{item.locations.join(", ")}</p>
+              </div>
+            )}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ── Sections ── */}
+      {sections.length > 0 && (
+        <Section spacing="lg">
+          <Container size="narrow">
+            <div className="space-y-16 sm:space-y-20">
+              {sections.map((s, i) => (
+                <article key={i}>
+                  <Reveal>
+                    <h2 className="font-display text-[clamp(1.35rem,2.5vw,2rem)] tracking-[-0.02em]">
+                      {s.heading}
+                    </h2>
+                    <div className="mt-5 text-[15px] leading-[1.8] text-muted">
+                      {s.body.split("\n").map((p, pi) => (
+                        <p key={pi} className="mb-4 last:mb-0">{p}</p>
+                      ))}
+                    </div>
+                  </Reveal>
+
+                  {/* Section media */}
+                  {s.media && s.media.length > 0 && (
+                    <div className={`mt-8 grid gap-4 ${s.media.length > 1 ? "grid-cols-2" : ""}`}>
+                      {s.media.map((url, mi) => (
+                        <Reveal key={mi} delay={mi * 0.06}>
+                          <div className="overflow-hidden rounded-sm bg-paper-warm">
+                            <img
+                              src={url}
+                              alt={`${s.heading} ${mi + 1}`}
+                              className="aspect-video w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                        </Reveal>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
+      {/* ── Gallery ── */}
       {item.gallery && item.gallery.length > 0 && (
-        <section className="border-t border-border py-24 lg:py-36">
+        <Section spacing="md" className="border-t border-border">
           <Container>
             <Reveal>
-              <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
                 Gallery
-              </h2>
+              </p>
             </Reveal>
-            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {item.gallery.map((url, i) => (
-                <Reveal key={i} delay={i * 0.06} scale>
-                  <div
-                    className={`overflow-hidden rounded-lg bg-paper-warm ${
-                      i % 3 === 0 ? "sm:row-span-2 aspect-[3/4]" : "aspect-[4/3]"
-                    }`}
-                  >
+                <Reveal key={i} delay={i * 0.04}>
+                  <div className="overflow-hidden rounded-sm bg-paper-warm">
                     <img
                       src={url}
                       alt={`Gallery ${i + 1}`}
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                       loading="lazy"
                     />
                   </div>
@@ -252,26 +173,29 @@ export default function CaseStudyStory({
               ))}
             </div>
           </Container>
-        </section>
+        </Section>
       )}
 
       {/* ── Outcomes ── */}
       {item.outcomes && item.outcomes.length > 0 && (
-        <section className="dark-section py-28 lg:py-40">
+        <Section spacing="lg" className="border-t border-border">
           <Container>
             <Reveal>
-              <h2 className="font-display text-[clamp(1.75rem,4vw,3rem)] tracking-[-0.02em] text-paper">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                Outcomes
+              </p>
+              <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]">
                 What We Delivered
               </h2>
             </Reveal>
-            <div className="mt-16 space-y-0">
+            <div className="mt-10">
               {item.outcomes.map((outcome, i) => (
-                <Reveal key={i} delay={i * 0.06}>
-                  <div className="grid items-start gap-6 border-t border-paper/10 py-10 lg:grid-cols-[100px_1fr]">
-                    <span className="font-display text-[clamp(2rem,4vw,3rem)] leading-none text-gold/30">
+                <Reveal key={i} delay={i * 0.04}>
+                  <div className={`flex gap-5 py-5 sm:py-6 ${i < item.outcomes!.length - 1 ? "border-b border-border" : ""}`}>
+                    <span className="text-[12px] font-semibold text-muted-light">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-[15px] leading-[1.8] text-paper/70">
+                    <p className="text-[14px] leading-[1.75] text-ink/80 sm:text-[15px]">
                       {outcome}
                     </p>
                   </div>
@@ -279,49 +203,47 @@ export default function CaseStudyStory({
               ))}
             </div>
           </Container>
-        </section>
+        </Section>
       )}
 
       {/* ── Related ── */}
       {related.length > 0 && (
-        <section className="py-28 lg:py-40">
+        <Section spacing="lg" className="border-t border-border">
           <Container>
-            <TextReveal
-              text="Related Workstories"
-              as="h2"
-              className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]"
-            />
-            <div className="mt-16 grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+            <Reveal>
+              <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.02em]">
+                Related Workstories
+              </h2>
+            </Reveal>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((cs, i) => (
-                <Reveal key={cs.slug} delay={i * 0.08} scale>
+                <Reveal key={cs.slug} delay={i * 0.06}>
                   <CaseStudyCard cs={cs} size="compact" />
                 </Reveal>
               ))}
             </div>
           </Container>
-        </section>
+        </Section>
       )}
 
-      {/* ── CTA — Asymmetric ── */}
-      <section className="dark-section py-28 lg:py-40">
-        <Container>
-          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
-            <Reveal>
-              <h2 className="font-display text-[clamp(1.75rem,5vw,3.5rem)] tracking-[-0.02em] text-paper">
-                Have a similar challenge?
-              </h2>
-            </Reveal>
-            <Reveal delay={0.15}>
+      {/* ── CTA ── */}
+      <Section spacing="lg" dark>
+        <Container className="text-center">
+          <Reveal>
+            <h2 className="mx-auto max-w-lg font-display text-[clamp(1.5rem,3.5vw,2.5rem)] tracking-[-0.02em] text-paper">
+              Have a similar challenge?
+            </h2>
+            <div className="mt-8">
               <Link
                 href="/contact"
-                className="inline-flex h-[52px] items-center gap-2 bg-paper px-10 text-[13px] font-medium text-ink transition-all duration-300 hover:bg-paper/90"
+                className="inline-flex h-11 items-center gap-2 bg-paper px-8 text-[13px] font-medium text-ink transition-colors duration-300 hover:bg-paper-warm"
               >
-                Start a Conversation&nbsp;&rarr;
+                Start a Conversation &rarr;
               </Link>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </Container>
-      </section>
-    </main>
+      </Section>
+    </>
   );
 }

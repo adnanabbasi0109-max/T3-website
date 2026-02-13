@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-gold: #b8952a;
-  --color-gold-light: #d4af37;
-  --color-gold-dark: #8a6d1b;
-  --color-gold-muted: #b8952a0d;
-  --color-surface: #fafaf8;
-  --color-surface-dark: #0c0c0c;
-  --color-muted: #999;
-  --color-border: #eae8e4;
-  --color-border-dark: #1a1a1c;
+  --color-gold: #b49a3a;
+  --color-gold-light: #c9af50;
+  --color-gold-dark: #8a761e;
+  --color-gold-muted: rgba(180, 154, 58, 0.06);
+  --color-surface: #f8f7f4;
+  --color-surface-dark: #111110;
+  --color-muted: #8a8a86;
+  --color-border: #e6e4df;
+  --color-border-dark: #222220;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -33,14 +33,15 @@ body {
   background: var(--color-surface);
   color: var(--color-surface-dark);
   font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
 /* ── Selection ── */
 ::selection {
-  background: var(--color-gold-light);
-  color: #000;
+  background: var(--color-gold);
+  color: #fff;
 }
 
 /* ── Focus ── */
@@ -49,27 +50,28 @@ body {
   outline-offset: 3px;
 }
 
-/* ── Scrollbar — minimal ── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 2px;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
 
 /* ── Typography ── */
 h1, h2, h3, h4, h5 {
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  text-wrap: balance;
 }
 
-p {
-  max-width: 65ch;
+p { max-width: 60ch; }
+
+/* ── Links ── */
+a { text-decoration: none; color: inherit; }
+
+/* ── Images ── */
+img {
+  display: block;
+  max-width: 100%;
 }
 
 /* ── Reduced motion ── */
@@ -83,7 +85,5 @@ p {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 }

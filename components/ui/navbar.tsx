@@ -38,6 +38,7 @@ export default function Navbar() {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-paper/90 shadow-[0_1px_0_var(--color-border)] backdrop-blur-xl"
@@ -75,6 +76,7 @@ export default function Navbar() {
           {/* Shortlist — minimal */}
           <Link
             href="/shortlist"
+            aria-label={`Shortlist${count > 0 ? ` (${count} items)` : ""}`}
             className="ml-2 flex items-center gap-1.5 text-[13px] font-medium text-muted transition-colors duration-300 hover:text-ink"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -129,7 +131,7 @@ export default function Navbar() {
             transition={{ duration: 0.35 }}
             className="fixed inset-0 z-40 flex flex-col justify-end bg-ink px-6 pb-16 pt-24 md:hidden"
           >
-            <nav className="flex flex-col gap-1">
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
               {links.map((l, i) => (
                 <motion.div
                   key={l.href}

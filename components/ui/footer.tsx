@@ -21,7 +21,7 @@ export default function Footer() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
               Work
             </p>
-            <nav className="mt-4 flex flex-col gap-2.5">
+            <nav aria-label="Work links" className="mt-4 flex flex-col gap-2.5">
               <Link href="/work" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 Workstories
               </Link>
@@ -36,7 +36,7 @@ export default function Footer() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
               Company
             </p>
-            <nav className="mt-4 flex flex-col gap-2.5">
+            <nav aria-label="Company links" className="mt-4 flex flex-col gap-2.5">
               <Link href="/services" className="text-[13px] text-ink/60 transition-colors duration-300 hover:text-ink">
                 Services
               </Link>

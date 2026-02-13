@@ -55,7 +55,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <Navbar />
-          <main id="main-content" className="flex-1 pt-16 sm:pt-[72px]">{children}</main>
+          <main id="main-content" className="flex-1 pt-[72px]">{children}</main>
           <Footer />
         </ShortlistProvider>
       </body>

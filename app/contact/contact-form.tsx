@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full border-b border-border bg-transparent pb-3 text-[14px] outline-none transition-colors placeholder:text-neutral-400 focus:border-surface-dark";
+  "w-full border-b border-border bg-transparent pb-3 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/40 focus:border-surface-dark";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -47,15 +47,15 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div className="border-t border-border pt-10 text-center">
-        <p className="text-[18px] font-semibold tracking-tight">
+        <p className="text-[20px] font-bold tracking-[-0.02em]">
           Message sent!
         </p>
-        <p className="mt-3 text-[14px] text-muted">
+        <p className="mt-3 text-[14px] leading-[1.7] text-muted">
           We&apos;ll get back to you within 24 hours.
         </p>
         <button
           onClick={() => setStatus("idle")}
-          className="mt-6 text-[13px] font-medium text-gold transition hover:underline"
+          className="mt-6 text-[13px] font-medium text-gold transition-colors duration-300 hover:text-gold-dark"
         >
           Send another message
         </button>
@@ -68,7 +68,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
         >
           Name <span className="text-red-400">*</span>
         </label>
@@ -86,7 +86,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
         >
           Email <span className="text-red-400">*</span>
         </label>
@@ -104,7 +104,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="company"
-          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
         >
           Company
         </label>
@@ -121,7 +121,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+          className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
         >
           Message <span className="text-red-400">*</span>
         </label>
@@ -143,7 +143,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full rounded-full bg-surface-dark px-6 py-3.5 text-[13px] font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+        className="w-full rounded-full bg-surface-dark px-6 py-3.5 text-[13px] font-medium text-white transition-all duration-300 hover:bg-surface-dark/85 disabled:opacity-50"
       >
         {status === "loading" ? "Sending..." : "Send Message"}
       </button>

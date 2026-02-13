@@ -10,25 +10,25 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <main>
-      <section className="pb-32 pt-28 lg:pt-36">
+      <section className="pb-28 pt-20 sm:pb-36 sm:pt-28 lg:pt-36">
         <Container>
-          <div className="grid gap-20 lg:grid-cols-2">
+          <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
             <Reveal>
               <div>
                 <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-gold">
                   Get in Touch
                 </p>
-                <h1 className="mt-4 text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight">
+                <h1 className="mt-5 text-[clamp(2rem,5vw,4rem)] font-extrabold tracking-[-0.03em]">
                   Start a Conversation
                 </h1>
-                <p className="mt-6 text-[15px] leading-[1.7] text-muted">
+                <p className="mt-6 text-[15px] leading-[1.75] text-muted">
                   Tell us about your challenge. We&apos;ll respond with honesty
                   — whether we&apos;re the right fit or not.
                 </p>
 
                 <div className="mt-16 space-y-10">
                   <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60">
                       Email
                     </p>
                     <p className="mt-2 text-[15px] font-semibold">
@@ -36,7 +36,7 @@ export default function ContactPage() {
                     </p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60">
                       Offices
                     </p>
                     <p className="mt-2 text-[15px] font-semibold">

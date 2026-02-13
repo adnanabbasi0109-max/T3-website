@@ -4,16 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useShortlist } from "../../components/ui/shortlist-provider";
 import type { CaseStudyDoc } from "../../lib/utils";
+import Container from "../../components/layout/Container";
 
 const inputClass =
-  "w-full border-b border-border bg-transparent pb-3 text-[14px] outline-none transition-colors placeholder:text-neutral-400 focus:border-surface-dark";
+  "w-full border-b border-border bg-transparent pb-3 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted/40 focus:border-surface-dark";
 
 export default function ShortlistClient() {
   const { slugs, remove, clear, count } = useShortlist();
   const [items, setItems] = useState<CaseStudyDoc[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Lead form state
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -80,42 +80,42 @@ export default function ShortlistClient() {
 
   if (loading) {
     return (
-      <div className="mx-auto max-w-[1200px] px-6 py-16 text-muted lg:px-10">
+      <Container className="py-16 text-muted">
         Loading your shortlist...
-      </div>
+      </Container>
     );
   }
 
   if (count === 0) {
     return (
-      <div className="mx-auto max-w-[1200px] px-6 py-20 lg:px-10">
+      <Container className="py-20">
         <div className="border-t border-border pt-12 text-center">
-          <p className="text-muted">Your shortlist is empty.</p>
+          <p className="text-[15px] text-muted">Your shortlist is empty.</p>
           <Link
             href="/work"
-            className="mt-4 inline-block text-[13px] font-medium text-gold transition hover:underline"
+            className="mt-4 inline-block text-[13px] font-medium text-gold transition-colors duration-300 hover:text-gold-dark"
           >
-            Browse workstories &rarr;
+            Browse workstories&nbsp;&rarr;
           </Link>
         </div>
-      </div>
+      </Container>
     );
   }
 
   return (
-    <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
+    <Container>
       {/* Saved items */}
-      <div className="mt-16">
+      <div className="mt-14">
         <div className="h-px bg-border" />
         {items.map((cs) => (
           <div
             key={cs.slug}
-            className="flex items-center justify-between border-b border-border py-6 transition-colors hover:bg-neutral-50"
+            className="flex items-center justify-between border-b border-border py-6 transition-colors duration-200 hover:bg-surface-dark/[0.015]"
           >
             <div>
               <Link
                 href={`/work/${cs.slug}`}
-                className="text-[15px] font-semibold tracking-tight transition hover:text-gold"
+                className="text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-300 hover:text-gold"
               >
                 {cs.title}
               </Link>
@@ -125,7 +125,7 @@ export default function ShortlistClient() {
             </div>
             <button
               onClick={() => remove(cs.slug)}
-              className="text-[12px] font-medium text-neutral-400 transition hover:text-red-500"
+              className="text-[12px] font-medium text-muted transition-colors duration-300 hover:text-red-500"
             >
               Remove
             </button>
@@ -136,28 +136,28 @@ export default function ShortlistClient() {
       <div className="mt-4 flex justify-end">
         <button
           onClick={clear}
-          className="text-[13px] text-muted transition hover:text-red-500"
+          className="text-[13px] text-muted transition-colors duration-300 hover:text-red-500"
         >
           Clear all
         </button>
       </div>
 
       {/* Lead form */}
-      <div className="mt-24">
-        <h2 className="text-[22px] font-bold tracking-tight">
+      <div className="mt-20 lg:mt-28">
+        <h2 className="text-[24px] font-bold tracking-[-0.02em]">
           Send Your Brief
         </h2>
-        <p className="mt-3 text-[15px] text-muted">
+        <p className="mt-3 text-[15px] leading-[1.75] text-muted">
           We&apos;ll review your selected workstories and prepare a tailored
           response.
         </p>
 
         {status === "success" ? (
           <div className="mt-12 border-t border-border pt-10 text-center">
-            <p className="text-[18px] font-semibold tracking-tight">
+            <p className="text-[20px] font-bold tracking-[-0.02em]">
               Brief submitted!
             </p>
-            <p className="mt-3 text-[14px] text-muted">
+            <p className="mt-3 text-[14px] leading-[1.7] text-muted">
               We&apos;ll get back to you within 24 hours with a tailored
               response based on your selected workstories.
             </p>
@@ -167,7 +167,7 @@ export default function ShortlistClient() {
             <div>
               <label
                 htmlFor="lead-name"
-                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
               >
                 Name <span className="text-red-400">*</span>
               </label>
@@ -184,7 +184,7 @@ export default function ShortlistClient() {
             <div>
               <label
                 htmlFor="lead-email"
-                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
               >
                 Email <span className="text-red-400">*</span>
               </label>
@@ -201,7 +201,7 @@ export default function ShortlistClient() {
             <div>
               <label
                 htmlFor="lead-company"
-                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
               >
                 Company
               </label>
@@ -217,7 +217,7 @@ export default function ShortlistClient() {
             <div>
               <label
                 htmlFor="lead-challenge"
-                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
               >
                 Challenge Type
               </label>
@@ -227,7 +227,7 @@ export default function ShortlistClient() {
                 onChange={(e) =>
                   setForm({ ...form, challengeType: e.target.value })
                 }
-                className="w-full appearance-none border-b border-border bg-transparent pb-3 pr-6 text-[14px] outline-none transition-colors focus:border-surface-dark"
+                className="w-full appearance-none border-b border-border bg-transparent pb-3 pr-6 text-[14px] outline-none transition-colors duration-300 focus:border-surface-dark"
               >
                 <option value="">Select...</option>
                 <option value="Brand Building">Brand Building</option>
@@ -245,7 +245,7 @@ export default function ShortlistClient() {
             <div>
               <label
                 htmlFor="lead-message"
-                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-neutral-400"
+                className="mb-3 block text-[11px] font-medium uppercase tracking-[0.15em] text-muted/60"
               >
                 Message
               </label>
@@ -266,13 +266,13 @@ export default function ShortlistClient() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full rounded-full bg-surface-dark px-6 py-3.5 text-[13px] font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+              className="w-full rounded-full bg-surface-dark px-6 py-3.5 text-[13px] font-medium text-white transition-all duration-300 hover:bg-surface-dark/85 disabled:opacity-50"
             >
               {status === "loading" ? "Sending..." : "Submit Brief"}
             </button>
           </form>
         )}
       </div>
-    </div>
+    </Container>
   );
 }

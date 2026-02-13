@@ -7,7 +7,7 @@ import type { CaseStudyDoc } from "../../lib/utils";
 import Container from "../../components/layout/Container";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-transparent px-5 py-4 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
+  "w-full border-b border-border bg-transparent pb-3 pt-1 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted-light focus:border-ink";
 
 export default function ShortlistClient() {
   const { slugs, remove, clear, count } = useShortlist();
@@ -80,7 +80,7 @@ export default function ShortlistClient() {
 
   if (loading) {
     return (
-      <Container className="py-16 text-muted">
+      <Container className="py-12 text-[14px] text-muted">
         Loading your shortlist...
       </Container>
     );
@@ -88,30 +88,16 @@ export default function ShortlistClient() {
 
   if (count === 0) {
     return (
-      <Container className="py-20">
-        <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border py-20 text-center">
-          {/* Bookmark icon */}
-          <svg
-            className="h-16 w-16 text-border"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-            />
-          </svg>
-          <p className="mt-6 text-[15px] text-muted">
+      <Container className="py-16">
+        <div className="border-t border-border py-16 text-center">
+          <p className="text-[15px] text-muted">
             Your shortlist is empty.
           </p>
           <Link
             href="/work"
-            className="mt-4 inline-flex items-center gap-2 text-[13px] font-medium text-gold transition-colors duration-300 hover:text-gold-dark"
+            className="mt-3 inline-block text-[13px] font-medium text-gold transition-colors duration-300 hover:text-gold-dark"
           >
-            Start exploring&nbsp;&rarr;
+            Start exploring &rarr;
           </Link>
         </div>
       </Container>
@@ -120,16 +106,16 @@ export default function ShortlistClient() {
 
   return (
     <Container>
-      {/* ── Shortlisted items as cards ── */}
-      <div className="mt-14 space-y-4">
+      {/* ── Shortlisted items ── */}
+      <div className="border-t border-border">
         {items.map((cs) => (
           <div
             key={cs.slug}
-            className="flex items-center gap-5 rounded-lg bg-paper-warm p-5 transition-colors duration-200"
+            className="flex items-center gap-4 border-b border-border py-4 sm:gap-6"
           >
             {/* Thumbnail */}
             {cs.heroImage ? (
-              <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-border">
+              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-sm bg-paper-warm sm:h-14 sm:w-14">
                 <img
                   src={cs.heroImage}
                   alt=""
@@ -138,8 +124,8 @@ export default function ShortlistClient() {
                 />
               </div>
             ) : (
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-border">
-                <span className="font-display text-xl text-muted/40">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-paper-warm sm:h-14 sm:w-14">
+                <span className="font-display text-lg text-muted-light">
                   {cs.title.charAt(0)}
                 </span>
               </div>
@@ -149,22 +135,22 @@ export default function ShortlistClient() {
             <div className="min-w-0 flex-1">
               <Link
                 href={`/work/${cs.slug}`}
-                className="block truncate font-display text-[16px] tracking-[-0.02em] transition-colors duration-300 hover:text-gold"
+                className="block truncate text-[14px] font-medium tracking-[-0.01em] transition-colors duration-300 hover:text-gold sm:text-[15px]"
               >
                 {cs.title}
               </Link>
-              <p className="mt-1.5 text-[12px] text-muted">
-                {cs.client || "Client"} &middot; {cs.year || ""}
+              <p className="mt-0.5 text-[11px] text-muted">
+                {cs.client || "Client"}{cs.year ? ` · ${cs.year}` : ""}
               </p>
             </div>
 
             {/* Remove */}
             <button
               onClick={() => remove(cs.slug)}
-              className="shrink-0 rounded-full p-2 text-muted transition-colors duration-300 hover:bg-accent/10 hover:text-accent"
+              className="shrink-0 p-1.5 text-muted-light transition-colors duration-300 hover:text-accent"
               aria-label={`Remove ${cs.title}`}
             >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -172,127 +158,66 @@ export default function ShortlistClient() {
         ))}
       </div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-3 flex justify-end">
         <button
           onClick={clear}
-          className="text-[13px] text-muted transition-colors duration-300 hover:text-accent"
+          className="text-[12px] text-muted-light transition-colors duration-300 hover:text-accent"
         >
           Clear all
         </button>
       </div>
 
       {/* ── Lead form ── */}
-      <div className="mt-24 lg:mt-32">
-        <h2 className="font-display text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em]">
+      <div className="mt-16 border-t border-border pt-12 sm:mt-20 sm:pt-16">
+        <h2 className="font-display text-[clamp(1.25rem,2.5vw,1.75rem)] tracking-[-0.02em]">
           Send Your Brief
         </h2>
-        <p className="mt-4 text-[15px] leading-[1.75] text-muted">
-          We&apos;ll review your selected workstories and prepare a tailored
-          response.
+        <p className="mt-3 text-[14px] leading-[1.75] text-muted sm:text-[15px]">
+          We&apos;ll review your selected workstories and prepare a tailored response.
         </p>
 
         {status === "success" ? (
-          <div className="mt-12 py-10 text-center">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gold/10">
-              <svg
-                className="h-8 w-8 text-gold"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12.75l6 6 9-13.5"
-                />
-              </svg>
-            </div>
-            <p className="font-display text-[22px] tracking-[-0.02em]">
-              Brief submitted!
+          <div className="mt-10 py-8">
+            <p className="font-display text-[20px] tracking-[-0.02em]">
+              Brief submitted.
             </p>
-            <p className="mt-3 text-[14px] leading-[1.7] text-muted">
-              We&apos;ll get back to you within 24 hours with a tailored
-              response based on your selected workstories.
+            <p className="mt-2 text-[14px] text-muted">
+              We&apos;ll get back to you within 24 hours.
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="mt-12 max-w-lg space-y-7">
+          <form onSubmit={handleSubmit} className="mt-8 max-w-lg space-y-7">
             <div>
-              <label
-                htmlFor="lead-name"
-                className="mb-2 block text-[13px] font-medium text-ink/80"
-              >
+              <label htmlFor="lead-name" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
                 Name <span className="text-accent">*</span>
               </label>
-              <input
-                id="lead-name"
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className={inputClass}
-                placeholder="Your name"
-              />
+              <input id="lead-name" type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} placeholder="Your name" />
             </div>
 
             <div>
-              <label
-                htmlFor="lead-email"
-                className="mb-2 block text-[13px] font-medium text-ink/80"
-              >
+              <label htmlFor="lead-email" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
                 Email <span className="text-accent">*</span>
               </label>
-              <input
-                id="lead-email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className={inputClass}
-                placeholder="you@company.com"
-              />
+              <input id="lead-email" type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} placeholder="you@company.com" />
             </div>
 
             <div>
-              <label
-                htmlFor="lead-company"
-                className="mb-2 block text-[13px] font-medium text-ink/80"
-              >
+              <label htmlFor="lead-company" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
                 Company
               </label>
-              <input
-                id="lead-company"
-                type="text"
-                value={form.company}
-                onChange={(e) => setForm({ ...form, company: e.target.value })}
-                className={inputClass}
-                placeholder="Company name"
-              />
+              <input id="lead-company" type="text" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className={inputClass} placeholder="Company name" />
             </div>
 
             <div>
-              <label
-                htmlFor="lead-challenge"
-                className="mb-2 block text-[13px] font-medium text-ink/80"
-              >
+              <label htmlFor="lead-challenge" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
                 Challenge Type
               </label>
-              <select
-                id="lead-challenge"
-                value={form.challengeType}
-                onChange={(e) =>
-                  setForm({ ...form, challengeType: e.target.value })
-                }
-                className={`${inputClass} appearance-none`}
-              >
+              <select id="lead-challenge" value={form.challengeType} onChange={(e) => setForm({ ...form, challengeType: e.target.value })} className={`${inputClass} cursor-pointer appearance-none`}>
                 <option value="">Select...</option>
                 <option value="Brand Building">Brand Building</option>
                 <option value="PR & Media">PR &amp; Media Strategy</option>
                 <option value="Social Media">Social Media</option>
-                <option value="Business Innovation">
-                  Business Innovation
-                </option>
+                <option value="Business Innovation">Business Innovation</option>
                 <option value="Art & Design">Art &amp; Design</option>
                 <option value="AI & Tech">AI &amp; Tech Solutions</option>
                 <option value="Other">Other</option>
@@ -300,20 +225,10 @@ export default function ShortlistClient() {
             </div>
 
             <div>
-              <label
-                htmlFor="lead-message"
-                className="mb-2 block text-[13px] font-medium text-ink/80"
-              >
+              <label htmlFor="lead-message" className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
                 Message
               </label>
-              <textarea
-                id="lead-message"
-                rows={4}
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className={`${inputClass} resize-y`}
-                placeholder="Tell us about your challenge..."
-              />
+              <textarea id="lead-message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-y`} placeholder="Tell us about your challenge..." />
             </div>
 
             {status === "error" && (
@@ -323,35 +238,9 @@ export default function ShortlistClient() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink py-4 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/90 disabled:opacity-50"
+              className="inline-flex h-11 items-center justify-center gap-2 bg-ink px-8 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light disabled:opacity-40"
             >
-              {status === "loading" ? (
-                <>
-                  <svg
-                    className="h-4 w-4 animate-spin"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      className="opacity-25"
-                    />
-                    <path
-                      d="M4 12a8 8 0 018-8"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  Sending...
-                </>
-              ) : (
-                "Submit Brief"
-              )}
+              {status === "loading" ? "Sending..." : "Submit Brief"}
             </button>
           </form>
         )}

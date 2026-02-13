@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const inputClass =
-  "w-full rounded-lg border border-border bg-transparent px-5 py-4 text-[14px] outline-none transition-all duration-300 placeholder:text-muted/40 focus:border-ink focus:ring-1 focus:ring-ink/10";
+  "w-full border-b border-border bg-transparent pb-3 pt-1 text-[14px] outline-none transition-colors duration-300 placeholder:text-muted-light focus:border-ink";
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -46,30 +46,9 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="py-10 text-center">
-        {/* Animated checkmark */}
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gold/10">
-          <svg
-            className="h-8 w-8 text-gold"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2.5}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-              style={{
-                strokeDasharray: 30,
-                strokeDashoffset: 0,
-                animation: "draw-check 0.5s ease-out forwards",
-              }}
-            />
-          </svg>
-        </div>
+      <div className="py-10">
         <p className="font-display text-[22px] tracking-[-0.02em]">
-          Message sent!
+          Message sent.
         </p>
         <p className="mt-3 text-[14px] leading-[1.7] text-muted">
           We&apos;ll get back to you within 24 hours.
@@ -85,11 +64,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-7">
+    <form onSubmit={handleSubmit} className="space-y-8">
       <div>
         <label
           htmlFor="name"
-          className="mb-2.5 block text-[13px] font-medium text-ink/80"
+          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Name <span className="text-accent">*</span>
         </label>
@@ -107,7 +86,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="email"
-          className="mb-2.5 block text-[13px] font-medium text-ink/80"
+          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Email <span className="text-accent">*</span>
         </label>
@@ -125,7 +104,7 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="company"
-          className="mb-2.5 block text-[13px] font-medium text-ink/80"
+          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Company
         </label>
@@ -142,14 +121,14 @@ export default function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-2.5 block text-[13px] font-medium text-ink/80"
+          className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted"
         >
           Message <span className="text-accent">*</span>
         </label>
         <textarea
           id="message"
           required
-          rows={6}
+          rows={5}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
           className={`${inputClass} resize-y`}
@@ -164,35 +143,9 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink py-4.5 text-[13px] font-medium text-paper transition-all duration-300 hover:bg-ink/90 disabled:opacity-50"
+        className="inline-flex h-11 items-center justify-center gap-2 bg-ink px-8 text-[13px] font-medium text-paper transition-colors duration-300 hover:bg-ink-light disabled:opacity-40"
       >
-        {status === "loading" ? (
-          <>
-            <svg
-              className="h-4 w-4 animate-spin"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="3"
-                className="opacity-25"
-              />
-              <path
-                d="M4 12a8 8 0 018-8"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
-            Sending...
-          </>
-        ) : (
-          "Send Message"
-        )}
+        {status === "loading" ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

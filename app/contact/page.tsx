@@ -1,5 +1,7 @@
 import ContactForm from "./contact-form";
 import Reveal from "../../components/motion/Reveal";
+import Container from "../../components/layout/Container";
+import Section from "../../components/layout/Section";
 
 export const metadata = {
   title: "Contact",
@@ -8,63 +10,61 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen lg:grid lg:grid-cols-2">
-      {/* ── Dark left panel ── */}
-      <div className="dark-section relative flex flex-col justify-center overflow-hidden px-8 py-24 sm:px-14 lg:min-h-screen lg:px-20">
-        {/* Decorative watermark */}
-        <div className="absolute bottom-0 left-0 select-none">
-          <span className="font-display text-[15vw] leading-none text-paper/[0.04]">
-            T3
-          </span>
-        </div>
+    <>
+      <Section spacing="lg">
+        <Container>
+          <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+            {/* Left — info */}
+            <div>
+              <Reveal>
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">
+                  Contact
+                </p>
+                <h1 className="font-display text-[clamp(2rem,4vw,3.5rem)] leading-[1.08] tracking-[-0.025em]">
+                  Let&apos;s talk.
+                </h1>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-5 max-w-sm text-[15px] leading-[1.75] text-muted sm:text-base">
+                  Tell us about your challenge. We&apos;ll respond with honesty
+                  — whether we&apos;re the right fit or not.
+                </p>
+              </Reveal>
 
-        <div className="relative">
-          <Reveal>
-            <h1 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] leading-[1] tracking-[-0.02em] text-paper">
-              Let&apos;s talk.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="mt-8 max-w-sm text-[15px] leading-[1.75] text-paper/50">
-              Tell us about your challenge. We&apos;ll respond with honesty
-              — whether we&apos;re the right fit or not.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.25}>
-            <div className="mt-20 space-y-12">
-              <div>
-                <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/30">
-                  Email
-                </p>
-                <a
-                  href="mailto:hello@t-3.in"
-                  className="mt-2 block text-[clamp(1rem,2vw,1.5rem)] font-light text-paper/70 transition-colors duration-300 hover:text-gold"
-                >
-                  hello@t-3.in
-                </a>
-              </div>
-              <div>
-                <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-paper/30">
-                  Offices
-                </p>
-                <p className="mt-2 text-[15px] font-semibold text-paper/70">
-                  Delhi NCR &middot; Jaipur &middot; Bhopal
-                </p>
-              </div>
+              <Reveal delay={0.2}>
+                <div className="mt-12 space-y-8">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
+                      Email
+                    </p>
+                    <a
+                      href="mailto:hello@t-3.in"
+                      className="mt-1.5 block text-[16px] font-medium transition-colors duration-300 hover:text-gold sm:text-[18px]"
+                    >
+                      hello@t-3.in
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
+                      Offices
+                    </p>
+                    <p className="mt-1.5 text-[14px] text-muted sm:text-[15px]">
+                      Delhi NCR · Jaipur · Bhopal
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
-        </div>
-      </div>
 
-      {/* ── Light right panel — form ── */}
-      <div className="flex items-center justify-center bg-paper px-8 py-24 sm:px-14 lg:px-20">
-        <div className="w-full max-w-md">
-          <Reveal delay={0.2}>
-            <ContactForm />
-          </Reveal>
-        </div>
-      </div>
-    </main>
+            {/* Right — form */}
+            <div>
+              <Reveal delay={0.15}>
+                <ContactForm />
+              </Reveal>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
   );
 }

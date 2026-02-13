@@ -2,25 +2,28 @@
 
 @theme inline {
   /* ── Palette ── */
-  --color-ink:        #0a0a09;
-  --color-paper:      #f5f4f0;
-  --color-paper-warm: #eae8e1;
-  --color-gold:       #b49a3a;
-  --color-gold-light: #c9af50;
+  --color-ink:        #111110;
+  --color-ink-light:  #1a1a19;
+  --color-paper:      #fafaf8;
+  --color-paper-warm: #f2f1ed;
+  --color-paper-dim:  #e8e7e3;
+  --color-gold:       #a8903a;
+  --color-gold-light: #c4af5e;
   --color-gold-dark:  #8a761e;
-  --color-gold-muted: rgba(180, 154, 58, 0.06);
-  --color-accent:     #e85d3a;
-  --color-muted:      #7a7a76;
-  --color-border:     #dbd9d2;
+  --color-gold-muted: rgba(168, 144, 58, 0.06);
+  --color-accent:     #c4462a;
+  --color-muted:      #6e6e6a;
+  --color-muted-light:#9a9a96;
+  --color-border:     #e2e1dc;
   --color-border-dark:#2a2a28;
 
-  /* Legacy aliases so existing code doesn't break */
+  /* Legacy aliases */
   --color-surface:      var(--color-paper);
   --color-surface-dark: var(--color-ink);
 
   /* ── Typography ── */
   --font-sans:    "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "DM Serif Display", Georgia, serif;
+  --font-display: "DM Serif Display", Georgia, "Times New Roman", serif;
 
   /* ── Easings ── */
   --ease-out-expo:     cubic-bezier(0.16, 1, 0.3, 1);
@@ -42,25 +45,27 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.65;
+  font-weight: 400;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
-/* ── Noise texture overlay ── */
+/* ── Subtle grain — very light, non-intrusive ── */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.022;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px;
 }
@@ -78,31 +83,42 @@ body::after {
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-light);
+}
 
-/* ── Typography ── */
+/* ── Typography rhythm ── */
 h1, h2 {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
   text-wrap: balance;
 }
 
-h3, h4, h5 {
+h3, h4, h5, h6 {
   font-family: var(--font-sans);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
   text-wrap: balance;
 }
 
-p { max-width: 60ch; }
+p {
+  max-width: 64ch;
+}
 
 /* ── Links ── */
-a { text-decoration: none; color: inherit; }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 /* ── Images ── */
 img {
@@ -110,7 +126,7 @@ img {
   max-width: 100%;
 }
 
-/* ── Dark Section ── */
+/* ── Dark section utility ── */
 .dark-section {
   background: var(--color-ink);
   color: var(--color-paper);
@@ -121,10 +137,10 @@ img {
   color: var(--color-ink);
 }
 
-/* ── Clip Reveal ── */
+/* ── Clip-path reveal ── */
 .clip-reveal {
   clip-path: inset(100% 0 0 0);
-  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: clip-path 0.8s var(--ease-out-expo);
 }
 
 .clip-reveal.revealed,

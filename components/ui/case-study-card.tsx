@@ -1,28 +1,52 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import type { CaseStudyDoc } from "../../lib/utils";
 
-export default function CaseStudyCard({ cs }: { cs: CaseStudyDoc }) {
+type Props = {
+  cs: CaseStudyDoc;
+  size?: "default" | "large" | "compact";
+};
+
+const ASPECT: Record<string, string> = {
+  default: "aspect-[3/2]",
+  large: "aspect-[4/5]",
+  compact: "aspect-[1/1]",
+};
+
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+export default function CaseStudyCard({ cs, size = "default" }: Props) {
+  const reduced = useReducedMotion();
+
   return (
     <Link href={`/work/${cs.slug}`} className="group block">
-      {/* Image */}
-      {cs.heroImage ? (
-        <div className="aspect-[3/2] overflow-hidden rounded-md bg-neutral-100">
-          <img
-            src={cs.heroImage}
-            alt={cs.title}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        </div>
-      ) : (
-        <div className="flex aspect-[3/2] items-center justify-center rounded-md bg-neutral-100">
-          <span className="text-6xl font-extrabold text-neutral-200/70">
-            {cs.title.charAt(0)}
-          </span>
-        </div>
-      )}
+      {/* Image with clip-path reveal */}
+      <div className={`overflow-hidden rounded-lg bg-paper-warm ${ASPECT[size]}`}>
+        {cs.heroImage ? (
+          <motion.div
+            className="h-full w-full"
+            initial={reduced ? {} : { clipPath: "inset(100% 0 0 0)" }}
+            whileInView={{ clipPath: "inset(0 0 0 0)" }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, ease }}
+          >
+            <img
+              src={cs.heroImage}
+              alt={cs.title}
+              className="h-full w-full object-cover transition-all duration-700 ease-out grayscale group-hover:scale-[1.04] group-hover:grayscale-0"
+              loading="lazy"
+            />
+          </motion.div>
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="font-display text-[4rem] text-border/40">
+              {cs.title.charAt(0)}
+            </span>
+          </div>
+        )}
+      </div>
 
       {/* Meta */}
       <div className="mt-5">
@@ -35,7 +59,15 @@ export default function CaseStudyCard({ cs }: { cs: CaseStudyDoc }) {
             </>
           )}
         </div>
-        <h3 className="mt-2.5 text-[19px] font-bold leading-[1.25] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
+        <h3
+          className={`mt-2.5 font-display tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold ${
+            size === "compact"
+              ? "text-[16px]"
+              : size === "large"
+                ? "text-[clamp(1.1rem,2vw,1.5rem)]"
+                : "text-[19px]"
+          }`}
+        >
           {cs.title}
         </h3>
       </div>

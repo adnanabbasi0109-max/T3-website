@@ -1,9 +1,13 @@
 import { useParams, Link, Navigate } from 'react-router';
 import { ArrowLeft, Play, ArrowUpRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { Button } from '../components/Button';
 import { Tag } from '../components/Tag';
 import { getWorkstoryBySlug, workstories } from '../data/workstories';
+
+function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?#]+)/);
+  return match ? match[1] : null;
+}
 
 export function WorkDetail() {
   const { slug } = useParams();
@@ -75,11 +79,16 @@ export function WorkDetail() {
                 <Tag key={domain} variant="gold">{domain}</Tag>
               ))}
             </div>
-            {workstory.videoUrl && (
-              <Button variant="secondary" className="inline-flex items-center">
+            {workstory.videoUrl && getYouTubeId(workstory.videoUrl) && (
+              <a
+                href={workstory.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 rounded-md border border-t3-soft-divider text-t3-near-black hover:bg-t3-soft-wash transition-colors"
+              >
                 <Play size={18} className="mr-2" />
                 Watch Video
-              </Button>
+              </a>
             )}
           </div>
 
@@ -106,6 +115,17 @@ export function WorkDetail() {
             </div>
           </div>
         </div>
+
+        {/* Hero Image */}
+        {workstory.image && (
+          <div className="mt-12 rounded-lg overflow-hidden border border-t3-soft-divider">
+            <img
+              src={workstory.image}
+              alt={workstory.title}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        )}
       </section>
 
       {/* Navigation */}
@@ -138,6 +158,21 @@ export function WorkDetail() {
       {/* Content */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
         <div className="max-w-3xl">
+          {/* Video */}
+          {workstory.videoUrl && getYouTubeId(workstory.videoUrl) && (
+            <section className="mb-16 scroll-mt-32">
+              <div className="aspect-video rounded-lg overflow-hidden border border-t3-soft-divider">
+                <iframe
+                  src={`https://www.youtube.com/embed/${getYouTubeId(workstory.videoUrl)}`}
+                  title={workstory.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+            </section>
+          )}
+
           {/* Overview */}
           <section id="overview" className="mb-24 scroll-mt-32">
             <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
@@ -253,9 +288,6 @@ export function WorkDetail() {
                   to={`/work/${work.slug}`}
                   className="group block"
                 >
-                  <div className="bg-t3-soft-divider aspect-[4/3] rounded-lg mb-4 overflow-hidden border border-t3-soft-divider">
-                    <div className="w-full h-full bg-gradient-to-br from-t3-soft-divider to-t3-soft-wash flex items-center justify-center group-hover:scale-105 transition-transform duration-500" />
-                  </div>
                   <h3 className="text-xl font-heading tracking-tight mb-2 group-hover:text-t3-muted-gray transition-colors">
                     {work.title}
                   </h3>

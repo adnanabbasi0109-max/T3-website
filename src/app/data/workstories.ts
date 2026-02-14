@@ -45,6 +45,7 @@ export const workstories: Workstory[] = [
       'Featured in major national and international media',
       'Won multiple advertising and marketing awards'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=l8kYQuAMu7Y&t=77s',
     image: ''
   },
   {
@@ -72,7 +73,7 @@ export const workstories: Workstory[] = [
       'Generated significant pre-launch interest and bookings',
       'Created scalable brand system for future expansion'
     ],
-    videoUrl: 'https://example.com/giovanni',
+    videoUrl: 'https://www.youtube.com/watch?v=--GW1zk6iAw',
     image: ''
   },
   {
@@ -99,6 +100,7 @@ export const workstories: Workstory[] = [
       'Media coverage in hospitality publications',
       'Differentiated positioning in crowded market'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=6b6SHYO_LBA',
     image: ''
   },
   {
@@ -126,6 +128,7 @@ export const workstories: Workstory[] = [
       'Higher quality lead generation',
       'Set new standard for property exhibitions in region'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=Cmly89Vri8o&t=13s',
     image: ''
   },
   {
@@ -152,7 +155,7 @@ export const workstories: Workstory[] = [
       'Strengthened Twitter\'s business team capabilities',
       'Created winning pitch presentations for major accounts'
     ],
-    image: ''
+    image: '/images/workstories/twitter-apac.jpg'
   },
   {
     slug: 'pepsico-katrina',
@@ -179,6 +182,7 @@ export const workstories: Workstory[] = [
       'Significant social media amplification',
       'Set new benchmark for corporate event innovation'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=FF-NPdWpZZk',
     image: ''
   },
   {
@@ -207,6 +211,7 @@ export const workstories: Workstory[] = [
       'Strong community participation and ownership',
       'Solidified Bhopal\'s position as rising investment hub'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=hoT9buA_Aw8',
     image: ''
   },
   {
@@ -233,6 +238,7 @@ export const workstories: Workstory[] = [
       'Deep connection with current and potential buyers',
       'Premium positioning in residential market'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=28wypoiDb1E&t=4s',
     image: ''
   },
   {
@@ -312,6 +318,7 @@ export const workstories: Workstory[] = [
       'One of Jaipur\'s most sought-after residential addresses',
       'Documentary content generated significant engagement'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=xhjGFCgBfXo&t=491s',
     image: ''
   },
   {
@@ -338,6 +345,7 @@ export const workstories: Workstory[] = [
       'Positioned as ideal long-term investment opportunity',
       'Effective documentary driving engagement'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=bcnUXv_kQjc&t=6s',
     image: ''
   },
   {
@@ -364,6 +372,7 @@ export const workstories: Workstory[] = [
       'Multiple screenings boosted recall value',
       'Pioneered new approach in political communication'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=8fAL64_Eo0U&t=1s',
     image: ''
   },
   {
@@ -390,6 +399,7 @@ export const workstories: Workstory[] = [
       'Multiple screenings ensured top-of-mind recall',
       'Effective new political communication format'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=IEDMYQV_jQU',
     image: ''
   },
   {
@@ -417,7 +427,7 @@ export const workstories: Workstory[] = [
       'Recognized as one of the most popular brands in segment',
       'Complete end-to-end brand creation success'
     ],
-    image: ''
+    image: '/images/workstories/united-by-food-(UBF).jpg'
   },
   {
     slug: 'polywood-rebrand',
@@ -445,6 +455,7 @@ export const workstories: Workstory[] = [
       'Stronger pricing power and brand equity',
       'Differentiated positioning in competitive market'
     ],
+    videoUrl: 'https://www.youtube.com/watch?v=8DG4dpokMoE&t=7s',
     image: ''
   }
 ];

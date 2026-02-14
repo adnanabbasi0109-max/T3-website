@@ -1,28 +1,29 @@
 import Link from "next/link";
 import { dbConnect } from "../lib/db";
 import { CaseStudy } from "../models/CaseStudy";
-import { serialize, SERVICES } from "../lib/utils";
+import { serialize, SERVICES, STATS } from "../lib/utils";
 import type { CaseStudyDoc } from "../lib/utils";
 import ScrollTypeHero from "../components/motion/ScrollTypeHero";
-import HowWeWork from "../components/sections/HowWeWork";
+import WorkstoryPreview from "../components/work/WorkstoryPreview";
 import Reveal from "../components/motion/Reveal";
-import Marquee from "../components/motion/Marquee";
+import CountUp from "../components/motion/CountUp";
 import Container from "../components/layout/Container";
 import Section from "../components/layout/Section";
-import FeaturedWorkCard from "../components/work/FeaturedWorkCard";
 
 async function getFeaturedStudies(): Promise<CaseStudyDoc[]> {
   try {
     await dbConnect();
     const docs = await CaseStudy.find({ featured: true })
       .sort({ order: 1, year: -1 })
-      .limit(4)
+      .limit(6)
       .lean();
     return serialize(docs);
   } catch {
     return [];
   }
 }
+
+const DOMAINS = SERVICES.map((s) => s.title);
 
 export default async function Home() {
   const featured = await getFeaturedStudies();
@@ -32,40 +33,81 @@ export default async function Home() {
       {/* ── Hero ── */}
       <ScrollTypeHero />
 
-      {/* ── Value Proposition ── */}
+      {/* ── Proof Stats Strip ── */}
+      <Section spacing="none" className="py-16 sm:py-20">
+        <Container>
+          <div className="divider-fade mb-14 sm:mb-16" />
+          <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-4 sm:gap-8">
+            {STATS.map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 0.08}>
+                <div>
+                  <p className="font-display text-[clamp(2rem,4vw,3rem)] tracking-[-0.03em]">
+                    <CountUp value={stat.value} />
+                  </p>
+                  <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-light">
+                    {stat.label}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <div className="divider-fade mt-14 sm:mt-16" />
+        </Container>
+      </Section>
+
+      {/* ── Domains — minimal list ── */}
       <Section spacing="lg">
         <Container>
-          <div className="grid gap-16 lg:grid-cols-2 lg:gap-28">
+          <div className="grid gap-16 lg:grid-cols-[1fr_1.4fr] lg:gap-28">
             <Reveal>
               <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Who We Are
+                What We Do
               </p>
-              <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.03em]">
-                Technology that elevates people, not replaces them.
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] tracking-[-0.03em]">
+                Six domains.
+                <br />
+                One intent.
               </h2>
+              <p className="mt-6 text-[15px] leading-[1.85] text-muted sm:text-[16px]">
+                Brand. Innovation. PR. Tech — built with humane intent.
+                Every domain connects to a single goal: elevating people
+                through thoughtful strategy and craft.
+              </p>
+              <Link
+                href="/domains"
+                className="link-underline mt-8 inline-block text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink"
+              >
+                Explore domains &rarr;
+              </Link>
             </Reveal>
-            <Reveal delay={0.15}>
-              <div className="space-y-6 lg:pt-10">
-                <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
-                  T3 Technologies blends creative innovation with strategic
-                  precision. For more than two decades, we&apos;ve helped brands,
-                  organizations, and leaders navigate inflection points — turning
-                  complexity into clarity.
-                </p>
-                <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
-                  Our work is proof-led. Every engagement becomes a workstory —
-                  documented outcomes that speak louder than promises.
-                </p>
+            <Reveal delay={0.1}>
+              <div className="space-y-0">
+                {DOMAINS.map((domain, i) => (
+                  <Link
+                    key={domain}
+                    href={`/domains#${domain.toLowerCase().replace(/\s+/g, "-").replace(/&/g, "and")}`}
+                    className="group flex items-baseline justify-between gap-4 border-b border-border py-5 transition-colors duration-500 hover:text-accent sm:py-6"
+                  >
+                    <div className="flex items-baseline gap-5">
+                      <span className="text-[11px] font-medium tabular-nums text-muted-light">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-[16px] font-semibold tracking-[-0.015em] sm:text-[17px]">
+                        {domain}
+                      </span>
+                    </div>
+                    <span className="text-[12px] text-muted-light transition-transform duration-500 group-hover:translate-x-1">
+                      &rarr;
+                    </span>
+                  </Link>
+                ))}
               </div>
             </Reveal>
           </div>
         </Container>
       </Section>
 
-      {/* ── How We Work ── */}
-      <HowWeWork />
-
-      {/* ── Featured Work ── */}
+      {/* ── Featured Workstories — hover preview ── */}
       {featured.length > 0 && (
         <Section spacing="lg">
           <Container>
@@ -88,15 +130,11 @@ export default async function Home() {
               </div>
             </Reveal>
 
-            <div className="mt-20 grid gap-14 sm:mt-24 sm:grid-cols-2 sm:gap-x-12 sm:gap-y-20">
-              {featured.map((cs, i) => (
-                <Reveal key={cs.slug} delay={i * 0.06}>
-                  <FeaturedWorkCard cs={cs} />
-                </Reveal>
-              ))}
+            <div className="mt-16 sm:mt-20">
+              <WorkstoryPreview items={featured} />
             </div>
 
-            <Reveal className="mt-16 text-center sm:hidden">
+            <Reveal className="mt-12 text-center sm:hidden">
               <Link
                 href="/work"
                 className="link-underline text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink"
@@ -108,60 +146,41 @@ export default async function Home() {
         </Section>
       )}
 
-      {/* ── Capabilities ── */}
-      <Section spacing="lg">
+      {/* ── Philosophy teaser ── */}
+      <Section spacing="lg" alt className="mx-4 rounded-[1.5rem] sm:mx-6 sm:rounded-[2rem] lg:mx-10">
         <Container>
-          <Reveal>
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-              What We Do
-            </p>
-            <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.03em]">
-              Capabilities
-            </h2>
-          </Reveal>
-
-          <div className="mt-16">
-            {SERVICES.map((svc, i) => (
-              <Reveal key={svc.title} delay={i * 0.03}>
-                <div className={`flex items-baseline gap-6 py-6 sm:gap-8 sm:py-7 ${
-                  i < SERVICES.length - 1 ? "border-b border-border" : ""
-                }`}>
-                  <span className="w-6 shrink-0 text-[12px] font-medium tabular-nums text-muted-light">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex flex-1 flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-6">
-                    <h3 className="text-[16px] font-semibold tracking-[-0.015em] sm:w-60 sm:shrink-0 sm:text-[17px]">
-                      {svc.title}
-                    </h3>
-                    <p className="text-[14px] leading-[1.75] text-muted">
-                      {svc.tagline}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+          <div className="grid gap-16 lg:grid-cols-2 lg:gap-28">
+            <Reveal>
+              <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                Philosophy
+              </p>
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] tracking-[-0.03em]">
+                Humane Technology
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="space-y-6 lg:pt-6">
+                <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
+                  Technology should elevate people, not replace them. We create
+                  solutions at the intersection of data, creativity, and human
+                  behavior — ensuring progress is both thoughtful and purposeful.
+                </p>
+                <Link
+                  href="/about"
+                  className="link-underline inline-block text-[13px] font-medium text-ink transition-colors duration-500 hover:text-accent"
+                >
+                  Read the doctrine &rarr;
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </Container>
-      </Section>
-
-      {/* ── Marquee ── */}
-      <Section spacing="none" className="py-10 sm:py-12">
-        <div className="divider-fade mb-10 sm:mb-12" />
-        <Marquee
-          text="Brand Identity / Digital Experiences / PR Strategy / UX Design / Business Innovation / AI Solutions / Art Direction / Social Media"
-          speed={55}
-          className="text-[clamp(1rem,2vw,1.25rem)] font-medium tracking-[-0.01em] text-ink/10"
-        />
-        <div className="divider-fade mt-10 sm:mt-12" />
       </Section>
 
       {/* ── CTA ── */}
       <Section spacing="xl" dark>
         <Container className="text-center">
           <Reveal>
-            <p className="mb-7 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-              Let&apos;s Create Together
-            </p>
             <h2 className="mx-auto max-w-2xl font-display text-[clamp(2rem,5vw,3.75rem)] tracking-[-0.035em] text-paper">
               Ready to build something worth documenting?
             </h2>

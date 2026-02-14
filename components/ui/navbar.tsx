@@ -8,6 +8,7 @@ import { useShortlist } from "./shortlist-provider";
 
 const links = [
   { href: "/work", label: "Work" },
+  { href: "/domains", label: "Domains" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

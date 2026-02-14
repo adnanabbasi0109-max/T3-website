@@ -12,6 +12,9 @@ import Section from "../../../components/layout/Section";
 
 type Chapter = { id: string; label: string };
 
+const CHAPTER_IDS = ["overview", "challenge", "intervention", "execution", "outcome"];
+const CHAPTER_LABELS = ["Overview", "Challenge", "Intervention", "Execution", "Outcome"];
+
 export default function CaseStudyStory({
   item,
   related,
@@ -25,16 +28,13 @@ export default function CaseStudyStory({
 
   const chapters = useMemo(() => {
     const chs: Chapter[] = [];
-    if (sections.length > 0) {
-      chs.push({ id: "chapter-brief", label: "Brief" });
-      if (sections.length > 1) chs.push({ id: "chapter-insight", label: "Insight" });
-      if (sections.length > 2) chs.push({ id: "chapter-build", label: "Build" });
-      if (sections.length > 3) chs.push({ id: "chapter-result", label: "Result" });
-      // Map any extra sections
-      sections.slice(4).forEach((s, i) => {
-        chs.push({ id: `chapter-extra-${i}`, label: s.heading });
-      });
-    }
+    sections.forEach((s, i) => {
+      if (i < 5) {
+        chs.push({ id: `chapter-${CHAPTER_IDS[i]}`, label: CHAPTER_LABELS[i] });
+      } else {
+        chs.push({ id: `chapter-extra-${i - 5}`, label: s.heading });
+      }
+    });
     if (item.outcomes && item.outcomes.length > 0) {
       chs.push({ id: "chapter-outcomes", label: "Outcomes" });
     }
@@ -43,8 +43,6 @@ export default function CaseStudyStory({
     }
     return chs;
   }, [sections, item.outcomes, item.gallery]);
-
-  const CHAPTER_LABELS = ["Brief", "Insight", "Build", "Result"];
 
   return (
     <>
@@ -154,18 +152,16 @@ export default function CaseStudyStory({
         <Section spacing="lg">
           <Container>
             <div className="grid gap-16 lg:grid-cols-[180px_1fr] lg:gap-20">
-              {/* Sticky chapter nav — desktop only */}
               {chapters.length > 0 && <ChapterNav chapters={chapters} />}
 
-              {/* Content */}
               <div className={`${chapters.length === 0 ? "lg:col-span-2" : ""} max-w-[680px]`}>
                 <div className="space-y-28 sm:space-y-36">
                   {sections.map((s, i) => {
                     const chapterId =
-                      i < 4
-                        ? `chapter-${["brief", "insight", "build", "result"][i]}`
-                        : `chapter-extra-${i - 4}`;
-                    const chapterLabel = i < 4 ? CHAPTER_LABELS[i] : undefined;
+                      i < 5
+                        ? `chapter-${CHAPTER_IDS[i]}`
+                        : `chapter-extra-${i - 5}`;
+                    const chapterLabel = i < 5 ? CHAPTER_LABELS[i] : undefined;
 
                     return (
                       <article key={i} id={chapterId}>

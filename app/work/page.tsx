@@ -10,7 +10,7 @@ import Reveal from "../../components/motion/Reveal";
 export const metadata = {
   title: "Workstories",
   description:
-    "Explore T3's award-winning portfolio of creative workstories. Filter by domain and industry.",
+    "Explore T3's portfolio of creative workstories. Filter by domain and industry.",
 };
 
 async function getAllCaseStudies(): Promise<CaseStudyDoc[]> {
@@ -26,11 +26,10 @@ export default async function WorkPage() {
 
   return (
     <>
-      {/* ── Header ── */}
       <Section spacing="lg">
         <Container>
           <Reveal>
-            <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+            <p className="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
               Portfolio
             </p>
             <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
@@ -38,9 +37,9 @@ export default async function WorkPage() {
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-5 max-w-lg text-[15px] leading-[1.85] text-muted sm:text-[16px]">
-              Explore T3&apos;s portfolio of award-winning digital experiences and
-              creative workstories.
+            <p className="mt-7 max-w-lg text-[15px] leading-[1.85] text-muted sm:text-[16px]">
+              Every project is a workstory — documented proof of creative
+              strategy meeting real-world outcomes.
             </p>
           </Reveal>
         </Container>
@@ -48,7 +47,7 @@ export default async function WorkPage() {
 
       <WorkClient initialItems={items} />
 
-      <div className="pb-20 sm:pb-32" />
+      <div className="pb-28 sm:pb-40" />
     </>
   );
 }

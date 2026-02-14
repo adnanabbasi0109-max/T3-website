@@ -6,31 +6,29 @@ import type { CaseStudyDoc } from "../../lib/utils";
 export default function FeaturedWorkCard({ cs }: { cs: CaseStudyDoc }) {
   return (
     <Link href={`/work/${cs.slug}`} className="group block">
-      {/* Image */}
-      <div className="overflow-hidden rounded-sm bg-paper-warm">
+      <div className="overflow-hidden rounded-[0.5rem] bg-paper-dim">
         {cs.heroImage ? (
           <img
             src={cs.heroImage}
             alt={cs.title}
-            className="aspect-[2.2/1] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="aspect-[16/10] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-[1.03]"
             loading="lazy"
           />
         ) : (
-          <div className="flex aspect-[2.2/1] items-center justify-center">
-            <span className="font-display text-[6rem] text-border/20">
+          <div className="flex aspect-[16/10] items-center justify-center">
+            <span className="font-display text-[5rem] text-ink/[0.03]">
               {cs.title.charAt(0)}
             </span>
           </div>
         )}
       </div>
 
-      {/* Meta */}
-      <div className="mt-5">
-        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted">
+      <div className="mt-7">
+        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-muted-light">
           {cs.client || "Client"}
-          {cs.year && ` · ${cs.year}`}
+          {cs.year && <span className="ml-2 text-muted-light/50">{cs.year}</span>}
         </p>
-        <h3 className="mt-2 font-display text-[clamp(1.25rem,2.5vw,2rem)] tracking-[-0.02em] transition-colors duration-300 group-hover:text-gold">
+        <h3 className="mt-2.5 font-display text-[clamp(1.25rem,2.5vw,1.75rem)] tracking-[-0.025em] transition-colors duration-500 group-hover:text-accent">
           {cs.title}
         </h3>
         {cs.domains && cs.domains.length > 0 && (

@@ -8,7 +8,6 @@ import { useShortlist } from "./shortlist-provider";
 
 const links = [
   { href: "/work", label: "Work" },
-  { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -38,27 +37,24 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── HUD-style nav bar ── */}
       <nav
         aria-label="Main navigation"
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.165,0.84,0.44,1)] ${
           scrolled
-            ? "bg-paper/85 shadow-nav backdrop-blur-2xl backdrop-saturate-[1.4]"
+            ? "bg-paper/85 shadow-nav backdrop-blur-2xl"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto flex h-[72px] max-w-[1120px] items-center justify-between px-6 sm:px-10 lg:px-16">
-          {/* Logo */}
+        <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6 sm:px-10 lg:px-16">
           <Link
             href="/"
-            className="relative z-50 text-[22px] font-bold tracking-[-0.05em] transition-opacity duration-500 hover:opacity-70"
+            className="relative z-50 text-[22px] font-bold tracking-[-0.05em] transition-opacity duration-500 hover:opacity-60"
             aria-label="T3 Technologies Home"
           >
             T<span className="text-gradient">3</span>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden items-center gap-9 md:flex">
+          <div className="hidden items-center gap-11 md:flex">
             {links.map((l) => {
               const active =
                 pathname === l.href || pathname.startsWith(l.href + "/");
@@ -66,10 +62,8 @@ export default function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className={`link-underline relative text-[13px] font-medium tracking-[0.01em] transition-all duration-500 ${
-                    active
-                      ? "text-ink"
-                      : "text-muted hover:text-ink"
+                  className={`link-underline relative text-[13px] font-medium tracking-[0.01em] transition-colors duration-500 ${
+                    active ? "text-ink" : "text-muted hover:text-ink"
                   }`}
                 >
                   {l.label}
@@ -84,44 +78,42 @@ export default function Navbar() {
               );
             })}
 
-            {/* Shortlist — icon only */}
-            <Link
-              href="/shortlist"
-              aria-label={`Shortlist${count > 0 ? ` (${count} items)` : ""}`}
-              className="glow-ring relative ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-border transition-all duration-500 hover:border-border-strong"
-            >
-              <svg className="h-[14px] w-[14px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-              </svg>
-              {count > 0 && (
+            {count > 0 && (
+              <Link
+                href="/shortlist"
+                aria-label={`Shortlist (${count} items)`}
+                className="relative ml-1 flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all duration-500 hover:border-border-strong"
+              >
+                <svg className="h-[13px] w-[13px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                </svg>
                 <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 500, damping: 20 }}
-                  className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-1 text-[9px] font-bold text-white"
+                  className="absolute -right-1.5 -top-1.5 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-accent px-1 text-[8px] font-bold text-white"
                 >
                   {count}
                 </motion.span>
-              )}
-            </Link>
+              </Link>
+            )}
           </div>
 
-          {/* Mobile: shortlist + hamburger */}
           <div className="flex items-center gap-3 md:hidden">
-            <Link
-              href="/shortlist"
-              aria-label={`Shortlist${count > 0 ? ` (${count} items)` : ""}`}
-              className="relative z-50 flex h-9 w-9 items-center justify-center"
-            >
-              <svg className="h-[14px] w-[14px]" fill="none" viewBox="0 0 24 24" stroke={mobileOpen ? "var(--color-paper)" : "currentColor"} strokeWidth={1.8}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
-              </svg>
-              {count > 0 && (
-                <span className="absolute -right-0.5 top-0 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-accent px-1 text-[8px] font-bold text-white">
+            {count > 0 && (
+              <Link
+                href="/shortlist"
+                aria-label={`Shortlist (${count} items)`}
+                className="relative z-50 flex h-9 w-9 items-center justify-center"
+              >
+                <svg className="h-[14px] w-[14px]" fill="none" viewBox="0 0 24 24" stroke={mobileOpen ? "var(--color-paper)" : "currentColor"} strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                </svg>
+                <span className="absolute -right-0.5 top-0 flex h-[15px] min-w-[15px] items-center justify-center rounded-full bg-accent px-1 text-[8px] font-bold text-white">
                   {count}
                 </span>
-              )}
-            </Link>
+              </Link>
+            )}
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -132,9 +124,7 @@ export default function Navbar() {
               <div className="flex flex-col gap-[6px]">
                 <span
                   className={`block h-[1.5px] w-5 origin-center transition-all duration-500 ${
-                    mobileOpen
-                      ? "translate-y-[7.5px] rotate-45 bg-paper"
-                      : "bg-ink"
+                    mobileOpen ? "translate-y-[7.5px] rotate-45 bg-paper" : "bg-ink"
                   }`}
                 />
                 <span
@@ -144,9 +134,7 @@ export default function Navbar() {
                 />
                 <span
                   className={`block h-[1.5px] w-5 origin-center transition-all duration-500 ${
-                    mobileOpen
-                      ? "-translate-y-[7.5px] -rotate-45 bg-paper"
-                      : "bg-ink"
+                    mobileOpen ? "-translate-y-[7.5px] -rotate-45 bg-paper" : "bg-ink"
                   }`}
                 />
               </div>
@@ -155,7 +143,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* ── Full-screen mobile menu ── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -175,10 +162,10 @@ export default function Navbar() {
                 >
                   <Link
                     href={l.href}
-                    className={`block py-3 font-display text-[2.75rem] leading-[1.1] tracking-[-0.025em] transition-colors duration-500 sm:text-[3.5rem] ${
+                    className={`block py-3 font-display text-[2.75rem] leading-[1.1] tracking-[-0.03em] transition-colors duration-500 sm:text-[3.5rem] ${
                       pathname === l.href || pathname.startsWith(l.href + "/")
                         ? "text-accent"
-                        : "text-paper/60 hover:text-paper"
+                        : "text-paper/50 hover:text-paper"
                     }`}
                   >
                     {l.label}
@@ -190,14 +177,14 @@ export default function Navbar() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.5, ease }}
+              transition={{ delay: 0.4, duration: 0.5, ease }}
               className="mt-auto pt-16"
             >
               <div className="divider-fade mb-6 opacity-20" />
               <div className="flex items-center justify-between">
                 <a
                   href="mailto:hello@t-3.in"
-                  className="text-[13px] font-medium text-paper/40 transition-colors duration-500 hover:text-paper"
+                  className="text-[13px] font-medium text-paper/35 transition-colors duration-500 hover:text-paper"
                 >
                   hello@t-3.in
                 </a>

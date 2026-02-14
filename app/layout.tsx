@@ -46,7 +46,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="flex min-h-screen flex-col bg-paper text-ink antialiased">
+      <body className="flex min-h-screen flex-col bg-paper text-ink antialiased selection:bg-accent selection:text-white">
         <ShortlistProvider>
           <a
             href="#main-content"

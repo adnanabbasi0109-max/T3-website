@@ -5,7 +5,6 @@ type Props = {
   className?: string;
   spacing?: "sm" | "md" | "lg" | "xl" | "none";
   dark?: boolean;
-  /** Light alt background (paper-warm) */
   alt?: boolean;
   as?: "section" | "div" | "article" | "aside";
   id?: string;
@@ -13,10 +12,10 @@ type Props = {
 
 const SPACING: Record<string, string> = {
   none: "",
-  sm: "py-14 sm:py-20",
-  md: "py-20 sm:py-28 lg:py-36",
-  lg: "py-24 sm:py-36 lg:py-48",
-  xl: "py-32 sm:py-48 lg:py-60",
+  sm: "py-16 sm:py-24",
+  md: "py-24 sm:py-36 lg:py-44",
+  lg: "py-32 sm:py-48 lg:py-56",
+  xl: "py-40 sm:py-56 lg:py-72",
 };
 
 export default function Section({

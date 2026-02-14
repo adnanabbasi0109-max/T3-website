@@ -9,48 +9,38 @@ type Props = {
 };
 
 const ASPECT: Record<string, string> = {
-  default: "aspect-[14/9]",
-  large: "aspect-[14/9]",
-  compact: "aspect-[1/1]",
-};
-
-const RADIUS: Record<string, string> = {
-  default: "rounded-[1.375rem]",
-  large: "rounded-[1.375rem]",
-  compact: "rounded-[0.875rem]",
+  default: "aspect-[16/10]",
+  large: "aspect-[16/10]",
+  compact: "aspect-[4/3]",
 };
 
 export default function CaseStudyCard({ cs, size = "default" }: Props) {
   return (
     <Link href={`/work/${cs.slug}`} className="group block">
-      {/* Image — 14:9 cinematic + generous radius + scale + shadow hover */}
       <div
-        className={`overflow-hidden bg-paper-warm shadow-card transition-shadow duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:shadow-card-hover ${ASPECT[size]} ${RADIUS[size]}`}
+        className={`overflow-hidden rounded-[0.5rem] bg-paper-dim transition-shadow duration-700 ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:shadow-card-hover ${ASPECT[size]}`}
       >
         {cs.heroImage ? (
           <img
             src={cs.heroImage}
             alt={cs.title}
-            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-[1.06]"
+            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] group-hover:scale-[1.04]"
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-ink-light">
-            <span className="font-display text-[4rem] text-paper/15">
+          <div className="flex h-full w-full items-center justify-center bg-paper-dim">
+            <span className="font-display text-[4rem] text-ink/[0.03]">
               {cs.title.charAt(0)}
             </span>
           </div>
         )}
       </div>
 
-      {/* Meta */}
-      <div className="mt-5 flex items-start justify-between gap-4">
+      <div className="mt-6 flex items-start justify-between gap-4">
         <div>
           <h3
-            className={`font-sans font-semibold tracking-[-0.015em] transition-colors duration-500 group-hover:text-accent ${
-              size === "compact"
-                ? "text-[15px]"
-                : "text-[17px] sm:text-[19px]"
+            className={`font-sans font-semibold tracking-[-0.02em] transition-colors duration-500 group-hover:text-accent ${
+              size === "compact" ? "text-[15px]" : "text-[17px] sm:text-[19px]"
             }`}
           >
             {cs.title}

@@ -22,22 +22,21 @@ export default function ScrollTypeHero() {
   });
 
   const wordIndex = useTransform(scrollYProgress, [0, 0.85], [0, WORDS.length - 1]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.04]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.025]);
 
   const heroContent = (isAnimated: boolean) => (
-    <div className="mx-auto w-full max-w-[1120px] px-6 sm:px-10 lg:px-16">
-      {/* Eyebrow */}
+    <div className="mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-16">
       {isAnimated ? (
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0, ease }}
-          className="mb-8 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:mb-10"
+          className="mb-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:mb-12"
         >
           T3 Technologies — Est. 2004
         </motion.p>
       ) : (
-        <p className="mb-8 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:mb-10">
+        <p className="mb-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent sm:mb-12">
           T3 Technologies — Est. 2004
         </p>
       )}
@@ -47,7 +46,7 @@ export default function ScrollTypeHero() {
           initial={{ opacity: 0, y: 48, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.2, delay: 0.15, ease }}
-          className="font-display text-[clamp(3rem,8.5vw,8rem)] leading-[0.98] tracking-[-0.04em]"
+          className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.96] tracking-[-0.04em]"
         >
           A Different
           <br />
@@ -61,7 +60,7 @@ export default function ScrollTypeHero() {
           </span>
         </motion.h1>
       ) : (
-        <h1 className="font-display text-[clamp(3rem,8.5vw,8rem)] leading-[0.98] tracking-[-0.04em]">
+        <h1 className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.96] tracking-[-0.04em]">
           A Different
           <br />
           creative approach
@@ -75,13 +74,13 @@ export default function ScrollTypeHero() {
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.0, delay: 0.55, ease }}
-          className="mt-10 max-w-[480px] text-[15px] leading-[1.8] text-muted sm:text-[16px]"
+          className="mt-12 max-w-[460px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14"
         >
           Proof-led creative strategy for brands that refuse to blend in.
           Over two decades of defying conventional wisdom.
         </motion.p>
       ) : (
-        <p className="mt-10 max-w-[480px] text-[15px] leading-[1.8] text-muted sm:text-[16px]">
+        <p className="mt-12 max-w-[460px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14">
           Proof-led creative strategy for brands that refuse to blend in.
           Over two decades of defying conventional wisdom.
         </p>
@@ -92,32 +91,32 @@ export default function ScrollTypeHero() {
           initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, delay: 0.85, ease }}
-          className="mt-12 flex items-center gap-4"
+          className="mt-14 flex items-center gap-4 lg:mt-16"
         >
           <Link
             href="/work"
-            className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-9 text-[13px] font-medium text-paper transition-all duration-600 hover:bg-ink-light hover:shadow-card"
+            className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-500 hover:bg-ink-light"
           >
             <span className="btn-text">View Work &rarr;</span>
           </Link>
           <Link
             href="/contact"
-            className="glow-ring inline-flex h-[52px] items-center rounded-full border border-border px-9 text-[13px] font-medium text-muted transition-all duration-600 hover:border-border-strong hover:text-ink"
+            className="inline-flex h-[52px] items-center rounded-full border border-border px-10 text-[13px] font-medium text-muted transition-all duration-500 hover:border-border-strong hover:text-ink"
           >
             Get in touch
           </Link>
         </motion.div>
       ) : (
-        <div className="mt-12 flex items-center gap-4">
+        <div className="mt-14 flex items-center gap-4 lg:mt-16">
           <Link
             href="/work"
-            className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-9 text-[13px] font-medium text-paper transition-all duration-600 hover:bg-ink-light"
+            className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-500 hover:bg-ink-light"
           >
             <span className="btn-text">View Work &rarr;</span>
           </Link>
           <Link
             href="/contact"
-            className="inline-flex h-[52px] items-center rounded-full border border-border px-9 text-[13px] font-medium text-muted transition-all duration-600 hover:border-border-strong hover:text-ink"
+            className="inline-flex h-[52px] items-center rounded-full border border-border px-10 text-[13px] font-medium text-muted transition-all duration-500 hover:border-border-strong hover:text-ink"
           >
             Get in touch
           </Link>
@@ -128,7 +127,7 @@ export default function ScrollTypeHero() {
 
   if (reduced) {
     return (
-      <section className="flex min-h-[90vh] items-end pb-24 sm:pb-32">
+      <section className="flex min-h-[92vh] items-end pb-28 sm:pb-36">
         {heroContent(false)}
       </section>
     );
@@ -140,8 +139,7 @@ export default function ScrollTypeHero() {
       className="relative"
       style={{ height: `${WORDS.length * 250 + 800}px` }}
     >
-      <div className="sticky top-0 flex h-screen items-end overflow-hidden pb-20 sm:pb-28 lg:pb-32">
-        {/* Subtle background gradient that evolves on scroll */}
+      <div className="sticky top-0 flex h-screen items-end overflow-hidden pb-24 sm:pb-32 lg:pb-36">
         <motion.div
           className="pointer-events-none absolute inset-0"
           style={{

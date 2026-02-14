@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CaseStudyDoc } from "../../lib/utils";
-import CaseStudyCard from "../../components/ui/case-study-card";
+import WorkListItem from "../../components/work/WorkListItem";
 import Reveal from "../../components/motion/Reveal";
 import Container from "../../components/layout/Container";
 
@@ -82,23 +82,21 @@ export default function WorkClient({
 
   return (
     <Container>
-      {/* ── Filter bar ── */}
-      <div className="pb-6">
-        <div className="divider-fade mb-6" />
+      {/* Filter bar */}
+      <div className="pb-10">
+        <div className="divider-fade mb-10" />
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          {/* Search */}
-          <div className="relative max-w-[280px] flex-1">
+          <div className="relative max-w-[260px] flex-1">
             <input
               type="text"
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="glow-ring w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light focus:border-border-strong"
+              className="w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light/60 focus:border-accent/30"
               aria-label="Search workstories"
             />
           </div>
 
-          {/* Filters — pill-shaped */}
           <div className="flex flex-wrap items-center gap-2">
             <select
               value={domain}
@@ -161,30 +159,30 @@ export default function WorkClient({
         </div>
 
         {hasFilters && (
-          <p className="mt-4 text-[12px] tabular-nums text-muted">
+          <p className="mt-6 text-[12px] tabular-nums text-muted">
             {filtered.length} result{filtered.length !== 1 && "s"}
           </p>
         )}
       </div>
 
-      {/* ── Results — 2-col cinematic grid ── */}
-      <div className="mt-10 sm:mt-14">
+      {/* Editorial list */}
+      <div className="mt-2">
         {filtered.length > 0 ? (
-          <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
+          <div>
             {filtered.map((cs, i) => (
-              <Reveal key={cs.slug} delay={Math.min(i * 0.04, 0.3)}>
-                <CaseStudyCard cs={cs} />
+              <Reveal key={cs.slug} delay={Math.min(i * 0.03, 0.25)}>
+                <WorkListItem cs={cs} />
               </Reveal>
             ))}
           </div>
         ) : (
-          <div className="py-24 text-center">
+          <div className="py-32 text-center">
             <p className="text-[16px] text-muted">
               No workstories match your filters.
             </p>
             <button
               onClick={clearAll}
-              className="mt-4 rounded-full border border-border px-6 py-2.5 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
+              className="mt-6 rounded-full border border-border px-6 py-2.5 text-[13px] font-medium transition-all duration-500 hover:border-border-strong"
             >
               Clear all filters
             </button>

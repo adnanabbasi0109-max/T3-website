@@ -11,7 +11,7 @@ const MAX_W: Record<string, string> = {
   full: "",
   xl: "max-w-[1440px]",
   wide: "max-w-[1280px]",
-  default: "max-w-[1120px]",
+  default: "max-w-[1200px]",
   narrow: "max-w-[680px]",
 };
 

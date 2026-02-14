@@ -1,16 +1,14 @@
 type Props = {
   className?: string;
-  /** Use gold accent color */
   accent?: boolean;
-  /** Spacing above and below */
   spacing?: "none" | "sm" | "md" | "lg";
 };
 
 const SPACING: Record<string, string> = {
   none: "",
-  sm: "my-8 sm:my-12",
-  md: "my-12 sm:my-16",
-  lg: "my-16 sm:my-24",
+  sm: "my-10 sm:my-14",
+  md: "my-14 sm:my-20",
+  lg: "my-20 sm:my-28",
 };
 
 export default function Divider({
@@ -21,7 +19,7 @@ export default function Divider({
   return (
     <hr
       className={`border-0 border-t ${
-        accent ? "border-gold/20" : "border-border"
+        accent ? "border-accent/15" : "border-border"
       } ${SPACING[spacing]} ${className}`}
     />
   );

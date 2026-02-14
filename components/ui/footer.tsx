@@ -1,51 +1,46 @@
 import Link from "next/link";
 
 const footerLinks = {
-  sitemap: [
-    { href: "/", label: "Home" },
+  pages: [
     { href: "/work", label: "Work" },
-    { href: "/services", label: "Services" },
     { href: "/about", label: "About" },
+    { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
   ],
   connect: [
+    { href: "mailto:hello@t-3.in", label: "hello@t-3.in", external: true },
     { href: "/shortlist", label: "Shortlist" },
-    { href: "mailto:hello@t-3.in", label: "Email Us", external: true },
   ],
-  offices: ["Delhi NCR", "Jaipur", "Bhopal"],
 };
 
 export default function Footer() {
   return (
     <footer className="mt-auto">
       <div className="divider-fade" />
-      <div className="mx-auto max-w-[1120px] px-6 sm:px-10 lg:px-16">
-        {/* ── Grid ── */}
-        <div className="grid gap-12 py-16 sm:grid-cols-2 sm:py-24 lg:grid-cols-4 lg:py-28">
-          {/* Brand — first column on desktop */}
+      <div className="mx-auto max-w-[1200px] px-6 sm:px-10 lg:px-16">
+        <div className="grid gap-14 py-24 sm:grid-cols-3 sm:py-32">
           <div className="flex flex-col">
-            <Link href="/" className="text-[28px] font-bold tracking-[-0.05em] transition-opacity duration-500 hover:opacity-70">
+            <Link href="/" className="text-[24px] font-bold tracking-[-0.05em] transition-opacity duration-500 hover:opacity-60">
               T<span className="text-gradient">3</span>
             </Link>
-            <p className="mt-4 max-w-[220px] text-[13px] leading-[1.8] text-muted">
-              A Different creative approach since 2004.
+            <p className="mt-5 max-w-[220px] text-[13px] leading-[1.85] text-muted">
+              Proof-led creative strategy since 2004.
             </p>
-            <p className="mt-auto pt-8 text-[11px] text-muted-light lg:pt-12">
-              Strategy · Craft · Outcome
+            <p className="mt-auto pt-12 text-[11px] text-muted-light">
+              Delhi NCR · Jaipur · Bhopal
             </p>
           </div>
 
-          {/* Sitemap */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
-              Sitemap
+              Pages
             </p>
-            <nav aria-label="Footer sitemap" className="mt-5 flex flex-col gap-3">
-              {footerLinks.sitemap.map((l) => (
+            <nav aria-label="Footer navigation" className="mt-6 flex flex-col gap-3.5">
+              {footerLinks.pages.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="link-underline w-fit text-[14px] text-ink/50 transition-colors duration-500 hover:text-ink"
+                  className="link-underline w-fit text-[14px] text-ink/35 transition-colors duration-500 hover:text-ink"
                 >
                   {l.label}
                 </Link>
@@ -53,18 +48,17 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Connect */}
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
               Connect
             </p>
-            <nav aria-label="Connect links" className="mt-5 flex flex-col gap-3">
+            <nav aria-label="Connect links" className="mt-6 flex flex-col gap-3.5">
               {footerLinks.connect.map((l) =>
                 l.external ? (
                   <a
                     key={l.href}
                     href={l.href}
-                    className="link-underline w-fit text-[14px] text-ink/50 transition-colors duration-500 hover:text-ink"
+                    className="link-underline w-fit text-[14px] text-ink/35 transition-colors duration-500 hover:text-ink"
                   >
                     {l.label}
                   </a>
@@ -72,7 +66,7 @@ export default function Footer() {
                   <Link
                     key={l.href}
                     href={l.href}
-                    className="link-underline w-fit text-[14px] text-ink/50 transition-colors duration-500 hover:text-ink"
+                    className="link-underline w-fit text-[14px] text-ink/35 transition-colors duration-500 hover:text-ink"
                   >
                     {l.label}
                   </Link>
@@ -80,29 +74,14 @@ export default function Footer() {
               )}
             </nav>
           </div>
-
-          {/* Offices */}
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-light">
-              Offices
-            </p>
-            <div className="mt-5 flex flex-col gap-3">
-              {footerLinks.offices.map((city) => (
-                <p key={city} className="text-[14px] text-ink/50">
-                  {city}
-                </p>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* ── Bottom bar ── */}
         <div className="divider-fade" />
-        <div className="flex flex-col items-start justify-between gap-3 py-6 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 py-7 sm:flex-row sm:items-center">
           <p className="text-[11px] text-muted-light">
             &copy; {new Date().getFullYear()} T3 Technologies. All rights reserved.
           </p>
-          <p className="text-[11px] text-muted-light/50">
+          <p className="text-[11px] text-muted-light/40">
             Built with craft in India
           </p>
         </div>

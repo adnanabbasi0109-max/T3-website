@@ -15,13 +15,12 @@ type Props = {
   scale?: boolean;
 };
 
-/* Off+Brand uses 1200ms with ease-out-quart for that buttery deceleration */
 const EASE: [number, number, number, number] = [0.165, 0.84, 0.44, 1];
 
 const DURATION_MAP: Record<string, number> = {
   soft: 1.2,
-  normal: 0.9,
-  snappy: 0.55,
+  normal: 0.85,
+  snappy: 0.5,
 };
 
 export default function Reveal({
@@ -31,7 +30,7 @@ export default function Reveal({
   direction = "up",
   once = true,
   as = "div",
-  distance = 36,
+  distance = 28,
   stiffness = "normal",
   scale = false,
 }: Props) {
@@ -50,8 +49,8 @@ export default function Reveal({
             : direction === "right"
               ? distance
               : 0,
-        filter: "blur(4px)",
-        ...(scale ? { scale: 0.96 } : {}),
+        filter: "blur(2px)",
+        ...(scale ? { scale: 0.97 } : {}),
       };
 
   const animate = {
@@ -66,7 +65,7 @@ export default function Reveal({
     <Component
       initial={initial}
       whileInView={animate}
-      viewport={{ once, margin: "-60px" }}
+      viewport={{ once, margin: "-50px" }}
       transition={{
         duration: reduced ? 0.15 : duration,
         delay,

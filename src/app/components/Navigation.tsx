@@ -1,0 +1,133 @@
+import { Link, useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import t3Logo from 'figma:asset/913de77406162c8c2f647acb9bb6b9361b5cd477.png';
+
+export function Navigation() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
+  const links = [
+    { path: '/work', label: 'Workstories' },
+    { path: '/domains', label: 'Domains' },
+    { path: '/about', label: 'About' },
+    { path: '/contact', label: 'Contact' }
+  ];
+
+  return (
+    <nav className="sticky top-0 z-50 bg-t3-off-white/95 backdrop-blur-sm border-b border-t3-soft-divider">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link 
+            to="/" 
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center hover:opacity-80 transition-opacity"
+          >
+            <img 
+              src={t3Logo} 
+              alt="T3 The Think Tank - Humane Technology" 
+              className="h-32 md:h-40 w-auto"
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {links.map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`text-sm tracking-wide transition-colors relative ${
+                  isActive(link.path) 
+                    ? 'text-t3-near-black' 
+                    : 'text-t3-muted-gray hover:text-t3-near-black'
+                }`}
+              >
+                {link.label}
+                {isActive(link.path) && (
+                  <span className="absolute -bottom-1 left-0 w-full h-px bg-t3-accent-gold" />
+                )}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className="px-5 py-2.5 bg-t3-near-black text-t3-off-white text-sm rounded-full hover:bg-t3-near-black/80 transition-colors border border-t3-near-black hover:border-t3-accent-gold"
+            >
+              Start a conversation
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 hover:bg-t3-soft-wash rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div 
+          className="md:hidden fixed inset-0 top-20 bg-t3-off-white z-40 px-6 py-8 overflow-y-auto"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setMobileMenuOpen(false);
+            }
+          }}
+        >
+          <div className="flex flex-col gap-6">
+            {links.map(link => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-4xl font-heading tracking-tight ${
+                  isActive(link.path) 
+                    ? 'text-t3-near-black' 
+                    : 'text-t3-muted-gray'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="mt-8 px-6 py-4 bg-t3-near-black text-t3-off-white text-center rounded-full border border-t3-soft-divider"
+            >
+              Start a conversation
+            </Link>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}

@@ -3,13 +3,6 @@ import { motion } from 'motion/react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-};
-
 const fadeInLeft = {
   initial: { opacity: 0, x: -40 },
   whileInView: { opacity: 1, x: 0 },
@@ -42,7 +35,6 @@ export function Contact() {
     email: '',
     company: '',
     building: '',
-    budget: '',
     message: ''
   });
 
@@ -158,27 +150,6 @@ export function Contact() {
               </motion.div>
 
               <motion.div variants={staggerItem}>
-                <label htmlFor="budget" className="block text-sm uppercase tracking-widest text-t3-muted-gray mb-3">
-                  Budget Range (Optional)
-                </label>
-                <select
-                  id="budget"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  className="w-full px-5 py-4 bg-t3-soft-wash border border-t3-soft-divider rounded-lg focus:outline-none focus:ring-2 focus:ring-t3-accent-gold focus:border-transparent transition-all appearance-none cursor-pointer"
-                >
-                  <option value="">Select a range</option>
-                  <option value="under-5l">Under ₹5 Lakhs</option>
-                  <option value="5l-10l">₹5-10 Lakhs</option>
-                  <option value="10l-25l">₹10-25 Lakhs</option>
-                  <option value="25l-50l">₹25-50 Lakhs</option>
-                  <option value="50l-1cr">₹50 Lakhs - ₹1 Crore</option>
-                  <option value="1cr-plus">₹1 Crore+</option>
-                </select>
-              </motion.div>
-
-              <motion.div variants={staggerItem}>
                 <label htmlFor="message" className="block text-sm uppercase tracking-widest text-t3-muted-gray mb-3">
                   Message
                 </label>
@@ -212,27 +183,6 @@ export function Contact() {
               </h3>
               
               <div className="space-y-8">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Headquarters
-                  </div>
-                  <p className="text-lg">
-                    Bhopal, Madhya Pradesh<br />
-                    India
-                  </p>
-                </div>
-
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Presence
-                  </div>
-                  <p className="text-lg">
-                    Delhi NCR<br />
-                    Jaipur<br />
-                    Bhopal
-                  </p>
-                </div>
-
                 <div>
                   <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
                     Email
@@ -271,20 +221,6 @@ export function Contact() {
         </div>
       </section>
 
-      {/* Philosophy Footer */}
-      <section className="bg-t3-near-black text-t3-off-white border-y border-t3-soft-divider">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 text-center">
-          <motion.div {...fadeInUp}>
-            <p className="text-sm uppercase tracking-widest text-t3-muted-gray mb-4">
-              Our Promise
-            </p>
-            <p className="text-2xl md:text-3xl font-heading tracking-tight max-w-3xl mx-auto">
-              We'll respond within 24 hours to discuss how we can help transform 
-              your challenge into a competitive advantage.
-            </p>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

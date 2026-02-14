@@ -94,12 +94,6 @@ export function WorkDetail() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
-                    Year
-                  </div>
-                  <div className="text-lg">{workstory.year}</div>
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
                     Industries
                   </div>
                   <div className="flex flex-wrap gap-2">

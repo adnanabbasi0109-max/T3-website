@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import t3Logo from 'figma:asset/913de77406162c8c2f647acb9bb6b9361b5cd477.png';
+const t3Logo = '/logo.png';
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
             <img 
               src={t3Logo} 
               alt="T3 The Think Tank - Humane Technology" 
-              className="h-40 md:h-48 w-auto mb-6"
+              className="h-12 md:h-14 w-auto mb-6"
             />
             <p className="text-sm text-t3-muted-gray leading-relaxed max-w-md">
               At T3, we believe in a harmonious blend of tradition and innovation. 

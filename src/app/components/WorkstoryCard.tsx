@@ -16,14 +16,24 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
         to={`/work/${workstory.slug}`}
         className="group block"
       >
-        <motion.div 
+        <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-t3-soft-wash aspect-[16/10] rounded-lg mb-6 overflow-hidden border border-t3-soft-divider"
+          className="aspect-[16/10] rounded-lg mb-6 overflow-hidden border border-t3-soft-divider relative"
         >
-          <div className="w-full h-full bg-gradient-to-br from-t3-soft-divider to-t3-soft-wash flex items-center justify-center text-t3-muted-gray">
-            <span className="text-sm uppercase tracking-widest">Featured Work</span>
-          </div>
+          {workstory.image ? (
+            <img
+              src={workstory.image}
+              alt={workstory.title}
+              loading="lazy"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-t3-soft-divider to-t3-soft-wash flex items-center justify-center text-t3-muted-gray">
+              <span className="text-sm uppercase tracking-widest">Featured Work</span>
+            </div>
+          )}
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-t3-off-white/40 to-transparent pointer-events-none" />
         </motion.div>
         <div className="space-y-4">
           <h3 className="text-2xl md:text-3xl font-heading tracking-tight group-hover:text-t3-muted-gray transition-colors">
@@ -74,7 +84,6 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
           </div>
           <div className="flex items-center justify-between text-xs md:text-sm text-t3-muted-gray">
             <span>{workstory.location}</span>
-            <span>{workstory.year}</span>
             <ArrowUpRight className="opacity-50 group-hover:opacity-100 transition-opacity" size={18} />
           </div>
         </div>

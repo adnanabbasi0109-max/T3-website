@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import t3Logo from 'figma:asset/913de77406162c8c2f647acb9bb6b9361b5cd477.png';
+const t3Logo = '/logo.png';
 
 export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,7 +52,7 @@ export function Navigation() {
             <img 
               src={t3Logo} 
               alt="T3 The Think Tank - Humane Technology" 
-              className="h-32 md:h-40 w-auto"
+              className="h-10 md:h-12 w-auto"
             />
           </Link>
 

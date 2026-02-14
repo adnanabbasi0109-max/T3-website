@@ -159,49 +159,6 @@ export function About() {
         </div>
       </section>
 
-      {/* Presence */}
-      <section className="bg-t3-soft-wash border-y border-t3-soft-divider">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
-          <div className="grid md:grid-cols-12 gap-12">
-            <div className="md:col-span-4">
-              <h2 className="text-3xl md:text-4xl font-heading tracking-tight">
-                Our Footprint
-              </h2>
-            </div>
-            <div className="md:col-span-8">
-              <div className="grid md:grid-cols-3 gap-8">
-                <div>
-                  <div className="text-sm uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Headquarters
-                  </div>
-                  <p className="text-2xl font-heading">Bhopal</p>
-                  <p className="text-t3-muted-gray mt-2">
-                    Madhya Pradesh
-                  </p>
-                </div>
-                <div>
-                  <div className="text-sm uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Presence
-                  </div>
-                  <p className="text-lg leading-relaxed">
-                    Delhi NCR<br />
-                    Jaipur<br />
-                    Bhopal
-                  </p>
-                </div>
-                <div>
-                  <div className="text-sm uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Reach
-                  </div>
-                  <p className="text-lg leading-relaxed">
-                    Delivering projects across India
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Work Approach */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:pb-32">

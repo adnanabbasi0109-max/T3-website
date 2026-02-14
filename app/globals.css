@@ -81,7 +81,7 @@ body::before {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.014;
+  opacity: 0.012;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
@@ -244,6 +244,40 @@ img {
     var(--color-border) 80%,
     transparent
   );
+}
+
+/* ── Chapter nav — sticky sidebar for case studies ── */
+.chapter-nav-item {
+  position: relative;
+  padding-left: 1.25rem;
+  transition: color 0.4s var(--ease-out-quart);
+}
+.chapter-nav-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+  transition: background 0.4s var(--ease-out-quart);
+}
+.chapter-nav-item.active::before {
+  background: var(--color-accent);
+}
+.chapter-nav-item.active {
+  color: var(--color-ink);
+}
+
+/* ── Editorial pull quote ── */
+.pull-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  border-left: 2px solid var(--color-accent);
+  padding-left: 1.5rem;
 }
 
 /* ── Reduced motion ── */

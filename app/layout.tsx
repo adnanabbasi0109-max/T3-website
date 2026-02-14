@@ -6,11 +6,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "T3 Technologies — Strategy, Craft, Outcome",
+    default: "T3 Technologies — Brand. Innovation. PR. Tech.",
     template: "%s — T3 Technologies",
   },
   description:
-    "Proof-led creative strategy for brands that refuse to blend in. 20+ years, 300+ projects, 75+ clients.",
+    "Brand. Innovation. PR. Tech — engineered with humane intent. Proof-led creative strategy for brands that refuse to blend in.",
   keywords: [
     "branding agency",
     "creative strategy",
@@ -18,9 +18,10 @@ export const metadata: Metadata = {
     "media strategy",
     "case studies",
     "T3 Technologies",
+    "humane technology",
   ],
   openGraph: {
-    title: "T3 Technologies — Strategy, Craft, Outcome",
+    title: "T3 Technologies — Brand. Innovation. PR. Tech.",
     description:
       "Proof-led creative strategy for brands that refuse to blend in.",
     type: "website",

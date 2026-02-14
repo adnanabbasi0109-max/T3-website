@@ -9,7 +9,7 @@ import {
 import { useRef } from "react";
 import Link from "next/link";
 
-const WORDS = ["Brand", "Innovation", "PR", "AI", "Design", "Strategy"];
+const WORDS = ["Brand", "Innovation", "PR", "Tech", "Design", "Strategy"];
 const ease: [number, number, number, number] = [0.165, 0.84, 0.44, 1];
 
 export default function ScrollTypeHero() {
@@ -46,13 +46,13 @@ export default function ScrollTypeHero() {
           initial={{ opacity: 0, y: 48, filter: "blur(6px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.2, delay: 0.15, ease }}
-          className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.96] tracking-[-0.04em]"
+          className="font-display text-[clamp(2.75rem,8.5vw,7.5rem)] leading-[0.96] tracking-[-0.04em]"
         >
-          A Different
+          Engineered with
           <br />
-          creative approach
+          humane intent
           <br />
-          to{" "}
+          for{" "}
           <span className="relative inline-block min-w-[3ch] text-accent">
             {WORDS.map((word, i) => (
               <WordItem key={word} word={word} index={i} wordIndex={wordIndex} />
@@ -60,12 +60,12 @@ export default function ScrollTypeHero() {
           </span>
         </motion.h1>
       ) : (
-        <h1 className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.96] tracking-[-0.04em]">
-          A Different
+        <h1 className="font-display text-[clamp(2.75rem,8.5vw,7.5rem)] leading-[0.96] tracking-[-0.04em]">
+          Engineered with
           <br />
-          creative approach
+          humane intent
           <br />
-          to <span className="text-accent">{WORDS[0]}</span>
+          for <span className="text-accent">{WORDS[0]}</span>
         </h1>
       )}
 
@@ -74,15 +74,15 @@ export default function ScrollTypeHero() {
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.0, delay: 0.55, ease }}
-          className="mt-12 max-w-[460px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14"
+          className="mt-12 max-w-[500px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14"
         >
-          Proof-led creative strategy for brands that refuse to blend in.
-          Over two decades of defying conventional wisdom.
+          Brand. Innovation. PR. Tech — proof-led creative strategy
+          for brands that refuse to blend in.
         </motion.p>
       ) : (
-        <p className="mt-12 max-w-[460px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14">
-          Proof-led creative strategy for brands that refuse to blend in.
-          Over two decades of defying conventional wisdom.
+        <p className="mt-12 max-w-[500px] text-[15px] leading-[1.85] text-muted sm:text-[16px] lg:mt-14">
+          Brand. Innovation. PR. Tech — proof-led creative strategy
+          for brands that refuse to blend in.
         </p>
       )}
 
@@ -97,13 +97,13 @@ export default function ScrollTypeHero() {
             href="/work"
             className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-500 hover:bg-ink-light"
           >
-            <span className="btn-text">View Work &rarr;</span>
+            <span className="btn-text">View Workstories &rarr;</span>
           </Link>
           <Link
             href="/contact"
             className="inline-flex h-[52px] items-center rounded-full border border-border px-10 text-[13px] font-medium text-muted transition-all duration-500 hover:border-border-strong hover:text-ink"
           >
-            Get in touch
+            Start a conversation
           </Link>
         </motion.div>
       ) : (
@@ -112,13 +112,13 @@ export default function ScrollTypeHero() {
             href="/work"
             className="btn-slide inline-flex h-[52px] items-center rounded-full bg-ink px-10 text-[13px] font-medium text-paper transition-all duration-500 hover:bg-ink-light"
           >
-            <span className="btn-text">View Work &rarr;</span>
+            <span className="btn-text">View Workstories &rarr;</span>
           </Link>
           <Link
             href="/contact"
             className="inline-flex h-[52px] items-center rounded-full border border-border px-10 text-[13px] font-medium text-muted transition-all duration-500 hover:border-border-strong hover:text-ink"
           >
-            Get in touch
+            Start a conversation
           </Link>
         </div>
       )}

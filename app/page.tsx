@@ -4,6 +4,7 @@ import { CaseStudy } from "../models/CaseStudy";
 import { serialize, SERVICES } from "../lib/utils";
 import type { CaseStudyDoc } from "../lib/utils";
 import ScrollTypeHero from "../components/motion/ScrollTypeHero";
+import HowWeWork from "../components/sections/HowWeWork";
 import Reveal from "../components/motion/Reveal";
 import Marquee from "../components/motion/Marquee";
 import Container from "../components/layout/Container";
@@ -40,9 +41,7 @@ export default async function Home() {
                 Who We Are
               </p>
               <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] tracking-[-0.03em]">
-                Every brand has a story.
-                <br />
-                We make it unforgettable.
+                Technology that elevates people, not replaces them.
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
@@ -62,6 +61,9 @@ export default async function Home() {
           </div>
         </Container>
       </Section>
+
+      {/* ── How We Work ── */}
+      <HowWeWork />
 
       {/* ── Featured Work ── */}
       {featured.length > 0 && (
@@ -174,7 +176,7 @@ export default async function Home() {
                 href="/contact"
                 className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-500 hover:bg-paper-warm"
               >
-                <span className="btn-text">Get in touch &rarr;</span>
+                <span className="btn-text">Start a Conversation &rarr;</span>
               </Link>
             </div>
           </Reveal>

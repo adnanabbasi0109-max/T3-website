@@ -36,7 +36,7 @@ export default function AboutPage() {
               About T3
             </p>
             <h1 className="max-w-4xl font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
-              We defy conventional wisdom — and document the proof.
+              Brand. Innovation. PR. Tech — engineered with humane intent.
             </h1>
           </Reveal>
           <Reveal delay={0.15}>
@@ -66,12 +66,14 @@ export default function AboutPage() {
             <Reveal delay={0.1}>
               <div className="space-y-6 lg:pt-6">
                 <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
-                  We believe in a harmonious blend of tradition and innovation.
-                  Technology should enhance the human experience, not replace it.
+                  We believe technology should elevate people, not replace them.
+                  A harmonious blend of tradition and innovation — ensuring
+                  progress is both thoughtful and purposeful.
                 </p>
                 <p className="text-[15px] leading-[1.85] text-muted sm:text-[16px]">
                   We create solutions that respect the past while embracing the
-                  future — ensuring progress is both thoughtful and purposeful.
+                  future. Every tool we build, every strategy we craft, is
+                  designed to enhance the human experience.
                 </p>
               </div>
             </Reveal>

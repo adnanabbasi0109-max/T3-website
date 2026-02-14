@@ -89,7 +89,7 @@ export default function WorkClient({
           <div className="relative max-w-[260px] flex-1">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search workstories..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full rounded-full border border-border bg-transparent px-5 py-2.5 text-[13px] outline-none transition-all duration-500 placeholder:text-muted-light/60 focus:border-accent/30"

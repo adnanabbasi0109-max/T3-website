@@ -26,7 +26,7 @@ export default function NotFound() {
             href="/work"
             className="inline-flex h-[52px] items-center rounded-full border border-border px-10 text-[14px] font-medium transition-all duration-500 hover:border-border-strong"
           >
-            View Work
+            View Workstories
           </Link>
         </div>
       </Container>

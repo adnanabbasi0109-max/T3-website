@@ -2,9 +2,8 @@ import Link from "next/link";
 
 const footerLinks = {
   pages: [
-    { href: "/work", label: "Work" },
+    { href: "/work", label: "Workstories" },
     { href: "/about", label: "About" },
-    { href: "/services", label: "Services" },
     { href: "/contact", label: "Contact" },
   ],
   connect: [
@@ -23,8 +22,8 @@ export default function Footer() {
             <Link href="/" className="text-[24px] font-bold tracking-[-0.05em] transition-opacity duration-500 hover:opacity-60">
               T<span className="text-gradient">3</span>
             </Link>
-            <p className="mt-5 max-w-[220px] text-[13px] leading-[1.85] text-muted">
-              Proof-led creative strategy since 2004.
+            <p className="mt-5 max-w-[240px] text-[13px] leading-[1.85] text-muted">
+              Brand. Innovation. PR. Tech — engineered with humane intent.
             </p>
             <p className="mt-auto pt-12 text-[11px] text-muted-light">
               Delhi NCR · Jaipur · Bhopal

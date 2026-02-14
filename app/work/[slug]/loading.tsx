@@ -7,6 +7,7 @@ export default function CaseStudyLoading() {
       <Section spacing="md">
         <Container>
           <div className="mb-12 h-4 w-20 animate-pulse rounded-[0.375rem] bg-paper-dim" />
+          <div className="mb-5 h-3 w-16 animate-pulse rounded-full bg-paper-dim" />
           <div className="h-12 w-3/4 animate-pulse rounded-[0.5rem] bg-paper-dim sm:h-16" />
           <div className="mt-7 flex gap-2">
             <div className="h-7 w-24 animate-pulse rounded-full bg-paper-dim" />

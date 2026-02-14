@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import type { CaseStudyDoc } from "../../../lib/utils";
 import { useShortlist } from "../../../components/ui/shortlist-provider";
 import CaseStudyCard from "../../../components/ui/case-study-card";
+import ChapterNav from "../../../components/sections/ChapterNav";
 import Reveal from "../../../components/motion/Reveal";
 import Container from "../../../components/layout/Container";
 import Section from "../../../components/layout/Section";
+
+type Chapter = { id: string; label: string };
 
 export default function CaseStudyStory({
   item,
@@ -19,6 +23,29 @@ export default function CaseStudyStory({
   const saved = has(item.slug);
   const sections = item.sections || [];
 
+  const chapters = useMemo(() => {
+    const chs: Chapter[] = [];
+    if (sections.length > 0) {
+      chs.push({ id: "chapter-brief", label: "Brief" });
+      if (sections.length > 1) chs.push({ id: "chapter-insight", label: "Insight" });
+      if (sections.length > 2) chs.push({ id: "chapter-build", label: "Build" });
+      if (sections.length > 3) chs.push({ id: "chapter-result", label: "Result" });
+      // Map any extra sections
+      sections.slice(4).forEach((s, i) => {
+        chs.push({ id: `chapter-extra-${i}`, label: s.heading });
+      });
+    }
+    if (item.outcomes && item.outcomes.length > 0) {
+      chs.push({ id: "chapter-outcomes", label: "Outcomes" });
+    }
+    if (item.gallery && item.gallery.length > 0) {
+      chs.push({ id: "chapter-gallery", label: "Gallery" });
+    }
+    return chs;
+  }, [sections, item.outcomes, item.gallery]);
+
+  const CHAPTER_LABELS = ["Brief", "Insight", "Build", "Result"];
+
   return (
     <>
       {/* ── Header ── */}
@@ -29,11 +56,14 @@ export default function CaseStudyStory({
               href="/work"
               className="link-underline mb-12 inline-flex items-center gap-2 text-[13px] font-medium text-muted transition-colors duration-500 hover:text-ink sm:mb-14"
             >
-              &larr; All Work
+              &larr; All Workstories
             </Link>
 
             <div className="flex items-start justify-between gap-8">
               <div className="max-w-3xl">
+                <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                  Workstory
+                </p>
                 <h1 className="font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[1.02] tracking-[-0.04em]">
                   {item.title}
                 </h1>
@@ -119,69 +149,63 @@ export default function CaseStudyStory({
         </Container>
       </Section>
 
-      {/* ── Content Sections ── */}
+      {/* ── Content Sections with Chapter Nav ── */}
       {sections.length > 0 && (
         <Section spacing="lg">
-          <Container size="narrow">
-            <div className="space-y-28 sm:space-y-36">
-              {sections.map((s, i) => (
-                <article key={i}>
-                  <Reveal>
-                    <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.025em]">
-                      {s.heading}
-                    </h2>
-                    <div className="mt-7 text-[15px] leading-[1.9] text-muted sm:text-[16px]">
-                      {s.body.split("\n").map((p, pi) => (
-                        <p key={pi} className="mb-5 last:mb-0">{p}</p>
-                      ))}
-                    </div>
-                  </Reveal>
+          <Container>
+            <div className="grid gap-16 lg:grid-cols-[180px_1fr] lg:gap-20">
+              {/* Sticky chapter nav — desktop only */}
+              {chapters.length > 0 && <ChapterNav chapters={chapters} />}
 
-                  {s.media && s.media.length > 0 && (
-                    <div className={`mt-12 grid gap-4 ${s.media.length > 1 ? "grid-cols-2" : ""}`}>
-                      {s.media.map((url, mi) => (
-                        <Reveal key={mi} delay={mi * 0.06}>
-                          <div className="overflow-hidden rounded-[0.5rem] bg-paper-dim">
-                            <img
-                              src={url}
-                              alt={`${s.heading} ${mi + 1}`}
-                              className="aspect-video w-full object-cover"
-                              loading="lazy"
-                            />
+              {/* Content */}
+              <div className={`${chapters.length === 0 ? "lg:col-span-2" : ""} max-w-[680px]`}>
+                <div className="space-y-28 sm:space-y-36">
+                  {sections.map((s, i) => {
+                    const chapterId =
+                      i < 4
+                        ? `chapter-${["brief", "insight", "build", "result"][i]}`
+                        : `chapter-extra-${i - 4}`;
+                    const chapterLabel = i < 4 ? CHAPTER_LABELS[i] : undefined;
+
+                    return (
+                      <article key={i} id={chapterId}>
+                        <Reveal>
+                          {chapterLabel && (
+                            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                              {chapterLabel}
+                            </p>
+                          )}
+                          <h2 className="font-display text-[clamp(1.5rem,3vw,2.25rem)] tracking-[-0.025em]">
+                            {s.heading}
+                          </h2>
+                          <div className="mt-7 text-[15px] leading-[1.9] text-muted sm:text-[16px]">
+                            {s.body.split("\n").map((p, pi) => (
+                              <p key={pi} className="mb-5 last:mb-0">{p}</p>
+                            ))}
                           </div>
                         </Reveal>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
-          </Container>
-        </Section>
-      )}
 
-      {/* ── Gallery ── */}
-      {item.gallery && item.gallery.length > 0 && (
-        <Section spacing="md">
-          <Container>
-            <Reveal>
-              <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                Gallery
-              </p>
-            </Reveal>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {item.gallery.map((url, i) => (
-                <Reveal key={i} delay={i * 0.04}>
-                  <div className="overflow-hidden rounded-[0.5rem] bg-paper-dim transition-shadow duration-700 hover:shadow-card-hover">
-                    <img
-                      src={url}
-                      alt={`Gallery ${i + 1}`}
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-                  </div>
-                </Reveal>
-              ))}
+                        {s.media && s.media.length > 0 && (
+                          <div className={`mt-12 grid gap-4 ${s.media.length > 1 ? "grid-cols-2" : ""}`}>
+                            {s.media.map((url, mi) => (
+                              <Reveal key={mi} delay={mi * 0.06}>
+                                <div className="overflow-hidden rounded-[0.5rem] bg-paper-dim">
+                                  <img
+                                    src={url}
+                                    alt={`${s.heading} ${mi + 1}`}
+                                    className="aspect-video w-full object-cover"
+                                    loading="lazy"
+                                  />
+                                </div>
+                              </Reveal>
+                            ))}
+                          </div>
+                        )}
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </Container>
         </Section>
@@ -189,7 +213,7 @@ export default function CaseStudyStory({
 
       {/* ── Outcomes ── */}
       {item.outcomes && item.outcomes.length > 0 && (
-        <Section spacing="lg" alt className="mx-4 rounded-[1.5rem] sm:mx-6 sm:rounded-[2rem] lg:mx-10">
+        <Section spacing="lg" alt className="mx-4 rounded-[1.5rem] sm:mx-6 sm:rounded-[2rem] lg:mx-10" id="chapter-outcomes">
           <Container>
             <Reveal>
               <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
@@ -217,6 +241,33 @@ export default function CaseStudyStory({
         </Section>
       )}
 
+      {/* ── Gallery ── */}
+      {item.gallery && item.gallery.length > 0 && (
+        <Section spacing="md" id="chapter-gallery">
+          <Container>
+            <Reveal>
+              <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                Gallery
+              </p>
+            </Reveal>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {item.gallery.map((url, i) => (
+                <Reveal key={i} delay={i * 0.04}>
+                  <div className="overflow-hidden rounded-[0.5rem] bg-paper-dim transition-shadow duration-700 hover:shadow-card-hover">
+                    <img
+                      src={url}
+                      alt={`Gallery ${i + 1}`}
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.165,0.84,0.44,1)] hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </Container>
+        </Section>
+      )}
+
       {/* ── Related ── */}
       {related.length > 0 && (
         <Section spacing="lg">
@@ -226,7 +277,7 @@ export default function CaseStudyStory({
                 Related
               </p>
               <h2 className="font-display text-[clamp(1.5rem,3vw,2.5rem)] tracking-[-0.025em]">
-                More Work
+                More Workstories
               </h2>
             </Reveal>
             <div className="mt-16 grid gap-10 sm:grid-cols-2 sm:gap-14 lg:grid-cols-3">
@@ -252,7 +303,7 @@ export default function CaseStudyStory({
                 href="/contact"
                 className="btn-slide inline-flex h-[52px] items-center rounded-full bg-paper px-10 text-[14px] font-medium text-ink transition-all duration-500 hover:bg-paper-warm"
               >
-                <span className="btn-text">Get in touch &rarr;</span>
+                <span className="btn-text">Start a conversation &rarr;</span>
               </Link>
             </div>
           </Reveal>

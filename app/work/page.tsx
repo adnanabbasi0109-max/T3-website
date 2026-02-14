@@ -33,7 +33,7 @@ export default async function WorkPage() {
               Portfolio
             </p>
             <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.02] tracking-[-0.04em]">
-              Our Work
+              Workstories
             </h1>
           </Reveal>
           <Reveal delay={0.1}>

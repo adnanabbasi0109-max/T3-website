@@ -34,7 +34,7 @@ const domainImages: Record<string, string> = {
   'marketing': 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80',
   'design': 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
   'tech-solutions': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
-  'pr-media': 'https://images.unsplash.com/photo-1504711434969-e33886168d5c?w=800&q=80',
+  'pr-media': 'https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?w=800&q=80',
 };
 
 export function Home() {

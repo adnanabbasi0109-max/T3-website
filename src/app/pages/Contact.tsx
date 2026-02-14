@@ -209,12 +209,6 @@ export function Contact() {
                   </a>
                 </div>
 
-                <div className="pt-8 border-t border-t3-soft-divider">
-                  <p className="text-sm text-t3-muted-gray leading-relaxed">
-                    Prefer WhatsApp? We're available there too. 
-                    Drop us a message and we'll respond promptly.
-                  </p>
-                </div>
               </div>
             </div>
           </motion.div>

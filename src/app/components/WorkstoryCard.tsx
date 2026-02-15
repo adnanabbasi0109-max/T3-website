@@ -4,24 +4,36 @@ import { motion } from 'motion/react';
 import { Tag } from './Tag';
 import type { Workstory } from '../data/workstories';
 
+function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?#]+)/);
+  return match ? match[1] : null;
+}
+
 interface WorkstoryCardProps {
   workstory: Workstory;
   variant?: 'row' | 'featured';
 }
 
 export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps) {
+  const videoId = workstory.videoUrl ? getYouTubeId(workstory.videoUrl) : null;
+
   if (variant === 'featured') {
     return (
-      <Link
-        to={`/work/${workstory.slug}`}
-        className="group block"
-      >
+      <div className="group block">
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="aspect-[16/10] rounded-lg mb-6 overflow-hidden border border-t3-soft-divider relative"
         >
-          {workstory.image ? (
+          {videoId ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title={workstory.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          ) : workstory.image ? (
             <img
               src={workstory.image}
               alt={workstory.title}
@@ -33,27 +45,34 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
               <span className="text-sm uppercase tracking-widest">Featured Work</span>
             </div>
           )}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-t3-off-white/40 to-transparent pointer-events-none" />
-        </motion.div>
-        <div className="space-y-4">
-          <h3 className="text-2xl md:text-3xl font-heading tracking-tight group-hover:text-t3-muted-gray transition-colors">
-            {workstory.title}
-          </h3>
-          <p className="text-t3-muted-gray leading-relaxed">
-            {workstory.summary}
-          </p>
-          {workstory.outcome && (
-            <p className="text-sm text-t3-accent-gold">
-              → {workstory.outcome}
-            </p>
+          {!videoId && (
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-t3-off-white/40 to-transparent pointer-events-none" />
           )}
-          <div className="flex flex-wrap gap-2">
-            {workstory.domains.slice(0, 3).map(domain => (
-              <Tag key={domain}>{domain}</Tag>
-            ))}
+        </motion.div>
+        <Link
+          to={`/work/${workstory.slug}`}
+          className="block"
+        >
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-heading tracking-tight group-hover:text-t3-muted-gray transition-colors">
+              {workstory.title}
+            </h3>
+            <p className="text-t3-muted-gray leading-relaxed">
+              {workstory.summary}
+            </p>
+            {workstory.outcome && (
+              <p className="text-sm text-t3-accent-gold">
+                → {workstory.outcome}
+              </p>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {workstory.domains.slice(0, 3).map(domain => (
+                <Tag key={domain}>{domain}</Tag>
+              ))}
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     );
   }
 

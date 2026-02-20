@@ -23,7 +23,14 @@ const staggerItem = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-t3-soft-divider bg-t3-off-white">
+    <footer className="bg-t3-off-white">
+      <motion.div
+        className="h-px bg-gradient-to-r from-transparent via-t3-accent-gold/30 to-transparent"
+        initial={{ scaleX: 0, opacity: 0 }}
+        whileInView={{ scaleX: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as const }}
+      />
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-8 mb-16">
           {/* Brand Column */}

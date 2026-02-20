@@ -6,6 +6,10 @@ import { StatsStrip } from '../components/StatsStrip';
 import { Button } from '../components/Button';
 import { TiltCard } from '../components/TiltCard';
 import { TextReveal } from '../components/TextReveal';
+import { Marquee } from '../components/Marquee';
+import { SectionDivider } from '../components/SectionDivider';
+import { Spotlight } from '../components/Spotlight';
+import { SplitReveal } from '../components/SplitReveal';
 
 
 const fadeInUp = {
@@ -111,19 +115,25 @@ export function About() {
         </motion.div>
       </section>
 
+      <SectionDivider variant="gradient" />
+
       {/* Stats */}
-      <section className="bg-t3-near-black text-t3-off-white border-y border-t3-soft-divider">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
-          <motion.div {...fadeInUp}>
-            <SectionHeader
-              overline="Proof Points"
-              title="Two decades of transformation"
-              className="mb-16 md:mb-20"
-            />
-          </motion.div>
-          <StatsStrip />
-        </div>
-      </section>
+      <Spotlight size={500} color="rgba(198, 161, 91, 0.05)">
+        <section className="bg-t3-near-black text-t3-off-white border-y border-t3-soft-divider">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
+            <SplitReveal>
+              <SectionHeader
+                overline="Proof Points"
+                title="Two decades of transformation"
+                className="mb-16 md:mb-20"
+              />
+            </SplitReveal>
+            <StatsStrip />
+          </div>
+        </section>
+      </Spotlight>
+
+      <SectionDivider variant="dots" />
 
       {/* Humane Technology */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
@@ -164,6 +174,17 @@ export function About() {
       </section>
 
 
+      <SectionDivider variant="gradient" />
+
+      {/* Marquee */}
+      <section className="py-5 bg-t3-soft-wash border-y border-t3-soft-divider">
+        <Marquee
+          items={['Deconstruct', 'Catalyze', 'Transform', 'Innovate', 'Collaborate', 'Elevate']}
+          speed={35}
+          className="text-t3-muted-gray/50"
+        />
+      </section>
+
       {/* Work Approach */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:pb-32">
         <motion.div {...fadeInUp}>
@@ -190,7 +211,7 @@ export function About() {
               key={card.num}
               variants={staggerItem}
             >
-              <TiltCard className="rounded-lg" tiltDeg={8} scale={1.03}>
+              <TiltCard className="rounded-lg" tiltDeg={22} scale={1.06}>
                 <div className="p-8 bg-t3-soft-wash rounded-lg border border-transparent hover:border-t3-accent-gold/20 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(198,161,91,0.08)]">
                   <div className="text-sm uppercase tracking-widest text-t3-muted-gray mb-4">
                     {card.num}
@@ -209,26 +230,27 @@ export function About() {
       </section>
 
       {/* CTA */}
-      <section className="bg-t3-near-black text-t3-off-white">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
-          <motion.h2
-            {...fadeInUp}
-            className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-8 max-w-4xl mx-auto"
-          >
-            Let's talk about the inflection point you're facing
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Button to="/contact" variant="secondary" className="border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10">
-              Start a conversation
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <Spotlight size={600} color="rgba(198, 161, 91, 0.06)">
+        <section className="bg-t3-near-black text-t3-off-white">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
+            <SplitReveal>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-8 max-w-4xl mx-auto">
+                Let's talk about the inflection point you're facing
+              </h2>
+            </SplitReveal>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
+            >
+              <Button to="/contact" variant="secondary" className="border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10">
+                Start a conversation
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+      </Spotlight>
     </div>
   );
 }

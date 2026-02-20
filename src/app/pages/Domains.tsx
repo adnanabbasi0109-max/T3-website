@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Tag } from '../components/Tag';
 import { TiltCard } from '../components/TiltCard';
+import { Spotlight } from '../components/Spotlight';
+import { SplitReveal } from '../components/SplitReveal';
+import { SectionDivider } from '../components/SectionDivider';
 import { domains } from '../data/domains';
 import { workstories } from '../data/workstories';
 
@@ -50,6 +53,8 @@ export function Domains() {
           />
         </motion.div>
       </section>
+
+      <SectionDivider variant="gradient" />
 
       {/* Domains Grid */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
@@ -112,7 +117,7 @@ export function Domains() {
                         </h4>
                         <div className="grid md:grid-cols-2 gap-6">
                           {domainWork.map(work => (
-                            <TiltCard key={work.slug} className="rounded-lg" tiltDeg={6} scale={1.02}>
+                            <TiltCard key={work.slug} className="rounded-lg" tiltDeg={20} scale={1.05}>
                               <div className="bg-t3-off-white p-6 rounded-lg border border-t3-soft-divider hover:border-t3-accent-gold transition-all duration-300 hover:shadow-[0_8px_30px_rgba(198,161,91,0.08)]">
                                 <h5 className="text-xl font-heading tracking-tight mb-3">
                                   {work.title}
@@ -143,33 +148,34 @@ export function Domains() {
       </section>
 
       {/* CTA */}
-      <section className="bg-t3-near-black text-t3-off-white border-t border-t3-soft-divider">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
-          <motion.h2 
-            {...fadeInUp}
-            className="text-4xl md:text-5xl font-heading tracking-tight mb-6 max-w-3xl mx-auto"
-          >
-            Ready to transform your challenge into an opportunity?
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
+      <Spotlight size={500} color="rgba(198, 161, 91, 0.06)">
+        <section className="bg-t3-near-black text-t3-off-white border-t border-t3-soft-divider">
+          <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
+            <SplitReveal>
+              <h2 className="text-4xl md:text-5xl font-heading tracking-tight mb-6 max-w-3xl mx-auto">
+                Ready to transform your challenge into an opportunity?
+              </h2>
+            </SplitReveal>
             <motion.div
-              whileHover={{ scale: 1.04, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-block"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
             >
-              <Link to="/contact" className="inline-block border border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10 hover:border-t3-accent-gold hover:shadow-[0_0_20px_rgba(198,161,91,0.15)] px-6 py-3 rounded-lg font-heading tracking-tight transition-all duration-300">
-                Start a conversation
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.04, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
+                className="inline-block"
+              >
+                <Link to="/contact" className="inline-block border border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10 hover:border-t3-accent-gold hover:shadow-[0_0_20px_rgba(198,161,91,0.15)] px-6 py-3 rounded-lg font-heading tracking-tight transition-all duration-300">
+                  Start a conversation
+                </Link>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      </Spotlight>
     </div>
   );
 }

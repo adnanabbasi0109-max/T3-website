@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { WorkstoryCard } from '../components/WorkstoryCard';
 import { FiltersBar, type FilterState } from '../components/FiltersBar';
 import { SectionHeader } from '../components/SectionHeader';
+import { SectionDivider } from '../components/SectionDivider';
+import { Marquee } from '../components/Marquee';
 import { workstories } from '../data/workstories';
 
 const fadeInUp = {
@@ -66,6 +68,8 @@ export function WorkIndex() {
           />
         </motion.div>
       </section>
+
+      <SectionDivider variant="gradient" />
 
       {/* Filters */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 pb-12">

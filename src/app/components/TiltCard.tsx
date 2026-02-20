@@ -12,9 +12,9 @@ interface TiltCardProps {
 export function TiltCard({
   children,
   className = '',
-  tiltDeg = 6,
+  tiltDeg = 18,
   glare = true,
-  scale = 1.02
+  scale = 1.04
 }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
@@ -50,8 +50,8 @@ export function TiltCard({
         rotateY: tilt.rotateY,
         scale: isHovering ? scale : 1
       }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20, mass: 0.5 }}
-      style={{ perspective: 800, transformStyle: 'preserve-3d' }}
+      transition={{ type: 'spring', stiffness: 250, damping: 18, mass: 0.4 }}
+      style={{ perspective: 600, transformStyle: 'preserve-3d' }}
       className={`relative ${className}`}
     >
       {children}
@@ -59,7 +59,7 @@ export function TiltCard({
         <div
           className="pointer-events-none absolute inset-0 rounded-[inherit] z-10 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(198,161,91,0.08) 0%, transparent 60%)`,
+            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(198,161,91,0.15) 0%, transparent 60%)`,
             opacity: isHovering ? 1 : 0
           }}
         />

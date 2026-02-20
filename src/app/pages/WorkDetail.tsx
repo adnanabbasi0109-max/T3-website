@@ -145,7 +145,7 @@ export function WorkDetail() {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="md:col-span-4"
           >
-            <TiltCard className="rounded-lg sticky top-24" tiltDeg={5} scale={1.01}>
+            <TiltCard className="rounded-lg sticky top-24" tiltDeg={18} scale={1.04}>
               <div className="bg-t3-soft-wash rounded-lg p-8">
                 <div className="space-y-6">
                   <div>
@@ -301,7 +301,7 @@ export function WorkDetail() {
               id="outcome"
               className="mb-24 scroll-mt-32"
             >
-              <TiltCard className="rounded-lg" tiltDeg={3} scale={1.01}>
+              <TiltCard className="rounded-lg" tiltDeg={16} scale={1.04}>
               <div className="bg-t3-near-black text-t3-off-white rounded-lg p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
                   Outcome
@@ -369,7 +369,7 @@ export function WorkDetail() {
             >
               {relatedWork.map(work => (
                 <motion.div key={work.slug} variants={staggerItem}>
-                  <TiltCard className="rounded-lg" tiltDeg={6} scale={1.03}>
+                  <TiltCard className="rounded-lg" tiltDeg={20} scale={1.06}>
                     <Link
                       to={`/work/${work.slug}`}
                       className="group block p-6 rounded-lg border border-transparent hover:border-t3-soft-divider hover:bg-t3-off-white transition-all duration-300"

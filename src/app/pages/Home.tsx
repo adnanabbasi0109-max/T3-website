@@ -8,6 +8,10 @@ import { WorkstoryCard } from '../components/WorkstoryCard';
 import { StatsStrip } from '../components/StatsStrip';
 import { TiltCard } from '../components/TiltCard';
 import { TextReveal } from '../components/TextReveal';
+import { Marquee } from '../components/Marquee';
+import { SectionDivider } from '../components/SectionDivider';
+import { Spotlight } from '../components/Spotlight';
+import { SplitReveal } from '../components/SplitReveal';
 
 import { workstories } from '../data/workstories';
 import { domains } from '../data/domains';
@@ -101,18 +105,31 @@ export function Home() {
         </div>
       </section>
 
-      {/* Stats Strip */}
-      <section className="relative bg-t3-soft-wash border-y border-t3-soft-divider overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=60"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.07]"
+      {/* Marquee Strip */}
+      <section className="border-y border-t3-soft-divider py-5 bg-t3-soft-wash">
+        <Marquee
+          items={['Innovation', 'Strategy', 'Design', 'Technology', 'Creativity', 'Data', 'Transformation', 'Impact']}
+          speed={30}
+          className="text-t3-muted-gray/60"
         />
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
-          <StatsStrip />
-        </div>
       </section>
+
+      {/* Stats Strip */}
+      <Spotlight size={500} color="rgba(198, 161, 91, 0.04)">
+        <section className="relative bg-t3-soft-wash overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=60"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.07]"
+          />
+          <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-20">
+            <StatsStrip />
+          </div>
+        </section>
+      </Spotlight>
+
+      <SectionDivider variant="gradient" />
 
       {/* Work Domains */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
@@ -163,21 +180,29 @@ export function Home() {
         </motion.div>
       </section>
 
+      <SectionDivider variant="gradient" />
+
       {/* Featured Workstories */}
       <section className="bg-t3-soft-wash">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
-          <motion.div {...fadeInUp} className="mb-16 md:mb-24">
-            <div className="text-xs uppercase tracking-[0.2em] text-t3-muted-gray mb-6">
-              Featured Work
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-6">
-              Workstories
-            </h2>
-            <p className="text-xl text-t3-muted-gray leading-relaxed max-w-3xl">
-              A glance at work, workforce, and workstories. Case-study-first thinking
-              that turns challenges into opportunities.
-            </p>
-          </motion.div>
+          <div className="mb-16 md:mb-24">
+            <SplitReveal>
+              <div className="text-xs uppercase tracking-[0.2em] text-t3-muted-gray mb-6">
+                Featured Work
+              </div>
+            </SplitReveal>
+            <SplitReveal delay={0.1}>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-6">
+                Workstories
+              </h2>
+            </SplitReveal>
+            <SplitReveal delay={0.2}>
+              <p className="text-xl text-t3-muted-gray leading-relaxed max-w-3xl">
+                A glance at work, workforce, and workstories. Case-study-first thinking
+                that turns challenges into opportunities.
+              </p>
+            </SplitReveal>
+          </div>
 
           <motion.div
             variants={staggerContainer}
@@ -188,7 +213,7 @@ export function Home() {
           >
             {featuredWork.map(work => (
               <motion.div key={work.slug} variants={staggerItem}>
-                <TiltCard tiltDeg={4} className="rounded-lg">
+                <TiltCard tiltDeg={16} className="rounded-lg">
                   <WorkstoryCard workstory={work} variant="featured" />
                 </TiltCard>
               </motion.div>
@@ -205,6 +230,8 @@ export function Home() {
           </motion.div>
         </div>
       </section>
+
+      <SectionDivider variant="dots" />
 
       {/* Humane Technology Philosophy */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32">
@@ -241,33 +268,34 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&q=70"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-t3-off-white/85" />
-        <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
-          <motion.h2
-            {...fadeInUp}
-            className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-8 max-w-4xl mx-auto"
-          >
-            Tell us what you're building. We'll help you become a category of one.
-          </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Button to="/contact" variant="primary" className="text-lg px-8 py-4">
-              Start a conversation
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <Spotlight size={600} color="rgba(198, 161, 91, 0.08)">
+        <section className="relative overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&q=70"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-t3-off-white/85" />
+          <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-24 md:py-32 text-center">
+            <SplitReveal>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading tracking-tight mb-8 max-w-4xl mx-auto">
+                Tell us what you're building. We'll help you become a category of one.
+              </h2>
+            </SplitReveal>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
+            >
+              <Button to="/contact" variant="primary" className="text-lg px-8 py-4">
+                Start a conversation
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+      </Spotlight>
     </div>
   );
 }

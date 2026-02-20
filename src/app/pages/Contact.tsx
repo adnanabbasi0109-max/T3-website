@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
 import { TiltCard } from '../components/TiltCard';
+import { SectionDivider } from '../components/SectionDivider';
 
 const fadeInLeft = {
   initial: { opacity: 0, x: -40 },
@@ -69,6 +70,8 @@ export function Contact() {
           />
         </motion.div>
       </section>
+
+      <SectionDivider variant="gradient" />
 
       {/* Form Section */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 pb-24 md:pb-32">
@@ -178,7 +181,7 @@ export function Contact() {
             {...fadeInRight}
             className="md:col-span-5"
           >
-            <TiltCard className="rounded-lg sticky top-24" tiltDeg={5} scale={1.01}>
+            <TiltCard className="rounded-lg sticky top-24" tiltDeg={18} scale={1.04}>
               <div className="bg-t3-soft-wash rounded-lg p-8 md:p-10">
                 <h3 className="text-2xl font-heading tracking-tight mb-8">
                   Get in touch

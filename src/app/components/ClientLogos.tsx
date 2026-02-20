@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { clients } from '../data/clients';
+import { TiltCard } from './TiltCard';
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -53,16 +54,19 @@ export function ClientLogos({ showTitle = true, limit, className = '' }: ClientL
           <motion.div
             key={client.name}
             variants={staggerItem}
-            className="flex items-center justify-center p-6 border border-t3-soft-divider rounded-lg bg-t3-soft-wash hover:border-t3-accent-gold/30 transition-colors group"
           >
-            <div className="text-center">
-              <h3 className="font-heading text-base md:text-lg tracking-tight group-hover:text-t3-accent-gold transition-colors">
-                {client.name}
-              </h3>
-              <p className="text-xs text-t3-muted-gray mt-1 uppercase tracking-wider">
-                {client.category}
-              </p>
-            </div>
+            <TiltCard className="rounded-lg" tiltDeg={8} scale={1.04}>
+              <div className="flex items-center justify-center p-6 border border-t3-soft-divider rounded-lg bg-t3-soft-wash hover:border-t3-accent-gold/30 transition-colors group">
+                <div className="text-center">
+                  <h3 className="font-heading text-base md:text-lg tracking-tight group-hover:text-t3-accent-gold transition-colors">
+                    {client.name}
+                  </h3>
+                  <p className="text-xs text-t3-muted-gray mt-1 uppercase tracking-wider">
+                    {client.category}
+                  </p>
+                </div>
+              </div>
+            </TiltCard>
           </motion.div>
         ))}
       </motion.div>

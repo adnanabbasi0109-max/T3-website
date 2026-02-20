@@ -54,15 +54,15 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
           className="block"
         >
           <div className="space-y-4">
-            <h3 className="text-2xl md:text-3xl font-heading tracking-tight group-hover:text-t3-muted-gray transition-colors">
+            <h3 className="text-2xl md:text-3xl font-heading tracking-tight group-hover:text-t3-muted-gray transition-colors duration-300">
               {workstory.title}
             </h3>
             <p className="text-t3-muted-gray leading-relaxed">
               {workstory.summary}
             </p>
             {workstory.outcome && (
-              <p className="text-sm text-t3-accent-gold">
-                → {workstory.outcome}
+              <p className="text-sm text-t3-accent-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-1 group-hover:translate-y-0">
+                &rarr; {workstory.outcome}
               </p>
             )}
             <div className="flex flex-wrap gap-2">
@@ -79,18 +79,18 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
   return (
     <Link
       to={`/work/${workstory.slug}`}
-      className="group block py-6 md:py-8 border-b border-t3-soft-divider hover:bg-t3-soft-wash/50 transition-colors -mx-6 px-6 md:-mx-12 md:px-12"
+      className="group block py-6 md:py-8 border-b border-t3-soft-divider hover:bg-t3-soft-wash/50 transition-all duration-300 -mx-6 px-6 md:-mx-12 md:px-12"
     >
       <div className="grid md:grid-cols-12 gap-4 md:gap-8">
         <div className="md:col-span-7">
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-heading tracking-tight mb-2 md:mb-3 group-hover:text-t3-muted-gray transition-colors">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-heading tracking-tight mb-2 md:mb-3 group-hover:text-t3-muted-gray transition-colors duration-300">
             {workstory.title}
           </h3>
           <p className="text-sm md:text-base text-t3-muted-gray leading-relaxed mb-4">
             {workstory.summary}
           </p>
           {workstory.outcome && (
-            <p className="text-xs md:text-sm text-t3-accent-gold opacity-0 group-hover:opacity-100 transition-opacity">
+            <p className="text-xs md:text-sm text-t3-accent-gold opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
               Result: {workstory.outcome}
             </p>
           )}
@@ -103,7 +103,7 @@ export function WorkstoryCard({ workstory, variant = 'row' }: WorkstoryCardProps
           </div>
           <div className="flex items-center justify-between text-xs md:text-sm text-t3-muted-gray">
             <span>{workstory.location}</span>
-            <ArrowUpRight className="opacity-50 group-hover:opacity-100 transition-opacity" size={18} />
+            <ArrowUpRight className="opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" size={18} />
           </div>
         </div>
       </div>

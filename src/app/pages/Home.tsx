@@ -1,10 +1,13 @@
 import { Link } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Button } from '../components/Button';
 import { SectionHeader } from '../components/SectionHeader';
 import { WorkstoryCard } from '../components/WorkstoryCard';
 import { StatsStrip } from '../components/StatsStrip';
+import { TiltCard } from '../components/TiltCard';
+import { TextReveal } from '../components/TextReveal';
 
 import { workstories } from '../data/workstories';
 import { domains } from '../data/domains';
@@ -39,18 +42,26 @@ const domainImages: Record<string, string> = {
 
 export function Home() {
   const featuredWork = workstories.slice(0, 6);
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+  const heroImageY = useTransform(heroScroll, [0, 1], ['0%', '30%']);
+  const heroImageScale = useTransform(heroScroll, [0, 1], [1, 1.1]);
 
   return (
     <div className="bg-t3-off-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-end overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-end overflow-hidden">
         <motion.div
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
+          style={{ y: heroImageY, scale: heroImageScale }}
         >
-          <img
+          <motion.img
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
             alt="Creative team collaborating"
             className="w-full h-full object-cover"
@@ -59,14 +70,11 @@ export function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-t3-off-white via-t3-off-white/70 to-transparent" />
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 pb-20 md:pb-32 lg:pb-40 pt-48">
           <div className="max-w-4xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            <TextReveal
+              text="For the moments when the playbook is obsolete and the future is unwritten."
+              delay={0.3}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading tracking-tight leading-[1.1] mb-6 md:mb-8 lg:mb-10"
-            >
-              For the moments when the playbook is obsolete and the future is unwritten.
-            </motion.h1>
+            />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -125,29 +133,31 @@ export function Home() {
         >
           {domains.map(domain => (
             <motion.div key={domain.id} variants={staggerItem}>
-              <Link
-                to="/domains"
-                className="group block relative h-72 md:h-80 rounded-lg overflow-hidden"
-              >
-                <img
-                  src={domainImages[domain.id] || ''}
-                  alt=""
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 group-hover:from-black/80 group-hover:via-black/50 group-hover:to-black/20 transition-all duration-500" />
-                <div className="relative z-10 h-full flex flex-col justify-end p-8">
-                  <h3 className="text-2xl font-heading tracking-tight mb-3 text-white group-hover:text-t3-accent-gold transition-colors">
-                    {domain.title}
-                  </h3>
-                  <p className="text-sm text-white/70 leading-relaxed mb-4">
-                    {domain.description}
-                  </p>
-                  <div className="text-sm text-white/50 group-hover:text-white flex items-center transition-colors">
-                    Explore <ArrowUpRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+              <TiltCard className="rounded-lg">
+                <Link
+                  to="/domains"
+                  className="group block relative h-72 md:h-80 rounded-lg overflow-hidden"
+                >
+                  <img
+                    src={domainImages[domain.id] || ''}
+                    alt=""
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30 group-hover:from-black/80 group-hover:via-black/50 group-hover:to-black/20 transition-all duration-500" />
+                  <div className="relative z-10 h-full flex flex-col justify-end p-8">
+                    <h3 className="text-2xl font-heading tracking-tight mb-3 text-white group-hover:text-t3-accent-gold transition-colors">
+                      {domain.title}
+                    </h3>
+                    <p className="text-sm text-white/70 leading-relaxed mb-4">
+                      {domain.description}
+                    </p>
+                    <div className="text-sm text-white/50 group-hover:text-white flex items-center transition-colors">
+                      Explore <ArrowUpRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -178,7 +188,9 @@ export function Home() {
           >
             {featuredWork.map(work => (
               <motion.div key={work.slug} variants={staggerItem}>
-                <WorkstoryCard workstory={work} variant="featured" />
+                <TiltCard tiltDeg={4} className="rounded-lg">
+                  <WorkstoryCard workstory={work} variant="featured" />
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>

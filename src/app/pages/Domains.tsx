@@ -4,6 +4,7 @@ import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Tag } from '../components/Tag';
+import { TiltCard } from '../components/TiltCard';
 import { domains } from '../data/domains';
 import { workstories } from '../data/workstories';
 
@@ -67,19 +68,19 @@ export function Domains() {
               <motion.div
                 key={domain.id}
                 variants={staggerItem}
-                className="border border-t3-soft-divider rounded-lg overflow-hidden transition-all"
+                className="border border-t3-soft-divider rounded-lg overflow-hidden transition-all duration-300 hover:border-t3-accent-gold/30"
               >
                 <button
                   onClick={() => setSelectedDomain(isExpanded ? null : domain.id)}
-                  className="w-full p-8 md:p-12 text-left hover:bg-t3-soft-wash transition-colors"
+                  className="w-full p-8 md:p-12 text-left hover:bg-t3-soft-wash transition-all duration-300 group/domain"
                 >
                   <div className="flex items-start justify-between gap-8">
                     <div className="flex-1">
                       <div className="flex items-center gap-4 mb-4">
-                        <span className="text-sm text-t3-muted-gray font-mono">
+                        <span className="text-sm text-t3-muted-gray font-mono transition-colors duration-300 group-hover/domain:text-t3-accent-gold">
                           {String(index + 1).padStart(2, '0')}
                         </span>
-                        <h3 className="text-3xl md:text-4xl font-heading tracking-tight">
+                        <h3 className="text-3xl md:text-4xl font-heading tracking-tight transition-colors duration-300 group-hover/domain:text-t3-accent-gold">
                           {domain.title}
                         </h3>
                       </div>
@@ -90,8 +91,8 @@ export function Domains() {
                         {domain.longDescription}
                       </p>
                     </div>
-                    <div className={`transform transition-transform ${isExpanded ? 'rotate-90' : ''}`}>
-                      <ArrowUpRight size={24} className="text-t3-muted-gray" />
+                    <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-90' : 'group-hover/domain:translate-x-1 group-hover/domain:-translate-y-1'}`}>
+                      <ArrowUpRight size={24} className="text-t3-muted-gray group-hover/domain:text-t3-accent-gold transition-colors duration-300" />
                     </div>
                   </div>
                 </button>
@@ -111,25 +112,24 @@ export function Domains() {
                         </h4>
                         <div className="grid md:grid-cols-2 gap-6">
                           {domainWork.map(work => (
-                            <div
-                              key={work.slug}
-                              className="bg-t3-off-white p-6 rounded-lg border border-t3-soft-divider hover:border-t3-accent-gold transition-colors"
-                            >
-                              <h5 className="text-xl font-heading tracking-tight mb-3">
-                                {work.title}
-                              </h5>
-                              <p className="text-sm text-t3-muted-gray mb-4 line-clamp-2">
-                                {work.summary}
-                              </p>
-                              <div className="flex flex-wrap gap-2 mb-4">
-                                {work.industries.map(industry => (
-                                  <Tag key={industry}>{industry}</Tag>
-                                ))}
+                            <TiltCard key={work.slug} className="rounded-lg" tiltDeg={6} scale={1.02}>
+                              <div className="bg-t3-off-white p-6 rounded-lg border border-t3-soft-divider hover:border-t3-accent-gold transition-all duration-300 hover:shadow-[0_8px_30px_rgba(198,161,91,0.08)]">
+                                <h5 className="text-xl font-heading tracking-tight mb-3">
+                                  {work.title}
+                                </h5>
+                                <p className="text-sm text-t3-muted-gray mb-4 line-clamp-2">
+                                  {work.summary}
+                                </p>
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                  {work.industries.map(industry => (
+                                    <Tag key={industry}>{industry}</Tag>
+                                  ))}
+                                </div>
+                                <Link to={`/work/${work.slug}`} className="text-sm p-0 flex items-center group/link text-t3-muted-gray hover:text-t3-accent-gold transition-colors duration-300">
+                                  View case study <ArrowUpRight className="ml-1 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300" size={14} />
+                                </Link>
                               </div>
-                              <Link to={`/work/${work.slug}`} className="text-sm p-0 flex items-center">
-                                View case study <ArrowUpRight className="ml-1" size={14} />
-                              </Link>
-                            </div>
+                            </TiltCard>
                           ))}
                         </div>
                       </div>
@@ -157,9 +157,16 @@ export function Domains() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Link to="/contact" className="inline-block border border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10 px-6 py-3 rounded-lg font-heading tracking-tight transition-all">
-              Start a conversation
-            </Link>
+            <motion.div
+              whileHover={{ scale: 1.04, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-block"
+            >
+              <Link to="/contact" className="inline-block border border-t3-off-white text-t3-off-white hover:bg-t3-off-white/10 hover:border-t3-accent-gold hover:shadow-[0_0_20px_rgba(198,161,91,0.15)] px-6 py-3 rounded-lg font-heading tracking-tight transition-all duration-300">
+                Start a conversation
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

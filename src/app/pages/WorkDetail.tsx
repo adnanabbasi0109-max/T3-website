@@ -1,13 +1,34 @@
 import { useParams, Link, Navigate } from 'react-router';
 import { ArrowLeft, Play, ArrowUpRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Tag } from '../components/Tag';
+import { TiltCard } from '../components/TiltCard';
 import { getWorkstoryBySlug, workstories } from '../data/workstories';
 
 function getYouTubeId(url: string): string | null {
   const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?#]+)/);
   return match ? match[1] : null;
 }
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: { transition: { staggerChildren: 0.1 } },
+  viewport: { once: true }
+};
+
+const staggerItem = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+};
 
 export function WorkDetail() {
   const { slug } = useParams();
@@ -37,8 +58,8 @@ export function WorkDetail() {
   }
 
   const relatedWork = workstories
-    .filter(w => 
-      w.slug !== workstory.slug && 
+    .filter(w =>
+      w.slug !== workstory.slug &&
       (w.domains.some(d => workstory.domains.includes(d)) ||
        w.industries.some(i => workstory.industries.includes(i)))
     )
@@ -58,73 +79,111 @@ export function WorkDetail() {
     <div className="bg-t3-off-white">
       {/* Hero */}
       <section className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 pt-12 md:pt-16 pb-16 md:pb-24">
-        <Link
-          to="/work"
-          className="inline-flex items-center text-t3-muted-gray hover:text-t3-near-black transition-colors mb-8"
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <ArrowLeft size={18} className="mr-2" />
-          Back to Workstories
-        </Link>
+          <Link
+            to="/work"
+            className="inline-flex items-center text-t3-muted-gray hover:text-t3-near-black transition-colors mb-8 group"
+          >
+            <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+            Back to Workstories
+          </Link>
+        </motion.div>
 
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-8">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading tracking-tight mb-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-5xl md:text-6xl lg:text-7xl font-heading tracking-tight mb-6"
+            >
               {workstory.title}
-            </h1>
-            <p className="text-xl md:text-2xl text-t3-muted-gray leading-relaxed mb-8">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-xl md:text-2xl text-t3-muted-gray leading-relaxed mb-8"
+            >
               {workstory.summary}
-            </p>
-            <div className="flex flex-wrap gap-3 mb-8">
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-wrap gap-3 mb-8"
+            >
               {workstory.domains.map(domain => (
                 <Tag key={domain} variant="gold">{domain}</Tag>
               ))}
-            </div>
+            </motion.div>
             {workstory.videoUrl && getYouTubeId(workstory.videoUrl) && (
-              <a
+              <motion.a
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
                 href={workstory.videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 rounded-md border border-t3-soft-divider text-t3-near-black hover:bg-t3-soft-wash transition-colors"
+                className="inline-flex items-center px-6 py-3 rounded-md border border-t3-soft-divider text-t3-near-black hover:bg-t3-soft-wash hover:border-t3-accent-gold transition-all duration-300"
               >
                 <Play size={18} className="mr-2" />
                 Watch Video
-              </a>
+              </motion.a>
             )}
           </div>
 
-          <div className="md:col-span-4">
-            <div className="bg-t3-soft-wash rounded-lg p-8 sticky top-24">
-              <div className="space-y-6">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
-                    Location
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4"
+          >
+            <TiltCard className="rounded-lg sticky top-24" tiltDeg={5} scale={1.01}>
+              <div className="bg-t3-soft-wash rounded-lg p-8">
+                <div className="space-y-6">
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
+                      Location
+                    </div>
+                    <div className="text-lg">{workstory.location}</div>
                   </div>
-                  <div className="text-lg">{workstory.location}</div>
-                </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
-                    Industries
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {workstory.industries.map(industry => (
-                      <Tag key={industry}>{industry}</Tag>
-                    ))}
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-2">
+                      Industries
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {workstory.industries.map(industry => (
+                        <Tag key={industry}>{industry}</Tag>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </TiltCard>
+          </motion.div>
         </div>
 
         {/* Hero Image */}
         {workstory.image && (
-          <div className="mt-12 rounded-lg overflow-hidden border border-t3-soft-divider">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-12 rounded-lg overflow-hidden border border-t3-soft-divider"
+          >
             <img
               src={workstory.image}
               alt={workstory.title}
               className="w-full h-auto object-contain"
             />
-          </div>
+          </motion.div>
         )}
       </section>
 
@@ -142,7 +201,7 @@ export function WorkDetail() {
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`text-sm whitespace-nowrap transition-colors pb-1 ${
+                className={`text-sm whitespace-nowrap transition-all duration-300 pb-1 ${
                   activeSection === section.id
                     ? 'text-t3-near-black border-b-2 border-t3-accent-gold'
                     : 'text-t3-muted-gray hover:text-t3-near-black'
@@ -160,7 +219,7 @@ export function WorkDetail() {
         <div className="max-w-3xl">
           {/* Video */}
           {workstory.videoUrl && getYouTubeId(workstory.videoUrl) && (
-            <section className="mb-16 scroll-mt-32">
+            <motion.section {...fadeInUp} className="mb-16 scroll-mt-32">
               <div className="aspect-video rounded-lg overflow-hidden border border-t3-soft-divider">
                 <iframe
                   src={`https://www.youtube.com/embed/${getYouTubeId(workstory.videoUrl)}`}
@@ -170,63 +229,79 @@ export function WorkDetail() {
                   className="w-full h-full"
                 />
               </div>
-            </section>
+            </motion.section>
           )}
 
           {/* Overview */}
-          <section id="overview" className="mb-24 scroll-mt-32">
+          <motion.section {...fadeInUp} id="overview" className="mb-24 scroll-mt-32">
             <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
               Overview
             </h2>
             <p className="text-lg text-t3-muted-gray leading-relaxed">
               {workstory.summary}
             </p>
-          </section>
+          </motion.section>
 
           {/* Challenge */}
           {workstory.challenge && (
-            <section id="challenge" className="mb-24 scroll-mt-32">
+            <motion.section {...fadeInUp} id="challenge" className="mb-24 scroll-mt-32">
               <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
                 The Challenge
               </h2>
               <p className="text-lg text-t3-muted-gray leading-relaxed">
                 {workstory.challenge}
               </p>
-            </section>
+            </motion.section>
           )}
 
           {/* Intervention */}
           {workstory.intervention && (
-            <section id="intervention" className="mb-24 scroll-mt-32">
+            <motion.section {...fadeInUp} id="intervention" className="mb-24 scroll-mt-32">
               <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
                 The Intervention
               </h2>
               <p className="text-lg text-t3-muted-gray leading-relaxed">
                 {workstory.intervention}
               </p>
-            </section>
+            </motion.section>
           )}
 
           {/* Execution */}
           {workstory.execution && (
-            <section id="execution" className="mb-24 scroll-mt-32">
-              <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
+            <motion.section
+              id="execution"
+              className="mb-24 scroll-mt-32"
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+            >
+              <motion.h2 variants={staggerItem} className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
                 What We Built
-              </h2>
+              </motion.h2>
               <ul className="space-y-4">
                 {workstory.execution.map((item, index) => (
-                  <li key={index} className="flex items-start">
+                  <motion.li
+                    key={index}
+                    variants={staggerItem}
+                    className="flex items-start"
+                  >
                     <span className="inline-block w-2 h-2 bg-t3-accent-gold rounded-full mt-2.5 mr-4 flex-shrink-0" />
                     <span className="text-lg text-t3-muted-gray leading-relaxed">{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </section>
+            </motion.section>
           )}
 
           {/* Outcome */}
           {(workstory.outcome || workstory.proofPoints) && (
-            <section id="outcome" className="mb-24 scroll-mt-32">
+            <motion.section
+              {...fadeInUp}
+              id="outcome"
+              className="mb-24 scroll-mt-32"
+            >
+              <TiltCard className="rounded-lg" tiltDeg={3} scale={1.01}>
               <div className="bg-t3-near-black text-t3-off-white rounded-lg p-8 md:p-12">
                 <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-6">
                   Outcome
@@ -260,7 +335,7 @@ export function WorkDetail() {
                       {workstory.services.map(service => (
                         <span
                           key={service}
-                          className="px-3 py-1 rounded-full text-xs border border-t3-muted-gray/30 text-t3-muted-gray"
+                          className="px-3 py-1 rounded-full text-xs border border-t3-muted-gray/30 text-t3-muted-gray hover:border-t3-accent-gold/50 hover:text-t3-accent-gold transition-colors duration-300"
                         >
                           {service}
                         </span>
@@ -269,7 +344,8 @@ export function WorkDetail() {
                   </div>
                 )}
               </div>
-            </section>
+              </TiltCard>
+            </motion.section>
           )}
         </div>
       </div>
@@ -278,29 +354,41 @@ export function WorkDetail() {
       {relatedWork.length > 0 && (
         <section className="bg-t3-soft-wash border-t border-t3-soft-divider">
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
-            <h2 className="text-3xl md:text-4xl font-heading tracking-tight mb-12">
+            <motion.h2
+              {...fadeInUp}
+              className="text-3xl md:text-4xl font-heading tracking-tight mb-12"
+            >
               Related Workstories
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
+            </motion.h2>
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true }}
+              className="grid md:grid-cols-3 gap-8"
+            >
               {relatedWork.map(work => (
-                <Link
-                  key={work.slug}
-                  to={`/work/${work.slug}`}
-                  className="group block"
-                >
-                  <h3 className="text-xl font-heading tracking-tight mb-2 group-hover:text-t3-muted-gray transition-colors">
-                    {work.title}
-                  </h3>
-                  <p className="text-sm text-t3-muted-gray line-clamp-2 mb-3">
-                    {work.summary}
-                  </p>
-                  <div className="flex items-center text-sm text-t3-accent-gold">
-                    View case study
-                    <ArrowUpRight size={16} className="ml-1" />
-                  </div>
-                </Link>
+                <motion.div key={work.slug} variants={staggerItem}>
+                  <TiltCard className="rounded-lg" tiltDeg={6} scale={1.03}>
+                    <Link
+                      to={`/work/${work.slug}`}
+                      className="group block p-6 rounded-lg border border-transparent hover:border-t3-soft-divider hover:bg-t3-off-white transition-all duration-300"
+                    >
+                      <h3 className="text-xl font-heading tracking-tight mb-2 group-hover:text-t3-muted-gray transition-colors duration-300">
+                        {work.title}
+                      </h3>
+                      <p className="text-sm text-t3-muted-gray line-clamp-2 mb-3">
+                        {work.summary}
+                      </p>
+                      <div className="flex items-center text-sm text-t3-accent-gold">
+                        View case study
+                        <ArrowUpRight size={16} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                      </div>
+                    </Link>
+                  </TiltCard>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
       )}

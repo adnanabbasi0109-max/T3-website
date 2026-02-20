@@ -83,4 +83,50 @@
     background-color: var(--color-accent-gold);
     color: var(--color-off-white);
   }
+
+  /* Hide default cursor on non-touch devices for custom cursor */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+}
+
+/* Gold shimmer animation for accent elements */
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Subtle pulse glow for interactive highlights */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(198, 161, 91, 0); }
+  50% { box-shadow: 0 0 20px 2px rgba(198, 161, 91, 0.15); }
+}
+
+/* Smooth float for cards on hover */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@layer utilities {
+  .animate-gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(198, 161, 91, 0.08) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: gold-shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-gold-pulse {
+    animation: gold-pulse 2.5s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
 }

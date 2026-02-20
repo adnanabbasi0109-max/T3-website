@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { SectionHeader } from '../components/SectionHeader';
 import { Button } from '../components/Button';
+import { TiltCard } from '../components/TiltCard';
 
 const fadeInLeft = {
   initial: { opacity: 0, x: -40 },
@@ -177,40 +178,42 @@ export function Contact() {
             {...fadeInRight}
             className="md:col-span-5"
           >
-            <div className="bg-t3-soft-wash rounded-lg p-8 md:p-10 sticky top-24">
-              <h3 className="text-2xl font-heading tracking-tight mb-8">
-                Get in touch
-              </h3>
-              
-              <div className="space-y-8">
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Email
-                  </div>
-                  <a 
-                    href="mailto:info@t-3.in" 
-                    className="text-lg hover:text-t3-accent-gold transition-colors"
-                  >
-                    info@t-3.in
-                  </a>
-                </div>
+            <TiltCard className="rounded-lg sticky top-24" tiltDeg={5} scale={1.01}>
+              <div className="bg-t3-soft-wash rounded-lg p-8 md:p-10">
+                <h3 className="text-2xl font-heading tracking-tight mb-8">
+                  Get in touch
+                </h3>
 
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
-                    Website
+                <div className="space-y-8">
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
+                      Email
+                    </div>
+                    <a
+                      href="mailto:info@t-3.in"
+                      className="text-lg hover:text-t3-accent-gold transition-colors"
+                    >
+                      info@t-3.in
+                    </a>
                   </div>
-                  <a 
-                    href="https://www.t-3.in" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-lg hover:text-t3-accent-gold transition-colors"
-                  >
-                    www.t-3.in
-                  </a>
-                </div>
 
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-t3-muted-gray mb-3">
+                      Website
+                    </div>
+                    <a
+                      href="https://www.t-3.in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-lg hover:text-t3-accent-gold transition-colors"
+                    >
+                      www.t-3.in
+                    </a>
+                  </div>
+
+                </div>
               </div>
-            </div>
+            </TiltCard>
           </motion.div>
         </div>
       </section>
